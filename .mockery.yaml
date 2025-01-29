@@ -1,0 +1,10 @@
+with-expecter: True
+log-level: Info
+keeptree: False
+dir: internal/_mocks
+outpkg: _mocks
+packages:
+    github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces:
+        config:
+            recursive: True
+            all: True

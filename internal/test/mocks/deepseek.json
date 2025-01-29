@@ -1,0 +1,14 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/deepseek"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "props": [
+                "mesa de trabalho"
+            ]
+        }
+    }
+}

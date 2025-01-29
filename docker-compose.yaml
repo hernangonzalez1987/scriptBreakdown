@@ -1,0 +1,10 @@
+version: "3"
+services:
+  wiremock:
+    image: "wiremock/wiremock:latest"
+    ports:
+      - "8443:8080"
+    container_name: mocks
+    volumes:
+      - ./internal/test/mocks:/home/wiremock/mappings
+    entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose" ]
