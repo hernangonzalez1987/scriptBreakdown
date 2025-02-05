@@ -11,6 +11,6 @@ type SceneBreakdown struct {
 
 type Tag struct {
 	Category    string
-	Name        string
+	Element     string
 	Description string
 }

@@ -52,6 +52,9 @@ func (f *finalDraftParser) ParseScript(ctx context.Context,
 			scene.Text = fmt.Sprintln(scene.Text, p.Text)
 		}
 	}
+	if scene.Text != "" {
+		script.Scenes = append(script.Scenes, scene)
+	}
 
 	return &script, nil
 

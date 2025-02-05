@@ -1,4 +1,4 @@
-package sceneanalyzer
+package scenebreakdown
 
 import (
 	"context"
@@ -24,9 +24,9 @@ func Test_sceneAnalyzer_AnalyzeScenes(t *testing.T) {
 	aiAnalyzer := _mocks.NewMockSceneTextAnalyzer(t)
 
 	aiAnalyzer.EXPECT().AnalyzeSceneText(ctx, "Some scene").Return(
-		[]entity.Tag{{Name: "Some"}}, nil)
+		[]entity.Tag{{Element: "Some"}}, nil)
 
-	analyzer := sceneAnalyzer{textAnalyzer: aiAnalyzer}
+	analyzer := sceneBreakdown{textAnalyzer: aiAnalyzer}
 
 	close(scenes)
 
@@ -37,6 +37,6 @@ func Test_sceneAnalyzer_AnalyzeScenes(t *testing.T) {
 	close(breakdowns)
 
 	assert.NoError(t, err)
-	assert.Equal(t, entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Name: "Some"}}}, breakdown)
+	assert.Equal(t, entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Element: "Some"}}}, breakdown)
 
 }

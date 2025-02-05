@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+	"github.com/rs/zerolog"
 )
 
 type presentationBreakdown struct {
@@ -26,7 +27,7 @@ func (ref *presentationBreakdown) ProcessFile(ctx *gin.Context) {
 
 	err := ctx.ShouldBind(&request)
 	if err != nil {
-		ctx.JSON(http.StatusBadGateway, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusBadGateway, NewErrorResponse(err))
 		return
 	}
 
@@ -34,13 +35,15 @@ func (ref *presentationBreakdown) ProcessFile(ctx *gin.Context) {
 
 	err = ctx.SaveUploadedFile(request.File, dst)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+
+		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
 		return
 	}
 
-	_, err = ref.service.ProcessFile(ctx, entity.ScriptBreakdownRequest{FilePath: dst})
+	_, err = ref.service.ScriptBreakdown(ctx, entity.ScriptBreakdownRequest{FilePath: dst})
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		zerolog.Ctx(ctx).Err(err).Msg("error on script breakdown")
+		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
 		return
 	}
 

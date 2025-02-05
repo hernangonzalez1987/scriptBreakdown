@@ -11,7 +11,8 @@
             "mode": "auto",
             "program": "./cmd",
             "env": {
-                "DEEPSEEK_HOST": "http://localhost:8443"
+                "DEEPSEEK_HOST": "http://localhost:8443",
+                "GEMINI_API_KEY": "AIzaSyA_FIaecNzlPA_frCtAfjBIAV6b_kmcmBo"
             }
         }
     ]

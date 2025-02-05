@@ -1,4 +1,4 @@
-package usecasebreakdown
+package scriptbreakdown
 
 import (
 	"context"
@@ -31,11 +31,11 @@ func Test_breakdownUseCase_ProcessFile(t *testing.T) {
 		mock.AnythingOfType("chan entity.Scene"),
 		mock.AnythingOfType("chan entity.SceneBreakdown")).
 		RunAndReturn(func(ctx context.Context, c1 chan entity.Scene, c2 chan entity.SceneBreakdown) error {
-			c2 <- entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Name: "some"}}}
+			c2 <- entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Element: "some"}}}
 			return nil
 		}).Return(nil)
 
-	result, err := breakdown.ProcessFile(ctx, req)
+	result, err := breakdown.ScriptBreakdown(ctx, req)
 
 	var expected *entity.ScriptBreakdownResult
 

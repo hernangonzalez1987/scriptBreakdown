@@ -12,7 +12,7 @@ type BreakdownPresentation interface {
 }
 
 type ScriptBreakdownUseCase interface {
-	ProcessFile(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)
+	ScriptBreakdown(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)
 }
 
 type ScriptParser interface {
