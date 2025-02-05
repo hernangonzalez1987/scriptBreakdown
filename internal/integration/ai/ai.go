@@ -21,10 +21,10 @@ const nameSpace = "2f704144-5538-5d38-99ab-e5f6d44478e8"
 
 type LlmAnalyzer struct {
 	model llms.Model
-	cache _interfaces.Cache
+	cache _interfaces.Cache[string]
 }
 
-func New(model llms.Model, cache _interfaces.Cache) *LlmAnalyzer {
+func New(model llms.Model, cache _interfaces.Cache[string]) *LlmAnalyzer {
 	return &LlmAnalyzer{model: model, cache: cache}
 }
 
@@ -53,12 +53,14 @@ func (ref *LlmAnalyzer) AnalyzeSceneText(ctx context.Context, sceneText string) 
 			return nil, errors.New("empty response from model")
 		}
 
-		response = resp.Choices[0].Content
+		content := resp.Choices[0].Content
 
-		ref.cache.Save(hash.String(), response)
+		ref.cache.Save(hash.String(), content)
+
+		response = &content
 	}
 
-	parsed, err := parseResponse(response)
+	parsed, err := parseResponse(*response)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}

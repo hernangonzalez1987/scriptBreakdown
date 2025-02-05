@@ -2,6 +2,11 @@ package finaldraft
 
 import "encoding/xml"
 
+const (
+	SceneHeading  = "Scene Heading"
+	ActionHeading = "Action"
+)
+
 type FDXFile struct {
 	FinalDraft xml.Name `xml:"FinalDraft"`
 	Content    Content  `xml:"Content"`

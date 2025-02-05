@@ -1,6 +1,7 @@
 package entity
 
 type Script struct {
+	Hash   string
 	Scenes []Scene
 }
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -40,12 +41,14 @@ func main() {
 
 	validate.RegisterStructValidation(entity.ScriptBreakdownRequestValidate, req)
 
+	ttl := time.Hour
+
 	router.POST("/script/breakdown", presentationbreakdown.New(
 		scriptbreakdown.New(
 			validate,
-			finaldraft.New(),
+			finaldraft.New(cache.New[finaldraft.FDXFile](&ttl)),
 			scenebreakdown.New(
-				ai.New(gemini, cache.New()),
+				ai.New(gemini, cache.New[string](&ttl)),
 			),
 		),
 	).ProcessFile)

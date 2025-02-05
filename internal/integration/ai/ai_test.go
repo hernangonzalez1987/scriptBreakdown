@@ -22,8 +22,8 @@ func Test_ai_AnalyzeSceneText(t *testing.T) {
 		resp,
 	})
 
-	cache := _mocks.NewMockCache(t)
-	cache.EXPECT().Get("58fb72cd-ece1-583a-9bfb-8ae219141f0f").Return("", false)
+	cache := _mocks.NewMockCache[string](t)
+	cache.EXPECT().Get("58fb72cd-ece1-583a-9bfb-8ae219141f0f").Return(nil, false)
 	cache.EXPECT().Save("58fb72cd-ece1-583a-9bfb-8ae219141f0f", resp)
 
 	llm := New(model, cache)

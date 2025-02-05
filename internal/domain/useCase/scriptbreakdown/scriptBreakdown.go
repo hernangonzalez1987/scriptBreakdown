@@ -77,6 +77,7 @@ func (ref *BreakdownUseCase) ScriptBreakdown(ctx context.Context,
 	close(sceneBreakdowns)
 
 	return &entity.ScriptBreakdownResult{
-		FilePath: "someOutputFilePath",
+		FilePath:    "someOutputFilePath",
+		BreakdownID: "someID",
 	}, nil
 }

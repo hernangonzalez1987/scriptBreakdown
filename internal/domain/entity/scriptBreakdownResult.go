@@ -1,5 +1,6 @@
 package entity
 
 type ScriptBreakdownResult struct {
-	FilePath string
+	BreakdownID string
+	FilePath    string
 }

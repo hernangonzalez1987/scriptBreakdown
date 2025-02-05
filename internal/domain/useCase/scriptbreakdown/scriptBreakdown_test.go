@@ -28,6 +28,7 @@ func Test_breakdownUseCase_ProcessFile(t *testing.T) {
 
 	script := entity.Script{
 		Scenes: []entity.Scene{{Number: 1, Text: "some scene text"}},
+		Hash:   "someHash",
 	}
 
 	parser.EXPECT().ParseScript(ctx, req).Return(&script, nil)
@@ -43,7 +44,8 @@ func Test_breakdownUseCase_ProcessFile(t *testing.T) {
 	result, err := breakdown.ScriptBreakdown(ctx, req)
 
 	expected := &entity.ScriptBreakdownResult{
-		FilePath: "someOutputFilePath",
+		BreakdownID: "someID",
+		FilePath:    "someOutputFilePath",
 	}
 
 	require.NoError(t, err)

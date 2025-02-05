@@ -1,6 +1,6 @@
 package _interfaces
 
-type Cache interface {
-	Get(key string) (string, bool)
-	Save(key, value string)
+type Cache[T any] interface {
+	Get(key string) (*T, bool)
+	Save(key string, value T)
 }

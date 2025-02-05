@@ -6,20 +6,24 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/google/uuid"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	"github.com/pkg/errors"
 )
 
-type Parser struct{}
+const namespace = "1486e36b-d00c-4f29-9098-10eb8eab9002"
 
-func New() *Parser {
-	return &Parser{}
+type Parser struct {
+	cache _interfaces.Cache[FDXFile]
 }
 
-func (f *Parser) ParseScript(_ context.Context,
-	breakdownRequest entity.ScriptBreakdownRequest,
-) (*entity.Script, error) {
-	fileRawContent, err := os.ReadFile(breakdownRequest.FilePath)
+func New(cache _interfaces.Cache[FDXFile]) *Parser {
+	return &Parser{cache: cache}
+}
+
+func (ref *Parser) ParseScript(_ context.Context, req entity.ScriptBreakdownRequest) (*entity.Script, error) {
+	fileRawContent, err := os.ReadFile(req.FilePath)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
@@ -31,25 +35,20 @@ func (f *Parser) ParseScript(_ context.Context,
 		return nil, errors.WithStack(err)
 	}
 
+	scriptHash := uuid.NewMD5(uuid.MustParse(namespace), fileRawContent)
+
+	ref.cache.Save(scriptHash.String(), file)
+
 	var script entity.Script
 
 	var scene entity.Scene
 
 	for _, paragraph := range file.Content.Paragraph {
-		if paragraph.Type == "Scene Heading" {
-			if scene.Text != "" {
-				script.Scenes = append(script.Scenes, scene)
-			}
-
-			scene = entity.Scene{
-				Number: paragraph.Number,
-				Text:   paragraph.Text,
-			}
-
+		if paragraph.Type == SceneHeading {
 			continue
 		}
 
-		if paragraph.Type == "Action" {
+		if paragraph.Type == ActionHeading {
 			scene.Text = fmt.Sprintln(scene.Text, paragraph.Text)
 		}
 	}
@@ -57,6 +56,8 @@ func (f *Parser) ParseScript(_ context.Context,
 	if scene.Text != "" {
 		script.Scenes = append(script.Scenes, scene)
 	}
+
+	script.Hash = scriptHash.String()
 
 	return &script, nil
 }

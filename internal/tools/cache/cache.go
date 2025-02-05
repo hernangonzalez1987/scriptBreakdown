@@ -2,29 +2,46 @@ package cache
 
 import (
 	"sync"
+	"time"
 )
 
-type Cache struct {
+type Cache[T any] struct {
 	mu   sync.RWMutex
-	data map[string]string
+	data map[string]element[T]
+	ttl  *time.Duration
 }
 
-func New() *Cache {
-	return &Cache{mu: sync.RWMutex{}, data: map[string]string{}}
+type element[T any] struct {
+	value      T
+	insertTime time.Time
 }
 
-func (ref *Cache) Get(key string) (string, bool) {
+func New[T any](ttl *time.Duration) *Cache[T] {
+	return &Cache[T]{mu: sync.RWMutex{}, data: map[string]element[T]{}, ttl: ttl}
+}
+
+func (ref *Cache[T]) Get(key string) (*T, bool) {
 	ref.mu.RLock()
 	defer ref.mu.RUnlock()
 
-	value, ok := ref.data[key]
+	value, found := ref.data[key]
 
-	return value, ok
+	if ref.ttl != nil && value.insertTime.Add(*ref.ttl).Before(time.Now()) {
+		delete(ref.data, key)
+
+		return nil, false
+	}
+
+	if found {
+		return &value.value, true
+	}
+
+	return nil, false
 }
 
-func (ref *Cache) Save(key, value string) {
+func (ref *Cache[T]) Save(key string, value T) {
 	ref.mu.Lock()
 	defer ref.mu.Unlock()
 
-	ref.data[key] = value
+	ref.data[key] = element[T]{value: value, insertTime: time.Now()}
 }

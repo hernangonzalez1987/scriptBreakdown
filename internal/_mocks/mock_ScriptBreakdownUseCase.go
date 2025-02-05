@@ -22,12 +22,12 @@ func (_m *MockScriptBreakdownUseCase) EXPECT() *MockScriptBreakdownUseCase_Expec
 	return &MockScriptBreakdownUseCase_Expecter{mock: &_m.Mock}
 }
 
-// ProcessFile provides a mock function with given fields: ctx, breakdownRequest
-func (_m *MockScriptBreakdownUseCase) ProcessFile(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error) {
+// ScriptBreakdown provides a mock function with given fields: ctx, breakdownRequest
+func (_m *MockScriptBreakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error) {
 	ret := _m.Called(ctx, breakdownRequest)
 
 	if len(ret) == 0 {
-		panic("no return value specified for ProcessFile")
+		panic("no return value specified for ScriptBreakdown")
 	}
 
 	var r0 *entity.ScriptBreakdownResult
@@ -52,31 +52,31 @@ func (_m *MockScriptBreakdownUseCase) ProcessFile(ctx context.Context, breakdown
 	return r0, r1
 }
 
-// MockScriptBreakdownUseCase_ProcessFile_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ProcessFile'
-type MockScriptBreakdownUseCase_ProcessFile_Call struct {
+// MockScriptBreakdownUseCase_ScriptBreakdown_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ScriptBreakdown'
+type MockScriptBreakdownUseCase_ScriptBreakdown_Call struct {
 	*mock.Call
 }
 
-// ProcessFile is a helper method to define mock.On call
+// ScriptBreakdown is a helper method to define mock.On call
 //   - ctx context.Context
 //   - breakdownRequest entity.ScriptBreakdownRequest
-func (_e *MockScriptBreakdownUseCase_Expecter) ProcessFile(ctx interface{}, breakdownRequest interface{}) *MockScriptBreakdownUseCase_ProcessFile_Call {
-	return &MockScriptBreakdownUseCase_ProcessFile_Call{Call: _e.mock.On("ProcessFile", ctx, breakdownRequest)}
+func (_e *MockScriptBreakdownUseCase_Expecter) ScriptBreakdown(ctx interface{}, breakdownRequest interface{}) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
+	return &MockScriptBreakdownUseCase_ScriptBreakdown_Call{Call: _e.mock.On("ScriptBreakdown", ctx, breakdownRequest)}
 }
 
-func (_c *MockScriptBreakdownUseCase_ProcessFile_Call) Run(run func(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest)) *MockScriptBreakdownUseCase_ProcessFile_Call {
+func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) Run(run func(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest)) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(entity.ScriptBreakdownRequest))
 	})
 	return _c
 }
 
-func (_c *MockScriptBreakdownUseCase_ProcessFile_Call) Return(_a0 *entity.ScriptBreakdownResult, _a1 error) *MockScriptBreakdownUseCase_ProcessFile_Call {
+func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) Return(_a0 *entity.ScriptBreakdownResult, _a1 error) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
 	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *MockScriptBreakdownUseCase_ProcessFile_Call) RunAndReturn(run func(context.Context, entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)) *MockScriptBreakdownUseCase_ProcessFile_Call {
+func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) RunAndReturn(run func(context.Context, entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
 	_c.Call.Return(run)
 	return _c
 }
