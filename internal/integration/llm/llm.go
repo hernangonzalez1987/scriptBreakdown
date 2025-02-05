@@ -1,4 +1,4 @@
-package ai
+package llm
 
 import (
 	"context"
@@ -19,16 +19,16 @@ const promptQuestion = `Encontra na seguinte cena, todos os elementos cénicos
 
 const nameSpace = "2f704144-5538-5d38-99ab-e5f6d44478e8"
 
-type LlmAnalyzer struct {
+type Analyzer struct {
 	model llms.Model
 	cache _interfaces.Cache[string]
 }
 
-func New(model llms.Model, cache _interfaces.Cache[string]) *LlmAnalyzer {
-	return &LlmAnalyzer{model: model, cache: cache}
+func New(model llms.Model, cache _interfaces.Cache[string]) *Analyzer {
+	return &Analyzer{model: model, cache: cache}
 }
 
-func (ref *LlmAnalyzer) AnalyzeSceneText(ctx context.Context, sceneText string) ([]entity.Tag, error) {
+func (ref *Analyzer) AnalyzeSceneText(ctx context.Context, sceneText string) ([]entity.Tag, error) {
 	prompt := promptQuestion + sceneText
 
 	hash := uuid.NewSHA1(uuid.MustParse(nameSpace), []byte(prompt))

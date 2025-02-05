@@ -11,8 +11,8 @@ import (
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown"
 	scenebreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown/sceneBreakdown"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/ai"
 	finaldraft "github.com/hernangonzalez1987/scriptBreakdown/internal/integration/finalDraft"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/llm"
 	presentationbreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/cache"
 	"github.com/rs/zerolog"
@@ -48,7 +48,7 @@ func main() {
 			validate,
 			finaldraft.New(cache.New[finaldraft.FDXFile](&ttl)),
 			scenebreakdown.New(
-				ai.New(gemini, cache.New[string](&ttl)),
+				llm.New(gemini, cache.New[string](&ttl)),
 			),
 		),
 	).ProcessFile)
