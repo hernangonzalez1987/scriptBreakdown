@@ -3,6 +3,7 @@ package httplogger
 import (
 	"net/http"
 
+	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
 )
 
@@ -16,7 +17,6 @@ func New(logger *zerolog.Logger, transport http.RoundTripper) http.RoundTripper 
 }
 
 func (ref *httpLogger) RoundTrip(req *http.Request) (*http.Response, error) {
-
 	ref.logger.Info().Any("req", req).Msg("http request sent")
 
 	res, err := ref.transport.RoundTrip(req)
@@ -27,6 +27,5 @@ func (ref *httpLogger) RoundTrip(req *http.Request) (*http.Response, error) {
 		ref.logger.Info().Any("res", res).Msg("http success response received")
 	}
 
-	return res, err
-
+	return res, errors.WithStack(err)
 }

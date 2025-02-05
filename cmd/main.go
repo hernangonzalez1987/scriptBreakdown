@@ -11,19 +11,14 @@ import (
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown"
 	scenebreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown/sceneBreakdown"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/ai"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/ai/cache"
 	finaldraft "github.com/hernangonzalez1987/scriptBreakdown/internal/integration/finalDraft"
 	presentationbreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/cache"
 	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/pkgerrors"
 	"github.com/tmc/langchaingo/llms/googleai"
 )
 
 func main() {
-
-	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
-
 	logger := zerolog.New(os.Stdout)
 
 	ctx := logger.WithContext(context.Background())
@@ -41,7 +36,9 @@ func main() {
 
 	validate := validator.New(validator.WithRequiredStructEnabled())
 
-	validate.RegisterStructValidation(entity.ScriptBreakdownRequestValidate, entity.ScriptBreakdownRequest{})
+	var req entity.ScriptBreakdownRequest
+
+	validate.RegisterStructValidation(entity.ScriptBreakdownRequestValidate, req)
 
 	router.POST("/script/breakdown", presentationbreakdown.New(
 		scriptbreakdown.New(
@@ -53,5 +50,8 @@ func main() {
 		),
 	).ProcessFile)
 
-	router.Run(":9000")
+	err = router.Run(":9000")
+	if err != nil {
+		logger.Fatal().Msg(err.Error())
+	}
 }

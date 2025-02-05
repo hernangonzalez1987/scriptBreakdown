@@ -9,18 +9,17 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-type sceneBreakdown struct {
-	_interfaces.SceneBreakdownTagger
+type SceneBreakdown struct {
 	textAnalyzer _interfaces.SceneTextAnalyzer
 }
 
-func New(textAnalyzer _interfaces.SceneTextAnalyzer) _interfaces.SceneBreakdownTagger {
-	return &sceneBreakdown{textAnalyzer: textAnalyzer}
+func New(textAnalyzer _interfaces.SceneTextAnalyzer) *SceneBreakdown {
+	return &SceneBreakdown{textAnalyzer: textAnalyzer}
 }
 
-func (ref *sceneBreakdown) BreakdownScene(ctx context.Context, scenes chan entity.Scene,
-	sceneBreakdowns chan entity.SceneBreakdown) error {
-
+func (ref *SceneBreakdown) BreakdownScene(ctx context.Context, scenes chan entity.Scene,
+	sceneBreakdowns chan entity.SceneBreakdown,
+) error {
 	log.Ctx(ctx).Info().Msg("listening for scenes")
 
 	for scene := range scenes {
@@ -37,5 +36,4 @@ func (ref *sceneBreakdown) BreakdownScene(ctx context.Context, scenes chan entit
 	}
 
 	return nil
-
 }

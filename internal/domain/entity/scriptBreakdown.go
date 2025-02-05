@@ -10,7 +10,6 @@ type SceneBreakdown struct {
 }
 
 type Tag struct {
-	Category    string
-	Element     string
-	Description string
+	Category string
+	Element  string
 }

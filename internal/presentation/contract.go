@@ -8,7 +8,7 @@ import (
 )
 
 type BreakdownRequest struct {
-	File *multipart.FileHeader `form:"file" binding:"required"`
+	File *multipart.FileHeader `binding:"required" form:"file"`
 }
 
 type ErrorResponse struct {
@@ -17,7 +17,6 @@ type ErrorResponse struct {
 }
 
 func NewErrorResponse(err error) ErrorResponse {
-
 	var customErr valueobjects.CustomError
 
 	if errors.As(err, &customErr) {
@@ -26,6 +25,7 @@ func NewErrorResponse(err error) ErrorResponse {
 			Description: customErr.Desc,
 		}
 	}
+
 	return ErrorResponse{
 		Code:        "UNKNOWN",
 		Description: err.Error(),

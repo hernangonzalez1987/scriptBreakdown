@@ -10,24 +10,23 @@ import (
 	"github.com/rs/zerolog"
 )
 
-type presentationBreakdown struct {
-	_interfaces.BreakdownPresentation
+type PresentationBreakdown struct {
 	service _interfaces.ScriptBreakdownUseCase
 }
 
-func New(service _interfaces.ScriptBreakdownUseCase) _interfaces.BreakdownPresentation {
-	return &presentationBreakdown{
+func New(service _interfaces.ScriptBreakdownUseCase) *PresentationBreakdown {
+	return &PresentationBreakdown{
 		service: service,
 	}
 }
 
-func (ref *presentationBreakdown) ProcessFile(ctx *gin.Context) {
+func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
+	var request *BreakdownRequest
 
-	request := BreakdownRequest{}
-
-	err := ctx.ShouldBind(&request)
+	err := ctx.ShouldBind(request)
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, NewErrorResponse(err))
+
 		return
 	}
 
@@ -35,8 +34,8 @@ func (ref *presentationBreakdown) ProcessFile(ctx *gin.Context) {
 
 	err = ctx.SaveUploadedFile(request.File, dst)
 	if err != nil {
-
 		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+
 		return
 	}
 
@@ -44,9 +43,9 @@ func (ref *presentationBreakdown) ProcessFile(ctx *gin.Context) {
 	if err != nil {
 		zerolog.Ctx(ctx).Err(err).Msg("error on script breakdown")
 		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+
 		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{"status": "successful"})
-
 }

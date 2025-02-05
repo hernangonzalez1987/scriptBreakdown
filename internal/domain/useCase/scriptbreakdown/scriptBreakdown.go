@@ -2,7 +2,6 @@ package scriptbreakdown
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
@@ -12,20 +11,26 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-const numGoRoutines = 2
+const (
+	numGoRoutines = 2
+	bufferSize    = 100
+)
 
-type breakdownUseCase struct {
+type BreakdownUseCase struct {
 	validate    *validator.Validate
 	parser      _interfaces.ScriptParser
 	sceneTagger _interfaces.SceneBreakdownTagger
 }
 
-func New(validate *validator.Validate, parser _interfaces.ScriptParser, sceneTagger _interfaces.SceneBreakdownTagger) _interfaces.ScriptBreakdownUseCase {
-	return &breakdownUseCase{validate: validate, parser: parser, sceneTagger: sceneTagger}
+func New(validate *validator.Validate, parser _interfaces.ScriptParser,
+	sceneTagger _interfaces.SceneBreakdownTagger,
+) *BreakdownUseCase {
+	return &BreakdownUseCase{validate: validate, parser: parser, sceneTagger: sceneTagger}
 }
 
-func (ref *breakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error) {
-
+func (ref *BreakdownUseCase) ScriptBreakdown(ctx context.Context,
+	breakdownRequest entity.ScriptBreakdownRequest,
+) (*entity.ScriptBreakdownResult, error) {
 	err := ref.validate.Struct(breakdownRequest)
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -40,8 +45,8 @@ func (ref *breakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownReque
 
 	scriptBreakdown := entity.ScriptBreakdown{SceneBreakdowns: make([]entity.SceneBreakdown, 0)}
 
-	scenes := make(chan entity.Scene, 100)
-	sceneBreakdowns := make(chan entity.SceneBreakdown, 100)
+	scenes := make(chan entity.Scene, bufferSize)
+	sceneBreakdowns := make(chan entity.SceneBreakdown, bufferSize)
 
 	group := errgroup.Group{}
 
@@ -56,8 +61,7 @@ func (ref *breakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownReque
 	}
 
 	go func() {
-		for i := 0; i < len(script.Scenes); i++ {
-
+		for range len(script.Scenes) {
 			sceneBreakdown := <-sceneBreakdowns
 			scriptBreakdown.SceneBreakdowns = append(scriptBreakdown.SceneBreakdowns, sceneBreakdown)
 		}
@@ -72,8 +76,7 @@ func (ref *breakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownReque
 
 	close(sceneBreakdowns)
 
-	fmt.Println(scriptBreakdown)
-
-	return nil, nil
-
+	return &entity.ScriptBreakdownResult{
+		FilePath: "someOutputFilePath",
+	}, nil
 }

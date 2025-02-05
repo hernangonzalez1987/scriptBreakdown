@@ -12,29 +12,29 @@ import (
 	"github.com/tmc/langchaingo/llms"
 )
 
-const promptQuestion = "Encontra na seguinte cena, todos os elementos cénicos (props, cast, wardrobe, vehicles, animals, sound-effects, music, special-effects, set-dressing). Retorna a resposta em formato JSON, com um array por cada categoria de elemento. A resposta deve ser só o JSON. A cena é a seguinte:"
+const promptQuestion = `Encontra na seguinte cena, todos os elementos cénicos
+ (props, cast, wardrobe, vehicles, animals, sound-effects, music, special-effects, set-dressing). 
+ Retorna a resposta em formato JSON, com um array por cada categoria de elemento. 
+ A resposta deve ser só o JSON. A cena é a seguinte:`
 
-var nameSpace = uuid.MustParse("2f704144-5538-5d38-99ab-e5f6d44478e8")
+const nameSpace = "2f704144-5538-5d38-99ab-e5f6d44478e8"
 
-type ai struct {
+type LlmAnalyzer struct {
 	model llms.Model
 	cache _interfaces.Cache
-	_interfaces.SceneTextAnalyzer
 }
 
-func New(model llms.Model, cache _interfaces.Cache) _interfaces.SceneTextAnalyzer {
-	return &ai{model: model, cache: cache}
+func New(model llms.Model, cache _interfaces.Cache) *LlmAnalyzer {
+	return &LlmAnalyzer{model: model, cache: cache}
 }
 
-func (ref *ai) AnalyzeSceneText(ctx context.Context, sceneText string) ([]entity.Tag, error) {
-
+func (ref *LlmAnalyzer) AnalyzeSceneText(ctx context.Context, sceneText string) ([]entity.Tag, error) {
 	prompt := promptQuestion + sceneText
 
-	hash := uuid.NewSHA1(nameSpace, []byte(prompt))
+	hash := uuid.NewSHA1(uuid.MustParse(nameSpace), []byte(prompt))
 
 	response, exists := ref.cache.Get(hash.String())
 	if !exists {
-
 		msgs := []llms.MessageContent{
 			{
 				Role: llms.ChatMessageTypeHuman,
@@ -64,11 +64,9 @@ func (ref *ai) AnalyzeSceneText(ctx context.Context, sceneText string) ([]entity
 	}
 
 	return extractTagsFromResponse(parsed), nil
-
 }
 
 func extractTagsFromResponse(parsed map[string][]string) []entity.Tag {
-
 	tags := []entity.Tag{}
 
 	for category, elements := range parsed {
@@ -78,14 +76,12 @@ func extractTagsFromResponse(parsed map[string][]string) []entity.Tag {
 				Element:  element,
 			})
 		}
-
 	}
 
 	return tags
 }
 
 func parseResponse(resp string) (map[string][]string, error) {
-
 	exp := regexp.MustCompile(`(?s)[^{]*({.*})[^}]*$`)
 
 	match := exp.FindStringSubmatch(resp)
@@ -93,11 +89,9 @@ func parseResponse(resp string) (map[string][]string, error) {
 	jsonResp := map[string][]string{}
 
 	err := json.Unmarshal([]byte(match[1]), &jsonResp)
-
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
 	return jsonResp, nil
-
 }

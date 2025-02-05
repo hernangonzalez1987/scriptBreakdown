@@ -1,22 +1,26 @@
-package scriptbreakdown
+package scriptbreakdown_test
 
 import (
 	"context"
 	"testing"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/_mocks"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_breakdownUseCase_ProcessFile(t *testing.T) {
+	t.Parallel()
 
 	ctx := context.Background()
 	parser := _mocks.NewMockScriptParser(t)
 	sceneTagger := _mocks.NewMockSceneBreakdownTagger(t)
-
-	breakdown := breakdownUseCase{parser: parser, sceneTagger: sceneTagger}
+	tag := entity.Tag{Element: "some", Category: "someCategory"}
+	breakdown := scriptbreakdown.New(validator.New(), parser, sceneTagger)
 
 	req := entity.ScriptBreakdownRequest{
 		FilePath: "some input path file",
@@ -30,16 +34,19 @@ func Test_breakdownUseCase_ProcessFile(t *testing.T) {
 	sceneTagger.EXPECT().BreakdownScene(ctx,
 		mock.AnythingOfType("chan entity.Scene"),
 		mock.AnythingOfType("chan entity.SceneBreakdown")).
-		RunAndReturn(func(ctx context.Context, c1 chan entity.Scene, c2 chan entity.SceneBreakdown) error {
-			c2 <- entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Element: "some"}}}
+		RunAndReturn(func(_ context.Context, _ chan entity.Scene, c2 chan entity.SceneBreakdown) error {
+			c2 <- entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{tag}}
+
 			return nil
 		}).Return(nil)
 
 	result, err := breakdown.ScriptBreakdown(ctx, req)
 
-	var expected *entity.ScriptBreakdownResult
+	expected := &entity.ScriptBreakdownResult{
+		FilePath: "someOutputFilePath",
+	}
 
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, expected, result)
 	mock.AssertExpectationsForObjects(t, parser, sceneTagger)
 }

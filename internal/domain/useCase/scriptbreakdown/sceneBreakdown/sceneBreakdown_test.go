@@ -1,4 +1,4 @@
-package scenebreakdown
+package scenebreakdown_test
 
 import (
 	"context"
@@ -6,10 +6,13 @@ import (
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/_mocks"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+	scenebreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown/sceneBreakdown"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_sceneAnalyzer_AnalyzeScenes(t *testing.T) {
+	t.Parallel()
 
 	ctx := context.Background()
 
@@ -23,10 +26,12 @@ func Test_sceneAnalyzer_AnalyzeScenes(t *testing.T) {
 
 	aiAnalyzer := _mocks.NewMockSceneTextAnalyzer(t)
 
-	aiAnalyzer.EXPECT().AnalyzeSceneText(ctx, "Some scene").Return(
-		[]entity.Tag{{Element: "Some"}}, nil)
+	tag := entity.Tag{Element: "Some", Category: "someCategory"}
 
-	analyzer := sceneBreakdown{textAnalyzer: aiAnalyzer}
+	aiAnalyzer.EXPECT().AnalyzeSceneText(ctx, "Some scene").Return(
+		[]entity.Tag{tag}, nil)
+
+	analyzer := scenebreakdown.New(aiAnalyzer)
 
 	close(scenes)
 
@@ -36,7 +41,6 @@ func Test_sceneAnalyzer_AnalyzeScenes(t *testing.T) {
 
 	close(breakdowns)
 
-	assert.NoError(t, err)
-	assert.Equal(t, entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{{Element: "Some"}}}, breakdown)
-
+	require.NoError(t, err)
+	assert.Equal(t, entity.SceneBreakdown{Number: 1, Tags: []entity.Tag{tag}}, breakdown)
 }
