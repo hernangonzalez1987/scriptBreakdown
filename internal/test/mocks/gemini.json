@@ -1,0 +1,43 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/models/gemini-1.5-flash:generateContent"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "candidates": [
+                {
+                    "content": {
+                        "parts": [
+                            {
+                                "text": "```json\n{\n  \"props\": [\n    \"mesa de trabalho\",\n    \"computador\",\n    \"mochila\",\n    \"papéis\",\n    \"pastas\"\n  ],\n  \"cast\": [\n    \"Empregado (35, branco)\",\n    \"Gerente (35, branca)\"\n  ],\n  \"wardrobe\": [\n    \"camisa social\"\n  ],\n  \"vehicles\": [],\n  \"animals\": [],\n  \"sound-effects\": [\n    \"luzes apagando\",\n    \"som de passos (sombra na janela)\"\n  ],\n  \"music\": [],\n  \"special-effects\": [\n    \"luzes apagando\",\n    \"reflexo de um homem de máscara na tela do computador\"\n  ],\n  \"set-dressing\": [\n    \"sala de escritório moderna e bem decorada\",\n    \"escrivaninhas vazias\",\n    \"janela com vista para a cidade noturna\"\n  ]\n}\n```\n"
+                            }
+                        ],
+                        "role": "model"
+                    },
+                    "finishReason": "STOP",
+                    "avgLogprobs": -0.0205745952469962
+                }
+            ],
+            "usageMetadata": {
+                "promptTokenCount": 364,
+                "candidatesTokenCount": 224,
+                "totalTokenCount": 588,
+                "promptTokensDetails": [
+                    {
+                        "modality": "TEXT",
+                        "tokenCount": 364
+                    }
+                ],
+                "candidatesTokensDetails": [
+                    {
+                        "modality": "TEXT",
+                        "tokenCount": 224
+                    }
+                ]
+            },
+            "modelVersion": "gemini-1.5-flash"
+        }
+    }
+}
