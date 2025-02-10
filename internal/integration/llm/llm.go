@@ -15,7 +15,9 @@ import (
 
 const (
 	promptQuestionPart1 = "Find on the following scene, all the elements of the following categories: "
-	promptQuestionPart2 = "The asnwer should be only a JSON, with the elements grouped on arrays by category." +
+	promptQuestionPart2 = "The answer should be only a JSON, with the elements grouped on arrays by category. " +
+		"Every element should be an exact transcription of part of the scene, with no rephrasing. " +
+		"Omit on the response the empty categories." +
 		"The scene: "
 	nameSpace = "2f704144-5538-5d38-99ab-e5f6d44478e8"
 )
@@ -66,7 +68,7 @@ func (ref *Analyzer) AnalyzeSceneText(ctx context.Context, sceneText string) (ma
 		return nil, errors.WithStack(err)
 	}
 
-	log.Ctx(ctx).Info().Any("parsed", parsed).Msg("response from LLM")
+	log.Info().Any("parsed", parsed).Msg("response from LLM")
 
 	return parsed, nil
 }

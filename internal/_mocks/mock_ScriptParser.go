@@ -4,8 +4,10 @@ package _mocks
 
 import (
 	context "context"
+	io "io"
 
 	entity "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -22,9 +24,9 @@ func (_m *MockScriptParser) EXPECT() *MockScriptParser_Expecter {
 	return &MockScriptParser_Expecter{mock: &_m.Mock}
 }
 
-// ParseScript provides a mock function with given fields: ctx, breakdownRequest
-func (_m *MockScriptParser) ParseScript(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.Script, error) {
-	ret := _m.Called(ctx, breakdownRequest)
+// ParseScript provides a mock function with given fields: ctx, reader
+func (_m *MockScriptParser) ParseScript(ctx context.Context, reader io.Reader) (*entity.Script, error) {
+	ret := _m.Called(ctx, reader)
 
 	if len(ret) == 0 {
 		panic("no return value specified for ParseScript")
@@ -32,19 +34,19 @@ func (_m *MockScriptParser) ParseScript(ctx context.Context, breakdownRequest en
 
 	var r0 *entity.Script
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownRequest) (*entity.Script, error)); ok {
-		return rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(0).(func(context.Context, io.Reader) (*entity.Script, error)); ok {
+		return rf(ctx, reader)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownRequest) *entity.Script); ok {
-		r0 = rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(0).(func(context.Context, io.Reader) *entity.Script); ok {
+		r0 = rf(ctx, reader)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*entity.Script)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, entity.ScriptBreakdownRequest) error); ok {
-		r1 = rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(1).(func(context.Context, io.Reader) error); ok {
+		r1 = rf(ctx, reader)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -59,14 +61,14 @@ type MockScriptParser_ParseScript_Call struct {
 
 // ParseScript is a helper method to define mock.On call
 //   - ctx context.Context
-//   - breakdownRequest entity.ScriptBreakdownRequest
-func (_e *MockScriptParser_Expecter) ParseScript(ctx interface{}, breakdownRequest interface{}) *MockScriptParser_ParseScript_Call {
-	return &MockScriptParser_ParseScript_Call{Call: _e.mock.On("ParseScript", ctx, breakdownRequest)}
+//   - reader io.Reader
+func (_e *MockScriptParser_Expecter) ParseScript(ctx interface{}, reader interface{}) *MockScriptParser_ParseScript_Call {
+	return &MockScriptParser_ParseScript_Call{Call: _e.mock.On("ParseScript", ctx, reader)}
 }
 
-func (_c *MockScriptParser_ParseScript_Call) Run(run func(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest)) *MockScriptParser_ParseScript_Call {
+func (_c *MockScriptParser_ParseScript_Call) Run(run func(ctx context.Context, reader io.Reader)) *MockScriptParser_ParseScript_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(entity.ScriptBreakdownRequest))
+		run(args[0].(context.Context), args[1].(io.Reader))
 	})
 	return _c
 }
@@ -76,7 +78,7 @@ func (_c *MockScriptParser_ParseScript_Call) Return(_a0 *entity.Script, _a1 erro
 	return _c
 }
 
-func (_c *MockScriptParser_ParseScript_Call) RunAndReturn(run func(context.Context, entity.ScriptBreakdownRequest) (*entity.Script, error)) *MockScriptParser_ParseScript_Call {
+func (_c *MockScriptParser_ParseScript_Call) RunAndReturn(run func(context.Context, io.Reader) (*entity.Script, error)) *MockScriptParser_ParseScript_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -31,7 +31,7 @@ func main() {
 
 	apiKey := os.Getenv("GEMINI_API_KEY")
 
-	gemini, err := googleai.New(ctx, googleai.WithAPIKey(apiKey))
+	gemini, err := googleai.New(ctx, googleai.WithAPIKey(apiKey), googleai.WithDefaultModel("gemini-1.5-flash"))
 	if err != nil {
 		log.Fatalf("error on gemini api connect %v", err)
 	}

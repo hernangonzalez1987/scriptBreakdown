@@ -77,11 +77,13 @@ func Test_generatePrompt(t *testing.T) {
 			args: args{
 				sceneText: "some scene text",
 			},
-			want: "Find on the following scene, all the elements of the following categories: " +
-				"(animals, art department, background actors, camera, cast, makeup/hair, mechanical effects," +
-				" music, props, security, set dressing, sound, special effects, special equipment, stunts," +
-				" vehicles, visual effects, wardrove). The asnwer should be only a JSON, " +
-				"with the elements grouped on arrays by category.The scene: some scene text",
+			want: "Find on the following scene, all the elements of the following categories:" +
+				" (animals, art department, background actors, camera, cast, makeup/hair, " +
+				"mechanical effects, music, props, security, set dressing, sound, special effects, " +
+				"special equipment, stunts, vehicles, visual effects, wardrove). " +
+				"The answer should be only a JSON, with the elements grouped on arrays by category." +
+				" Every element should be an exact transcription of part of the scene, with no rephrasing." +
+				" Omit on the response the empty categories.The scene: some scene text",
 		},
 	}
 	for _, tt := range tests {

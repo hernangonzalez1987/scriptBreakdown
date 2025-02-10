@@ -47,5 +47,5 @@ func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
 		return
 	}
 
-	ctx.File(result.BreakdownTempFileName)
+	ctx.File(result.TempFileName)
 }

@@ -66,6 +66,8 @@ func (ref *BreakdownUseCase) ScriptBreakdown(ctx context.Context,
 	}
 	defer func() { err = tempInputFile.Close() }()
 
+	tempFileName := script.Hash + tempExtention
+
 	tempOutputFile, err := os.Create(script.Hash + tempExtention)
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -78,7 +80,8 @@ func (ref *BreakdownUseCase) ScriptBreakdown(ctx context.Context,
 	}
 
 	return &entity.ScriptBreakdownResult{
-		BreakdownTempFileName: script.Hash + tempExtention,
+		BreakdownID:  script.Hash,
+		TempFileName: tempFileName,
 	}, nil
 }
 
