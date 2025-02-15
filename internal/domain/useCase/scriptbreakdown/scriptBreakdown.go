@@ -1,88 +1,139 @@
 package scriptbreakdown
 
 import (
+	"bytes"
 	"context"
-	"os"
+	"io"
 	"sync"
+	"time"
 
-	"github.com/go-playground/validator/v10"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 	"github.com/pkg/errors"
-	"github.com/rs/zerolog/log"
 	"golang.org/x/sync/errgroup"
 )
 
 const (
 	numGoRoutines = 2
 	bufferSize    = 100
-	tempExtention = ".tmp"
 )
 
 type BreakdownUseCase struct {
-	validate    *validator.Validate
-	parser      _interfaces.ScriptParser
-	render      _interfaces.ScriptRender
-	sceneTagger _interfaces.SceneBreakdown
+	parser        _interfaces.ScriptParser
+	render        _interfaces.ScriptRender
+	sceneTagger   _interfaces.SceneBreakdownUseCase
+	sourceStorage _interfaces.Storage
+	targetStorage _interfaces.Storage
+	repository    _interfaces.BreakdownRepository
 }
 
-func New(validate *validator.Validate,
-	parser _interfaces.ScriptParser,
+func New(parser _interfaces.ScriptParser,
 	render _interfaces.ScriptRender,
-	sceneTagger _interfaces.SceneBreakdown,
+	sceneTagger _interfaces.SceneBreakdownUseCase,
+	sourceStorage _interfaces.Storage,
+	targetStorage _interfaces.Storage,
+	repository _interfaces.BreakdownRepository,
 ) *BreakdownUseCase {
-	return &BreakdownUseCase{validate: validate, parser: parser, render: render, sceneTagger: sceneTagger}
+	return &BreakdownUseCase{
+		parser:        parser,
+		render:        render,
+		sceneTagger:   sceneTagger,
+		sourceStorage: sourceStorage,
+		targetStorage: targetStorage,
+		repository:    repository,
+	}
 }
 
-func (ref *BreakdownUseCase) ScriptBreakdown(ctx context.Context,
-	req entity.ScriptBreakdownRequest,
+func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
+	event entity.ScriptBreakdownEvent,
 ) (result *entity.ScriptBreakdownResult, err error) {
-	err = ref.validate.Struct(req)
+	// TODO: Update processing
+	// TODO: On error, update on error
+
+	scriptFile, err := ref.sourceStorage.Get(ctx, event.BreakdownID)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	inputFile, err := os.Open(req.ScriptFileName)
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-	defer func() { err = inputFile.Close() }()
+	defer func() { err = scriptFile.Close() }()
 
-	script, err := ref.parser.ParseScript(ctx, inputFile)
+	current, err := ref.repository.Get(ctx, event.BreakdownID)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	log.Ctx(ctx).Info().Msgf("script parsed. Number of scenes: %v", len(script.Scenes))
+	version := 1
+
+	if current != nil {
+		if current.Status == valueobjects.BreakdownStatusProcessing {
+			return nil, errors.New("script is already being processed")
+		}
+		version = current.Version + 1
+	}
+
+	err = ref.repository.Save(ctx, entity.ScriptBreakdownResult{
+		BreakdownID:       event.BreakdownID,
+		Status:            valueobjects.BreakdownStatusProcessing,
+		Version:           version,
+		LastUpdate:        time.Now(),
+		StatusDescription: "Processing",
+	})
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	breakdownResult := entity.ScriptBreakdownResult{
+		BreakdownID:       event.BreakdownID,
+		Status:            valueobjects.BreakdownStatusProcessing,
+		Version:           version + 1,
+		LastUpdate:        time.Now(),
+		StatusDescription: err.Error(),
+	}
+
+	defer func() {
+		if err != nil {
+			err = ref.repository.Save(ctx, breakdownResult)
+		}
+	}()
+
+	scriptBuffer := new(bytes.Buffer)
+	script, err := ref.parser.ParseScript(ctx, io.TeeReader(scriptFile, scriptBuffer))
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
 
 	scriptBreakdown, err := ref.scriptBreakdown(ctx, *script)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	tempInputFile, err := os.Open(req.ScriptFileName)
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-	defer func() { err = tempInputFile.Close() }()
-
-	tempFileName := script.Hash + tempExtention
-
-	tempOutputFile, err := os.Create(script.Hash + tempExtention)
-	if err != nil {
-		return nil, errors.WithStack(err)
-	}
-	defer func() { err = tempOutputFile.Close() }()
-
-	err = ref.render.RenderScript(ctx, tempInputFile, tempOutputFile, *scriptBreakdown)
+	breakdownContent := new(bytes.Buffer)
+	err = ref.render.RenderScript(ctx, scriptBuffer, breakdownContent, *scriptBreakdown)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	return &entity.ScriptBreakdownResult{
-		BreakdownID:  script.Hash,
-		TempFileName: tempFileName,
-	}, nil
+	breakdownBuffer := new(bytes.Buffer)
+	err = ref.targetStorage.Put(ctx, event.BreakdownID, io.TeeReader(breakdownContent, breakdownBuffer))
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	breakdownResult = entity.ScriptBreakdownResult{
+		BreakdownID:       event.BreakdownID,
+		Status:            valueobjects.BreakdownStatusProcessing,
+		Version:           version + 1,
+		LastUpdate:        time.Now(),
+		StatusDescription: "Success",
+	}
+
+	err = ref.repository.Save(ctx, breakdownResult)
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	return &breakdownResult, nil
 }
 
 func (ref *BreakdownUseCase) scriptBreakdown(ctx context.Context,

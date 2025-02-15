@@ -16,7 +16,7 @@ func Test_breakdownUseCase_script_breakdown(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	sceneTagger := _mocks.NewMockSceneBreakdown(t)
+	sceneTagger := _mocks.NewMockSceneBreakdownUseCase(t)
 
 	breakdown := BreakdownUseCase{sceneTagger: sceneTagger}
 
@@ -27,7 +27,6 @@ func Test_breakdownUseCase_script_breakdown(t *testing.T) {
 
 	script := entity.Script{
 		Scenes:        []entity.Scene{{Number: 1, Text: "some scene text"}},
-		Hash:          "someHash",
 		TagCategories: []entity.Category{},
 	}
 

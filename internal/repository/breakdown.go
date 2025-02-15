@@ -13,7 +13,10 @@ import (
 	"github.com/pkg/errors"
 )
 
-const tableName = "ScriptBreakdownResults"
+const (
+	tableName = "ScriptBreakdownResults"
+	keyName   = "script-breakdown-id"
+)
 
 type Repository struct {
 	client _interfaces.DB
@@ -21,6 +24,29 @@ type Repository struct {
 
 func New(client _interfaces.DB) *Repository {
 	return &Repository{client: client}
+}
+
+func (ref *Repository) Init(ctx context.Context) error {
+	_, err := ref.client.CreateTable(ctx, &dynamodb.CreateTableInput{
+		TableName: aws.String(tableName),
+		AttributeDefinitions: []types.AttributeDefinition{
+			{
+				AttributeName: aws.String(keyName),
+				AttributeType: types.ScalarAttributeTypeS,
+			},
+		},
+		KeySchema: []types.KeySchemaElement{
+			{
+				AttributeName: aws.String(keyName),
+				KeyType:       types.KeyTypeHash,
+			},
+		},
+	})
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	return nil
 }
 
 func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {

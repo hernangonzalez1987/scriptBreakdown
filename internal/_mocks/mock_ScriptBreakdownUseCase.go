@@ -22,29 +22,29 @@ func (_m *MockScriptBreakdownUseCase) EXPECT() *MockScriptBreakdownUseCase_Expec
 	return &MockScriptBreakdownUseCase_Expecter{mock: &_m.Mock}
 }
 
-// ScriptBreakdown provides a mock function with given fields: ctx, breakdownRequest
-func (_m *MockScriptBreakdownUseCase) ScriptBreakdown(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error) {
-	ret := _m.Called(ctx, breakdownRequest)
+// BreakdownScript provides a mock function with given fields: ctx, event
+func (_m *MockScriptBreakdownUseCase) BreakdownScript(ctx context.Context, event entity.ScriptBreakdownEvent) (*entity.ScriptBreakdownResult, error) {
+	ret := _m.Called(ctx, event)
 
 	if len(ret) == 0 {
-		panic("no return value specified for ScriptBreakdown")
+		panic("no return value specified for BreakdownScript")
 	}
 
 	var r0 *entity.ScriptBreakdownResult
 	var r1 error
-	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)); ok {
-		return rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownEvent) (*entity.ScriptBreakdownResult, error)); ok {
+		return rf(ctx, event)
 	}
-	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownRequest) *entity.ScriptBreakdownResult); ok {
-		r0 = rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(0).(func(context.Context, entity.ScriptBreakdownEvent) *entity.ScriptBreakdownResult); ok {
+		r0 = rf(ctx, event)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*entity.ScriptBreakdownResult)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(context.Context, entity.ScriptBreakdownRequest) error); ok {
-		r1 = rf(ctx, breakdownRequest)
+	if rf, ok := ret.Get(1).(func(context.Context, entity.ScriptBreakdownEvent) error); ok {
+		r1 = rf(ctx, event)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -52,31 +52,31 @@ func (_m *MockScriptBreakdownUseCase) ScriptBreakdown(ctx context.Context, break
 	return r0, r1
 }
 
-// MockScriptBreakdownUseCase_ScriptBreakdown_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'ScriptBreakdown'
-type MockScriptBreakdownUseCase_ScriptBreakdown_Call struct {
+// MockScriptBreakdownUseCase_BreakdownScript_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'BreakdownScript'
+type MockScriptBreakdownUseCase_BreakdownScript_Call struct {
 	*mock.Call
 }
 
-// ScriptBreakdown is a helper method to define mock.On call
+// BreakdownScript is a helper method to define mock.On call
 //   - ctx context.Context
-//   - breakdownRequest entity.ScriptBreakdownRequest
-func (_e *MockScriptBreakdownUseCase_Expecter) ScriptBreakdown(ctx interface{}, breakdownRequest interface{}) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
-	return &MockScriptBreakdownUseCase_ScriptBreakdown_Call{Call: _e.mock.On("ScriptBreakdown", ctx, breakdownRequest)}
+//   - event entity.ScriptBreakdownEvent
+func (_e *MockScriptBreakdownUseCase_Expecter) BreakdownScript(ctx interface{}, event interface{}) *MockScriptBreakdownUseCase_BreakdownScript_Call {
+	return &MockScriptBreakdownUseCase_BreakdownScript_Call{Call: _e.mock.On("BreakdownScript", ctx, event)}
 }
 
-func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) Run(run func(ctx context.Context, breakdownRequest entity.ScriptBreakdownRequest)) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
+func (_c *MockScriptBreakdownUseCase_BreakdownScript_Call) Run(run func(ctx context.Context, event entity.ScriptBreakdownEvent)) *MockScriptBreakdownUseCase_BreakdownScript_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(entity.ScriptBreakdownRequest))
+		run(args[0].(context.Context), args[1].(entity.ScriptBreakdownEvent))
 	})
 	return _c
 }
 
-func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) Return(_a0 *entity.ScriptBreakdownResult, _a1 error) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
-	_c.Call.Return(_a0, _a1)
+func (_c *MockScriptBreakdownUseCase_BreakdownScript_Call) Return(result *entity.ScriptBreakdownResult, err error) *MockScriptBreakdownUseCase_BreakdownScript_Call {
+	_c.Call.Return(result, err)
 	return _c
 }
 
-func (_c *MockScriptBreakdownUseCase_ScriptBreakdown_Call) RunAndReturn(run func(context.Context, entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)) *MockScriptBreakdownUseCase_ScriptBreakdown_Call {
+func (_c *MockScriptBreakdownUseCase_BreakdownScript_Call) RunAndReturn(run func(context.Context, entity.ScriptBreakdownEvent) (*entity.ScriptBreakdownResult, error)) *MockScriptBreakdownUseCase_BreakdownScript_Call {
 	_c.Call.Return(run)
 	return _c
 }

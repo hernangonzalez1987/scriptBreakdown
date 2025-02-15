@@ -200,16 +200,13 @@ func Test_readFile(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			gotFile, gotHash, err := readScript(tt.args.reader)
+			gotFile, err := readScript(tt.args.reader)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("readFile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(gotFile, tt.wantFile) {
 				t.Errorf("readFile() gotFile = %v, want %v", gotFile, tt.wantFile)
-			}
-			if gotHash != tt.wantHash {
-				t.Errorf("readFile() gotHash = %v, want %v", gotHash, tt.wantHash)
 			}
 		})
 	}

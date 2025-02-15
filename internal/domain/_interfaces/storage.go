@@ -6,6 +6,6 @@ import (
 )
 
 type Storage interface {
-	Put(ctx context.Context, fileName string, reader io.Reader) error
-	Get(ctx context.Context, fileName string, writer io.Writer) error
+	Put(ctx context.Context, key string, reader io.Reader) error
+	Get(ctx context.Context, key string) (io.ReadCloser, error)
 }

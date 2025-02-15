@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/google/uuid"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	"github.com/pkg/errors"
 )
@@ -23,7 +22,7 @@ func NewParser() *Parser {
 }
 
 func (ref *Parser) ParseScript(_ context.Context, reader io.Reader) (*entity.Script, error) {
-	file, hash, err := readScript(reader)
+	file, err := readScript(reader)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
@@ -31,26 +30,23 @@ func (ref *Parser) ParseScript(_ context.Context, reader io.Reader) (*entity.Scr
 	return &entity.Script{
 		Scenes:        extractScenesFromScript(*file),
 		TagCategories: extractCategoryTagsFromScript(*file),
-		Hash:          hash,
 	}, nil
 }
 
-func readScript(reader io.Reader) (fdxFile *FDXFile, hash string, err error) {
+func readScript(reader io.Reader) (fdxFile *FDXFile, err error) {
 	scriptRawContent, err := io.ReadAll(reader)
 	if err != nil {
-		return nil, "", errors.WithStack(err)
+		return nil, errors.WithStack(err)
 	}
 
 	fdxFile = &FDXFile{}
 
 	err = xml.Unmarshal(scriptRawContent, fdxFile)
 	if err != nil {
-		return nil, "", errors.WithStack(err)
+		return nil, errors.WithStack(err)
 	}
 
-	scriptHash := uuid.NewMD5(uuid.MustParse(namespace), scriptRawContent)
-
-	return fdxFile, scriptHash.String(), nil
+	return fdxFile, nil
 }
 
 func extractScenesFromScript(script FDXFile) []entity.Scene {

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"mime/multipart"
 
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 )
 
@@ -29,5 +30,15 @@ func NewErrorResponse(err error) ErrorResponse {
 	return ErrorResponse{
 		Code:        "UNKNOWN",
 		Description: err.Error(),
+	}
+}
+
+type BreakdownRequestResponse struct {
+	BreakdownID string `json:"breakdown_id"`
+}
+
+func NewBreakdownRequestResponse(result entity.ScriptBreakdownResult) BreakdownRequestResponse {
+	return BreakdownRequestResponse{
+		BreakdownID: result.BreakdownID,
 	}
 }

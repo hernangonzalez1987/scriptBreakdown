@@ -22,22 +22,34 @@ func (_m *MockStorage) EXPECT() *MockStorage_Expecter {
 	return &MockStorage_Expecter{mock: &_m.Mock}
 }
 
-// Get provides a mock function with given fields: ctx, fileName, writer
-func (_m *MockStorage) Get(ctx context.Context, fileName string, writer io.Writer) error {
-	ret := _m.Called(ctx, fileName, writer)
+// Get provides a mock function with given fields: ctx, key
+func (_m *MockStorage) Get(ctx context.Context, key string) (io.ReadCloser, error) {
+	ret := _m.Called(ctx, key)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Get")
 	}
 
-	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, string, io.Writer) error); ok {
-		r0 = rf(ctx, fileName, writer)
+	var r0 io.ReadCloser
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) (io.ReadCloser, error)); ok {
+		return rf(ctx, key)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, string) io.ReadCloser); ok {
+		r0 = rf(ctx, key)
 	} else {
-		r0 = ret.Error(0)
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(io.ReadCloser)
+		}
 	}
 
-	return r0
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(ctx, key)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // MockStorage_Get_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Get'
@@ -47,32 +59,31 @@ type MockStorage_Get_Call struct {
 
 // Get is a helper method to define mock.On call
 //   - ctx context.Context
-//   - fileName string
-//   - writer io.Writer
-func (_e *MockStorage_Expecter) Get(ctx interface{}, fileName interface{}, writer interface{}) *MockStorage_Get_Call {
-	return &MockStorage_Get_Call{Call: _e.mock.On("Get", ctx, fileName, writer)}
+//   - key string
+func (_e *MockStorage_Expecter) Get(ctx interface{}, key interface{}) *MockStorage_Get_Call {
+	return &MockStorage_Get_Call{Call: _e.mock.On("Get", ctx, key)}
 }
 
-func (_c *MockStorage_Get_Call) Run(run func(ctx context.Context, fileName string, writer io.Writer)) *MockStorage_Get_Call {
+func (_c *MockStorage_Get_Call) Run(run func(ctx context.Context, key string)) *MockStorage_Get_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(string), args[2].(io.Writer))
+		run(args[0].(context.Context), args[1].(string))
 	})
 	return _c
 }
 
-func (_c *MockStorage_Get_Call) Return(_a0 error) *MockStorage_Get_Call {
-	_c.Call.Return(_a0)
+func (_c *MockStorage_Get_Call) Return(_a0 io.ReadCloser, _a1 error) *MockStorage_Get_Call {
+	_c.Call.Return(_a0, _a1)
 	return _c
 }
 
-func (_c *MockStorage_Get_Call) RunAndReturn(run func(context.Context, string, io.Writer) error) *MockStorage_Get_Call {
+func (_c *MockStorage_Get_Call) RunAndReturn(run func(context.Context, string) (io.ReadCloser, error)) *MockStorage_Get_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
-// Put provides a mock function with given fields: ctx, fileName, reader
-func (_m *MockStorage) Put(ctx context.Context, fileName string, reader io.Reader) error {
-	ret := _m.Called(ctx, fileName, reader)
+// Put provides a mock function with given fields: ctx, key, reader
+func (_m *MockStorage) Put(ctx context.Context, key string, reader io.Reader) error {
+	ret := _m.Called(ctx, key, reader)
 
 	if len(ret) == 0 {
 		panic("no return value specified for Put")
@@ -80,7 +91,7 @@ func (_m *MockStorage) Put(ctx context.Context, fileName string, reader io.Reade
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, string, io.Reader) error); ok {
-		r0 = rf(ctx, fileName, reader)
+		r0 = rf(ctx, key, reader)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -95,13 +106,13 @@ type MockStorage_Put_Call struct {
 
 // Put is a helper method to define mock.On call
 //   - ctx context.Context
-//   - fileName string
+//   - key string
 //   - reader io.Reader
-func (_e *MockStorage_Expecter) Put(ctx interface{}, fileName interface{}, reader interface{}) *MockStorage_Put_Call {
-	return &MockStorage_Put_Call{Call: _e.mock.On("Put", ctx, fileName, reader)}
+func (_e *MockStorage_Expecter) Put(ctx interface{}, key interface{}, reader interface{}) *MockStorage_Put_Call {
+	return &MockStorage_Put_Call{Call: _e.mock.On("Put", ctx, key, reader)}
 }
 
-func (_c *MockStorage_Put_Call) Run(run func(ctx context.Context, fileName string, reader io.Reader)) *MockStorage_Put_Call {
+func (_c *MockStorage_Put_Call) Run(run func(ctx context.Context, key string, reader io.Reader)) *MockStorage_Put_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(context.Context), args[1].(string), args[2].(io.Reader))
 	})

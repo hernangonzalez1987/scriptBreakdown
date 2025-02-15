@@ -1,0 +1,36 @@
+package eventhandler
+
+import (
+	"context"
+	"log"
+
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+)
+
+type S3EventHandler struct {
+	breakdownUseCase _interfaces.ScriptBreakdownUseCase
+}
+
+func NewS3EventHandler(breakdownUseCase _interfaces.ScriptBreakdownUseCase) *S3EventHandler {
+	return &S3EventHandler{breakdownUseCase: breakdownUseCase}
+}
+
+func (h *S3EventHandler) HandleEvent(ctx context.Context, s3Event events.S3Event) error {
+	for _, record := range s3Event.Records {
+		breakdownEvent := entity.ScriptBreakdownEvent{
+			BreakdownID: record.S3.Object.Key,
+		}
+
+		_, err := h.breakdownUseCase.BreakdownScript(ctx, entity.ScriptBreakdownEvent{
+			BreakdownID: breakdownEvent.BreakdownID,
+		})
+		if err != nil {
+			log.Printf("Error processing script breakdown: %v", err)
+			return err
+		}
+	}
+
+	return nil
+}

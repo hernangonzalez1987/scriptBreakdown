@@ -3,7 +3,6 @@ package entity
 import valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 
 type Script struct {
-	Hash          string
 	Scenes        []Scene
 	TagCategories TagCategories
 }

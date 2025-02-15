@@ -17,3 +17,12 @@ services:
       - ./internal/test/db:/home/dynamodblocal/data
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
     container_name: dynamodb-local
+
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      - SERVICES=iam,s3,sqs,sns
+      - AWS_DEFAULT_REGION=sa-east-1
+      - EDGE_PORT=4566
+    ports:
+      - '4566-4597:4566-4597'

@@ -2,19 +2,17 @@ package presentationbreakdown
 
 import (
 	"net/http"
-	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
-	"github.com/rs/zerolog"
 )
 
 type PresentationBreakdown struct {
-	service _interfaces.ScriptBreakdownUseCase
+	service _interfaces.ScriptBreakdownRequestUseCase
 }
 
-func New(service _interfaces.ScriptBreakdownUseCase) *PresentationBreakdown {
+func New(service _interfaces.ScriptBreakdownRequestUseCase) *PresentationBreakdown {
 	return &PresentationBreakdown{
 		service: service,
 	}
@@ -30,22 +28,26 @@ func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
 		return
 	}
 
-	dst := filepath.Base(request.File.Filename)
-
-	err = ctx.SaveUploadedFile(request.File, dst)
+	fileHeader, err := ctx.FormFile("file")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
 
 		return
 	}
 
-	result, err := ref.service.ScriptBreakdown(ctx, entity.ScriptBreakdownRequest{ScriptFileName: dst})
+	file, err := fileHeader.Open()
 	if err != nil {
-		zerolog.Ctx(ctx).Err(err).Msg("error on script breakdown")
 		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
 
 		return
 	}
 
-	ctx.File(result.TempFileName)
+	result, err := ref.service.RequestScriptBreakdown(ctx, entity.ScriptBreakdownRequest{TempScriptFile: file})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+
+		return
+	}
+
+	ctx.JSON(http.StatusOK, NewBreakdownRequestResponse(*result))
 }

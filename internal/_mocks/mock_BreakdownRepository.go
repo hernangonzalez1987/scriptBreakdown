@@ -81,6 +81,52 @@ func (_c *MockBreakdownRepository_Get_Call) RunAndReturn(run func(context.Contex
 	return _c
 }
 
+// Init provides a mock function with given fields: ctx
+func (_m *MockBreakdownRepository) Init(ctx context.Context) error {
+	ret := _m.Called(ctx)
+
+	if len(ret) == 0 {
+		panic("no return value specified for Init")
+	}
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context) error); ok {
+		r0 = rf(ctx)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// MockBreakdownRepository_Init_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Init'
+type MockBreakdownRepository_Init_Call struct {
+	*mock.Call
+}
+
+// Init is a helper method to define mock.On call
+//   - ctx context.Context
+func (_e *MockBreakdownRepository_Expecter) Init(ctx interface{}) *MockBreakdownRepository_Init_Call {
+	return &MockBreakdownRepository_Init_Call{Call: _e.mock.On("Init", ctx)}
+}
+
+func (_c *MockBreakdownRepository_Init_Call) Run(run func(ctx context.Context)) *MockBreakdownRepository_Init_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context))
+	})
+	return _c
+}
+
+func (_c *MockBreakdownRepository_Init_Call) Return(_a0 error) *MockBreakdownRepository_Init_Call {
+	_c.Call.Return(_a0)
+	return _c
+}
+
+func (_c *MockBreakdownRepository_Init_Call) RunAndReturn(run func(context.Context) error) *MockBreakdownRepository_Init_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Save provides a mock function with given fields: ctx, result
 func (_m *MockBreakdownRepository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {
 	ret := _m.Called(ctx, result)
