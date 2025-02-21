@@ -57,6 +57,11 @@ func main() {
 
 	repository := repository.New(dbClient)
 
+	err = repository.Init(ctx)
+	if err != nil {
+		log.Fatalf("error initializing repository %v", err)
+	}
+
 	sourceStorage := storage.NewS3Storage(storageClient, os.Getenv("SCRIPTS_BUCKET"))
 	targetStorage := storage.NewS3Storage(storageClient, os.Getenv("BREAKDOWNS_BUCKET"))
 

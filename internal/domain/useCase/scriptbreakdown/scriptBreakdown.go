@@ -84,15 +84,14 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 	}
 
 	breakdownResult := entity.ScriptBreakdownResult{
-		BreakdownID:       event.BreakdownID,
-		Status:            valueobjects.BreakdownStatusProcessing,
-		Version:           version + 1,
-		LastUpdate:        time.Now(),
-		StatusDescription: err.Error(),
+		BreakdownID: event.BreakdownID,
+		Status:      valueobjects.BreakdownStatusProcessing,
+		Version:     version + 1,
 	}
 
 	defer func() {
 		if err != nil {
+			breakdownResult.StatusDescription = err.Error()
 			err = ref.repository.Save(ctx, breakdownResult)
 		}
 	}()
@@ -124,7 +123,6 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		BreakdownID:       event.BreakdownID,
 		Status:            valueobjects.BreakdownStatusProcessing,
 		Version:           version + 1,
-		LastUpdate:        time.Now(),
 		StatusDescription: "Success",
 	}
 

@@ -1,7 +1,6 @@
 package storage
 
 import (
-	"bytes"
 	"context"
 	"io"
 
@@ -20,16 +19,10 @@ func NewS3Storage(client *s3.Client, bucket string) *S3Storage {
 }
 
 func (s *S3Storage) Put(ctx context.Context, key string, body io.Reader) error {
-	buf := new(bytes.Buffer)
-	_, err := buf.ReadFrom(body)
-	if err != nil {
-		return errors.WithStack(err)
-	}
-
-	_, err = s.client.PutObject(ctx, &s3.PutObjectInput{
+	_, err := s.client.PutObject(ctx, &s3.PutObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(key),
-		Body:   bytes.NewReader(buf.Bytes()),
+		Body:   body,
 	})
 	if err != nil {
 		return errors.WithStack(err)

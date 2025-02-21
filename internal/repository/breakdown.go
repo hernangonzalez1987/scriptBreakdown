@@ -3,6 +3,8 @@ package repository
 import (
 	"context"
 	"fmt"
+	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
@@ -14,8 +16,9 @@ import (
 )
 
 const (
-	tableName = "ScriptBreakdownResults"
-	keyName   = "script-breakdown-id"
+	tableName               = "ScriptBreakdownResults"
+	keyName                 = "script-breakdown-id"
+	tableAlreadyExistsError = "Cannot create preexisting table"
 )
 
 type Repository struct {
@@ -41,7 +44,11 @@ func (ref *Repository) Init(ctx context.Context) error {
 				KeyType:       types.KeyTypeHash,
 			},
 		},
+		BillingMode: types.BillingModePayPerRequest,
 	})
+	if strings.Contains(err.Error(), tableAlreadyExistsError) {
+		return nil
+	}
 	if err != nil {
 		return errors.WithStack(err)
 	}
@@ -52,13 +59,15 @@ func (ref *Repository) Init(ctx context.Context) error {
 func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {
 	condition := "attribute_not_exists(BreakdownID)"
 
+	result.LastUpdate = time.Now()
+
 	if result.Version > 1 {
 		condition = fmt.Sprintf("Version = %v", result.Version-1)
 	}
 	_, err := ref.client.PutItem(ctx, &dynamodb.PutItemInput{
 		TableName: aws.String(tableName),
 		Item: map[string]types.AttributeValue{
-			"BreakdownID": &types.AttributeValueMemberS{Value: result.BreakdownID},
+			keyName: &types.AttributeValueMemberS{Value: result.BreakdownID},
 		},
 		ConditionExpression: aws.String(condition),
 	})
@@ -71,8 +80,9 @@ func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownRe
 
 func (ref *Repository) Get(ctx context.Context, id string) (*entity.ScriptBreakdownResult, error) {
 	item, err := ref.client.GetItem(ctx, &dynamodb.GetItemInput{
+		TableName: aws.String(tableName),
 		Key: map[string]types.AttributeValue{
-			"BreakdownID": &types.AttributeValueMemberS{Value: id},
+			keyName: &types.AttributeValueMemberS{Value: id},
 		},
 	})
 	if err != nil {
