@@ -57,11 +57,15 @@ func (ref *Repository) Init(ctx context.Context) error {
 
 func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {
 	condition := "attribute_not_exists(" + keyName + ")"
+	var expressionValues map[string]types.AttributeValue
 
 	result.UpdatedAt = time.Now()
 
 	if result.Version > 1 {
-		condition = fmt.Sprintf("version = %v", result.Version-1)
+		condition = "version = :version"
+		expressionValues = map[string]types.AttributeValue{
+			":version": &types.AttributeValueMemberN{Value: fmt.Sprint(result.Version - 1)},
+		}
 	}
 
 	attrs, err := attributevalue.MarshalMap(result)
@@ -70,9 +74,10 @@ func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownRe
 	}
 
 	_, err = ref.client.PutItem(ctx, &dynamodb.PutItemInput{
-		TableName:           aws.String(tableName),
-		Item:                attrs,
-		ConditionExpression: aws.String(condition),
+		TableName:                 aws.String(tableName),
+		Item:                      attrs,
+		ConditionExpression:       aws.String(condition),
+		ExpressionAttributeValues: expressionValues,
 	})
 	if err != nil {
 		return errors.WithStack(err)
