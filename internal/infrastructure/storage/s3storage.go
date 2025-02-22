@@ -2,6 +2,7 @@ package storage
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -19,7 +20,7 @@ func NewS3Storage(client *s3.Client, bucket string) *S3Storage {
 }
 
 func (s *S3Storage) Put(ctx context.Context, key string, body io.Reader) error {
-	_, err := s.client.PutObject(ctx, &s3.PutObjectInput{
+	output, err := s.client.PutObject(ctx, &s3.PutObjectInput{
 		Bucket: aws.String(s.bucket),
 		Key:    aws.String(key),
 		Body:   body,
@@ -27,6 +28,8 @@ func (s *S3Storage) Put(ctx context.Context, key string, body io.Reader) error {
 	if err != nil {
 		return errors.WithStack(err)
 	}
+
+	fmt.Println(output)
 
 	return nil
 }

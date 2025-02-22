@@ -3,11 +3,12 @@ package queue
 import (
 	"context"
 	"encoding/json"
-	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/google/uuid"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	log "github.com/rs/zerolog"
 )
 
 type SQSListener struct {
@@ -32,7 +33,7 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 			WaitTimeSeconds:     20,
 		})
 		if err != nil {
-			log.Printf("Error receiving SQS message: %v", err)
+			log.Ctx(ctx).Error().Err(err).Msg("error receiving from queue")
 			continue
 		}
 
@@ -40,13 +41,21 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 			var event events.S3Event
 			err := json.Unmarshal([]byte(*message.Body), &event)
 			if err != nil {
-				log.Printf("Error unmarshalling SQS message: %v", err)
+				log.Ctx(ctx).Warn().Err(err).Msg("error unmarshaling event")
 				continue
 			}
 
+			correlationID := uuid.New().String()
+
+			ctx := log.Ctx(ctx).WithContext(ctx)
+
+			log.Ctx(ctx).UpdateContext(func(c log.Context) log.Context {
+				return c.Str("correlation_id", correlationID)
+			})
+
 			err = l.eventHandler.HandleEvent(ctx, event)
 			if err != nil {
-				log.Printf("Error processing script breakdown: %v", err)
+				log.Ctx(ctx).Error().Err(err).Msg("error on event handler")
 				continue
 			}
 
@@ -55,7 +64,7 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 				ReceiptHandle: message.ReceiptHandle,
 			})
 			if err != nil {
-				log.Printf("Error deleting SQS message: %v", err)
+				log.Ctx(ctx).Error().Err(err).Msg("error on delete from queue")
 			}
 		}
 	}

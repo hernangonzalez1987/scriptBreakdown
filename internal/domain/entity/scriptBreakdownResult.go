@@ -8,10 +8,11 @@ import (
 )
 
 type ScriptBreakdownResult struct {
-	BreakdownID       string                       `json:"BreakdownID"`
-	Content           io.Reader                    `json:"Content"`
-	Status            valueobjects.BreakdownStatus `json:"Status"`
-	StatusDescription string                       `json:"StatusDescription"`
-	Version           int                          `json:"Version"`
-	LastUpdate        time.Time                    `json:"LastUpdate"`
+	BreakdownID       string                       `json:"breakdown_id" dynamodbav:"breakdown_id"`
+	Content           io.Reader                    `json:"content" dynamodbav:"-"`
+	Status            valueobjects.BreakdownStatus `json:"status" dynamodbav:"status"`
+	StatusDescription string                       `json:"status_description" dynamodbav:"status_description"`
+	Version           int                          `json:"version" dynamodbav:"version"`
+	CreatedAt         time.Time                    `json:"created_at" dynamodbav:"created_at"`
+	UpdatedAt         time.Time                    `json:"updated_at" dynamodbav:"updated_at"`
 }

@@ -10,22 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	"github.com/pkg/errors"
 )
 
 const (
 	tableName               = "ScriptBreakdownResults"
-	keyName                 = "script-breakdown-id"
+	keyName                 = "breakdown_id"
 	tableAlreadyExistsError = "Cannot create preexisting table"
 )
 
 type Repository struct {
-	client _interfaces.DB
+	client *dynamodb.Client
 }
 
-func New(client _interfaces.DB) *Repository {
+func New(client *dynamodb.Client) *Repository {
 	return &Repository{client: client}
 }
 
@@ -46,10 +45,10 @@ func (ref *Repository) Init(ctx context.Context) error {
 		},
 		BillingMode: types.BillingModePayPerRequest,
 	})
-	if strings.Contains(err.Error(), tableAlreadyExistsError) {
-		return nil
-	}
 	if err != nil {
+		if strings.Contains(err.Error(), tableAlreadyExistsError) {
+			return nil
+		}
 		return errors.WithStack(err)
 	}
 
@@ -57,18 +56,22 @@ func (ref *Repository) Init(ctx context.Context) error {
 }
 
 func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {
-	condition := "attribute_not_exists(BreakdownID)"
+	condition := "attribute_not_exists(" + keyName + ")"
 
-	result.LastUpdate = time.Now()
+	result.UpdatedAt = time.Now()
 
 	if result.Version > 1 {
-		condition = fmt.Sprintf("Version = %v", result.Version-1)
+		condition = fmt.Sprintf("version = %v", result.Version-1)
 	}
-	_, err := ref.client.PutItem(ctx, &dynamodb.PutItemInput{
-		TableName: aws.String(tableName),
-		Item: map[string]types.AttributeValue{
-			keyName: &types.AttributeValueMemberS{Value: result.BreakdownID},
-		},
+
+	attrs, err := attributevalue.MarshalMap(result)
+	if err != nil {
+		return errors.WithStack(err)
+	}
+
+	_, err = ref.client.PutItem(ctx, &dynamodb.PutItemInput{
+		TableName:           aws.String(tableName),
+		Item:                attrs,
 		ConditionExpression: aws.String(condition),
 	})
 	if err != nil {
@@ -87,6 +90,10 @@ func (ref *Repository) Get(ctx context.Context, id string) (*entity.ScriptBreakd
 	})
 	if err != nil {
 		return nil, errors.WithStack(err)
+	}
+
+	if item.Item == nil {
+		return nil, nil
 	}
 
 	result := &entity.ScriptBreakdownResult{}

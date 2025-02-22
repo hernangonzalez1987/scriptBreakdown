@@ -2,11 +2,11 @@ package eventhandler
 
 import (
 	"context"
-	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
+	"github.com/pkg/errors"
 )
 
 type S3EventHandler struct {
@@ -27,8 +27,7 @@ func (h *S3EventHandler) HandleEvent(ctx context.Context, s3Event events.S3Event
 			BreakdownID: breakdownEvent.BreakdownID,
 		})
 		if err != nil {
-			log.Printf("Error processing script breakdown: %v", err)
-			return err
+			return errors.WithStack(err)
 		}
 	}
 

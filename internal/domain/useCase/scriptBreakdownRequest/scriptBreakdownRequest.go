@@ -28,6 +28,9 @@ func (ref *ScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Con
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
+	defer func() {
+		err = tempFile.Close()
+	}()
 
 	scriptRawContent, err := io.ReadAll(io.TeeReader(req.TempScriptFile, tempFile))
 	if err != nil {
@@ -35,6 +38,16 @@ func (ref *ScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Con
 	}
 
 	breakdownID := uuid.NewMD5(uuid.MustParse(namespace), scriptRawContent)
+
+	err = tempFile.Sync()
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	_, err = tempFile.Seek(0, 0)
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
 
 	err = ref.storage.Put(ctx, breakdownID.String(), tempFile)
 	if err != nil {

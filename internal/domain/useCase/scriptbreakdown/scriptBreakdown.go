@@ -5,14 +5,16 @@ import (
 	"context"
 	"io"
 	"sync"
-	"time"
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 	"github.com/pkg/errors"
+	"github.com/rs/zerolog/log"
 	"golang.org/x/sync/errgroup"
 )
+
+var errAlreadyProcessing = errors.New("script is already being processed")
 
 const (
 	numGoRoutines = 2
@@ -47,16 +49,20 @@ func New(parser _interfaces.ScriptParser,
 
 func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 	event entity.ScriptBreakdownEvent,
-) (result *entity.ScriptBreakdownResult, err error) {
+) (*entity.ScriptBreakdownResult, error) {
 	// TODO: Update processing
 	// TODO: On error, update on error
+
+	log.Ctx(ctx).Info().Any("event", event).Msg("processing script breakdown")
+
+	var err error
 
 	scriptFile, err := ref.sourceStorage.Get(ctx, event.BreakdownID)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	defer func() { err = scriptFile.Close() }()
+	defer scriptFile.Close()
 
 	current, err := ref.repository.Get(ctx, event.BreakdownID)
 	if err != nil {
@@ -67,7 +73,7 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 
 	if current != nil {
 		if current.Status == valueobjects.BreakdownStatusProcessing {
-			return nil, errors.New("script is already being processed")
+			return nil, errAlreadyProcessing
 		}
 		version = current.Version + 1
 	}
@@ -76,23 +82,25 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		BreakdownID:       event.BreakdownID,
 		Status:            valueobjects.BreakdownStatusProcessing,
 		Version:           version,
-		LastUpdate:        time.Now(),
 		StatusDescription: "Processing",
 	})
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	breakdownResult := entity.ScriptBreakdownResult{
-		BreakdownID: event.BreakdownID,
-		Status:      valueobjects.BreakdownStatusProcessing,
-		Version:     version + 1,
-	}
-
 	defer func() {
 		if err != nil {
-			breakdownResult.StatusDescription = err.Error()
-			err = ref.repository.Save(ctx, breakdownResult)
+			breakdownResult := entity.ScriptBreakdownResult{
+				BreakdownID:       event.BreakdownID,
+				Status:            valueobjects.BreakdownStatusError,
+				Version:           version + 1,
+				StatusDescription: err.Error(),
+			}
+
+			err := ref.repository.Save(ctx, breakdownResult)
+			if err != nil {
+				log.Ctx(ctx).Err(err).Msg("error writing error on db")
+			}
 		}
 	}()
 
@@ -107,6 +115,8 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		return nil, errors.WithStack(err)
 	}
 
+	log.Ctx(ctx).Info().Any("event", event).Msg("script breakdown done. About to render")
+
 	breakdownContent := new(bytes.Buffer)
 	err = ref.render.RenderScript(ctx, scriptBuffer, breakdownContent, *scriptBreakdown)
 	if err != nil {
@@ -119,12 +129,14 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		return nil, errors.WithStack(err)
 	}
 
-	breakdownResult = entity.ScriptBreakdownResult{
+	breakdownResult := entity.ScriptBreakdownResult{
 		BreakdownID:       event.BreakdownID,
 		Status:            valueobjects.BreakdownStatusProcessing,
 		Version:           version + 1,
 		StatusDescription: "Success",
 	}
+
+	log.Ctx(ctx).Info().Any("event", event).Msg("render done")
 
 	err = ref.repository.Save(ctx, breakdownResult)
 	if err != nil {

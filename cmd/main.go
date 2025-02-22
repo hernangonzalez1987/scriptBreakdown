@@ -29,7 +29,11 @@ import (
 )
 
 func main() {
-	logger := zerolog.New(os.Stdout).Level(zerolog.InfoLevel)
+	logger := zerolog.New(os.Stdout).Level(zerolog.InfoLevel).
+		With().
+		Timestamp().
+		Caller().
+		Logger()
 
 	ctx := logger.WithContext(context.Background())
 
