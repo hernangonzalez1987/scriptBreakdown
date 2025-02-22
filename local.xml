@@ -9,16 +9,22 @@
       </UserParagraphData>
     </Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>Uma </Text><Text TagNumber="12">multidão</Text><Text> se aglomera na Praça da Sé, em São Paulo. Alguns leem </Text><Text TagNumber="21">jornais</Text><Text>,
-        outros conversam animados, </Text><Text TagNumber="13">vendedores ambulantes</Text><Text> oferecem seus </Text><Text TagNumber="22">produtos</Text><Text>. O sol da manhã
-        ilumina a cena, criando sombras longas e vibrantes.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text>Uma </Text><Text TagNumber="18">multidão</Text><Text> se aglomera na Praça da Sé, em São Paulo. Alguns leem </Text><Text TagNumber="6">jornais</Text><Text>,
+        outros conversam animados, </Text><Text TagNumber="19">vendedores ambulantes</Text><Text> oferecem seus </Text><Text TagNumber="7">produtos</Text><Text>. O sol da manhã
+        ilumina a cena, criando sombras longas e vibrantes.</Text><UserParagraphData>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>No centro da praça, um pequeno </Text><Text TagNumber="1">palco improvisado</Text><Text>. Um </Text><Text TagNumber="23">microfone</Text><Text> está posicionado
-        no centro, aguardando o orador.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+      </UserParagraphData></Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text TagNumber="17">A câmera inicia em um plano geral da praça</Text><Text>, capturando a energia do local.
-        </Text><Text TagNumber="18">Lentamente, ela se move em direção ao palco</Text><Text>, onde um homem de </Text><Text TagNumber="24">terno e gravata</Text><Text>, </Text><Text TagNumber="20">Marcelo</Text><Text>,
-        ajusta o </Text><Text TagNumber="23">microfone</Text><Text>. Ele parece nervoso.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text>No centro da praça, um pequeno </Text><Text TagNumber="25">palco improvisado</Text><Text>. Um </Text><Text TagNumber="8">microfone</Text><Text> está posicionado
+        no centro, aguardando o orador.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
+
+    <Paragraph Type="Action" Alignment="Left"><Text TagNumber="3">A câmera inicia em um plano geral da praça</Text><Text>, capturando a energia do local.
+        </Text><Text TagNumber="4">Lentamente, ela se move em direção ao palco</Text><Text>, onde um homem de </Text><Text TagNumber="9">terno e gravata</Text><Text>, </Text><Text TagNumber="24">Marcelo</Text><Text>,
+        ajusta o </Text><Text TagNumber="8">microfone</Text><Text>. Ele parece nervoso.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
 
     <Paragraph Type="Character" Alignment="Left">
       <Text Style="AllCaps">MARCELO</Text>
@@ -45,8 +51,10 @@
       </UserParagraphData>
     </Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>A </Text><Text TagNumber="12">multidão</Text><Text> reage com </Text><Text TagNumber="8">risadas</Text><Text>. </Text><Text TagNumber="20">Marcelo</Text><Text> tenta disfarçar o nervosismo, ajeitando a
-        gravata.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text>A </Text><Text TagNumber="18">multidão</Text><Text> reage com </Text><Text TagNumber="13">risadas</Text><Text>. </Text><Text TagNumber="24">Marcelo</Text><Text> tenta disfarçar o nervosismo, ajeitando a
+        </Text><Text TagNumber="10">gravata</Text><Text>.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
 
     <Paragraph Type="Character" Alignment="Left">
       <Text Style="AllCaps">MARCELO</Text>
@@ -74,12 +82,16 @@
       </UserParagraphData>
     </Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>No canto da praça, um </Text><Text TagNumber="7">carro de polícia</Text><Text> se aproxima lentamente, com as sirenes
-        desligadas. </Text><Text TagNumber="6">Dois policiais</Text><Text> saem do veículo e observam a </Text><Text TagNumber="12">multidão</Text><Text>, atentos a qualquer sinal
-        de problema.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text>No canto da praça, um </Text><Text TagNumber="12">carro de polícia</Text><Text> se aproxima lentamente, com as sirenes
+        desligadas. </Text><Text TagNumber="11">Dois policiais</Text><Text> saem do veículo e observam a </Text><Text TagNumber="18">multidão</Text><Text>, atentos a qualquer sinal
+        de problema.</Text><UserParagraphData>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>No palco, </Text><Text TagNumber="20">Marcelo</Text><Text> continua seu discurso, agora com mais confiança. A </Text><Text TagNumber="12">multidão</Text><Text> o
-        ouve atentamente.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+      </UserParagraphData></Paragraph>
+
+    <Paragraph Type="Action" Alignment="Left"><Text>No palco, </Text><Text TagNumber="24">Marcelo</Text><Text> continua seu discurso, agora com mais confiança. A </Text><Text TagNumber="18">multidão</Text><Text> o
+        ouve atentamente.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
 
     <Paragraph Type="Character" Alignment="Left">
       <Text Style="AllCaps">MARCELO</Text>
@@ -97,15 +109,21 @@
       </UserParagraphData>
     </Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text TagNumber="19">A câmera se afasta lentamente</Text><Text>, mostrando a </Text><Text TagNumber="12">multidão</Text><Text> reunida na praça, enquanto
-        o </Text><Text TagNumber="9">discurso de Marcelo ecoa pelo ar</Text><Text>. A </Text><Text TagNumber="2">música de fundo, um violão suave</Text><Text>, acompanha a cena.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text TagNumber="5">A câmera se afasta lentamente</Text><Text>, mostrando a </Text><Text TagNumber="18">multidão</Text><Text> reunida na praça, enquanto
+        o </Text><Text TagNumber="14">discurso de Marcelo ecoa pelo ar</Text><Text>. A </Text><Text TagNumber="15">música de fundo, um violão suave</Text><Text>, acompanha a cena.</Text><UserParagraphData>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>No céu, um efeito visual sutil: a imagem de uma </Text><Text TagNumber="11">pomba branca</Text><Text>, símbolo da paz,
-        se sobrepõe à imagem da praça.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+      </UserParagraphData></Paragraph>
 
-    <Paragraph Type="Action" Alignment="Left"><Text>A cena termina com um plano geral da Praça da Sé, mostrando a </Text><Text TagNumber="12">multidão</Text><Text> reunida,
-        o </Text><Text TagNumber="1">palco improvisado</Text><Text> e o </Text><Text TagNumber="7">carro de polícia</Text><Text> ao fundo. </Text><Text TagNumber="3">A música aumenta gradualmente</Text><Text>, enquanto a
-        </Text><Text TagNumber="5">imagem da pomba branca desaparece lentamente</Text><Text>.</Text><UserParagraphData>&#xA;&#xA;      </UserParagraphData></Paragraph>
+    <Paragraph Type="Action" Alignment="Left"><Text>No céu, um </Text><Text TagNumber="1">efeito visual sutil: a imagem de uma pomba branca</Text><Text>, símbolo da paz,
+        se sobrepõe à imagem da praça.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
+
+    <Paragraph Type="Action" Alignment="Left"><Text>A cena termina com um plano geral da Praça da Sé, mostrando a </Text><Text TagNumber="18">multidão</Text><Text> reunida,
+        o </Text><Text TagNumber="25">palco improvisado</Text><Text> e o </Text><Text TagNumber="12">carro de polícia</Text><Text> ao fundo. </Text><Text TagNumber="16">A música aumenta gradualmente</Text><Text>, enquanto a
+        imagem da </Text><Text TagNumber="17">pomba branca</Text><Text> desaparece lentamente.</Text><UserParagraphData>
+
+      </UserParagraphData></Paragraph>
 
   </Content>
 
@@ -314,39 +332,7 @@
     <Revision Color="#00000000FFFF" FullRevision="No" ID="19" Mark="*" Name="2nd Tan (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
   </Revisions>
 
-  <TagData>
-    <TagCategories>
-      <TagCategory Color="#00003600B700" Id="01fc9642-84ff-4366-b37c-a3068dee57e8" Name="Cast Members" Number="2" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="028a4e2b-b507-4d09-88ab-90e3edae9071" Name="Background Actors" Number="3" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0377dbe6-77a3-41af-bda8-86eb2468fdbf" Name="Stunts" Number="4" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="04721a56-f54b-49c8-80ad-d53887d6b851" Name="Vehicles" Number="5" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Name="Props" Number="6" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="069e18b8-2109-4f3d-94e7-d802027a60a8" Name="Special Effects" Number="8" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0726fa85-1e65-4ab8-87de-bf21d09b01f0" Name="Wardrobe" Number="9" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="08ae1eef-32ce-415f-9a9b-0982d2453ec4" Name="Makeup/Hair" Number="10" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="09cb0d1c-ce01-4f22-bb64-b5f2e6c491c6" Name="Animals" Number="11" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0ae40617-cc7c-48e6-ae2b-5aaecc09986f" Name="Animal Wrangler" Number="12" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0b0b44c9-aa4b-4c40-88b1-d94472ad7a26" Name="Music" Number="13" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0ce7d308-096d-4603-8fe8-349f72cd89ff" Name="Sound" Number="14" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0debb71b-5743-4c53-80cc-e17e841ce645" Name="Set Dressing" Number="16" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0e7a8fc5-5441-4bad-a9bf-5ddd3fe51c69" Name="Greenery" Number="17" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="0ff5cda4-4d43-4cfe-940f-91380c46fdad" Name="Special Equipment" Number="19" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="109d0eaa-0334-4823-ac0c-b44d3f209dc4" Name="Security" Number="18" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="1179a4b1-70ee-4011-b4a2-809a0af09e92" Name="Additional Labor" Number="20" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e" Name="Visual Effects" Number="21" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="135cc9d1-c4d5-4d00-83d9-571f584ea9cd" Name="Mechanical Effects" Number="22" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="148267ae-50ae-4746-8202-659fb7447b55" Name="Miscellaneous" Number="23" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="15b6f4fd-4e74-4ad8-9971-b239d88c2997" Name="Notes" Number="24" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="216f33fd-fc42-4269-be01-b05b18f815a0" Name="Comments" Number="29" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="47b02ff1-5161-4137-b736-f36eebba7643" Name="Camera" Number="7" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="4a84b619-62f9-4c04-8e46-bf2cd0b7f582" Name="Art Department" Number="15" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="63c140da-ef2b-491a-b416-b46f461abb89" Name="Script Day" Number="25" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="70877d87-30ef-45b6-be46-c6fa94b83a71" Name="Sequence" Number="27" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="849f1ebf-5507-4f33-bff6-3a5b4d73be14" Name="Unit" Number="26" Style="Bold"></TagCategory>
-      <TagCategory Color="#000000000000" Id="8e5e75c2-713b-47df-a75f-f12648b98ded" Name="Synopsis" Number="1" Style="Bold"></TagCategory>
-      <TagCategory Color="#940011000000" Id="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Name="Location" Number="28" Style="Bold"></TagCategory>
-    </TagCategories>
-  </TagData>
+  <TagData><TagCategories><TagCategory Name="Cast Members" Number="2" Id="01fc9642-84ff-4366-b37c-a3068dee57e8" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Background Actors" Number="3" Id="028a4e2b-b507-4d09-88ab-90e3edae9071" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Stunts" Number="4" Id="0377dbe6-77a3-41af-bda8-86eb2468fdbf" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Vehicles" Number="5" Id="04721a56-f54b-49c8-80ad-d53887d6b851" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Props" Number="6" Id="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Special Effects" Number="8" Id="069e18b8-2109-4f3d-94e7-d802027a60a8" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Wardrobe" Number="9" Id="0726fa85-1e65-4ab8-87de-bf21d09b01f0" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Makeup/Hair" Number="10" Id="08ae1eef-32ce-415f-9a9b-0982d2453ec4" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Animals" Number="11" Id="09cb0d1c-ce01-4f22-bb64-b5f2e6c491c6" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Animal Wrangler" Number="12" Id="0ae40617-cc7c-48e6-ae2b-5aaecc09986f" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Music" Number="13" Id="0b0b44c9-aa4b-4c40-88b1-d94472ad7a26" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Sound" Number="14" Id="0ce7d308-096d-4603-8fe8-349f72cd89ff" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Set Dressing" Number="16" Id="0debb71b-5743-4c53-80cc-e17e841ce645" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Greenery" Number="17" Id="0e7a8fc5-5441-4bad-a9bf-5ddd3fe51c69" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Special Equipment" Number="19" Id="0ff5cda4-4d43-4cfe-940f-91380c46fdad" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Security" Number="18" Id="109d0eaa-0334-4823-ac0c-b44d3f209dc4" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Additional Labor" Number="20" Id="1179a4b1-70ee-4011-b4a2-809a0af09e92" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Visual Effects" Number="21" Id="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Mechanical Effects" Number="22" Id="135cc9d1-c4d5-4d00-83d9-571f584ea9cd" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Miscellaneous" Number="23" Id="148267ae-50ae-4746-8202-659fb7447b55" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Notes" Number="24" Id="15b6f4fd-4e74-4ad8-9971-b239d88c2997" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Comments" Number="29" Id="216f33fd-fc42-4269-be01-b05b18f815a0" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Camera" Number="7" Id="47b02ff1-5161-4137-b736-f36eebba7643" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Art Department" Number="15" Id="4a84b619-62f9-4c04-8e46-bf2cd0b7f582" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Script Day" Number="25" Id="63c140da-ef2b-491a-b416-b46f461abb89" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Sequence" Number="27" Id="70877d87-30ef-45b6-be46-c6fa94b83a71" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Unit" Number="26" Id="849f1ebf-5507-4f33-bff6-3a5b4d73be14" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Synopsis" Number="1" Id="8e5e75c2-713b-47df-a75f-f12648b98ded" Style="Bold"><TagCategory></TagCategory></TagCategory><TagCategory Name="Location" Number="28" Id="c5e89e4d-f83e-4c28-950c-92a63f1b5f26" Style="Bold"><TagCategory></TagCategory></TagCategory></TagCategories><TagDefinitions><TagDefinition CatId="069e18b8-2109-4f3d-94e7-d802027a60a8" Id="87febd7b-f04e-41c8-b4d9-4dd6187752a5" Label="efeito visual sutil: a imagem de uma pomba branca" Number="1"></TagDefinition><TagDefinition CatId="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e" Id="138e50af-84d4-4a0c-a30d-90ccd3df3933" Label="imagem de uma pomba branca" Number="2"></TagDefinition><TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643" Id="1c456877-ce0e-413b-8116-728562c64f74" Label="A câmera inicia em um plano geral da praça" Number="3"></TagDefinition><TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643" Id="a5b9a865-42ad-4125-a8e7-c8726ae72435" Label="Lentamente, ela se move em direção ao palco" Number="4"></TagDefinition><TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643" Id="dc4ed919-00c9-4eb3-bd88-2b99183309b2" Label="A câmera se afasta lentamente" Number="5"></TagDefinition><TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="3170d94f-6e97-417a-8c4d-ebd4195e8a96" Label="jornais" Number="6"></TagDefinition><TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="8c894e03-b06b-4b98-9a81-87200b213d32" Label="produtos" Number="7"></TagDefinition><TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="42242a11-f281-4692-945b-e80004f75401" Label="microfone" Number="8"></TagDefinition><TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="b9798f36-1f44-4531-9cbb-a3e6c080dccc" Label="terno e gravata" Number="9"></TagDefinition><TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa" Id="3382020c-e44c-48e6-911e-104ea48e50d4" Label="gravata" Number="10"></TagDefinition><TagDefinition CatId="109d0eaa-0334-4823-ac0c-b44d3f209dc4" Id="9bdbddc6-3ba7-4247-ae8b-4fd1d990724f" Label="Dois policiais" Number="11"></TagDefinition><TagDefinition CatId="109d0eaa-0334-4823-ac0c-b44d3f209dc4" Id="c134fcdd-9355-4752-932e-54d702dcc856" Label="carro de polícia" Number="12"></TagDefinition><TagDefinition CatId="0ce7d308-096d-4603-8fe8-349f72cd89ff" Id="7acae17f-dc15-4a97-bbf0-4ed4cc6beda9" Label="risadas" Number="13"></TagDefinition><TagDefinition CatId="0ce7d308-096d-4603-8fe8-349f72cd89ff" Id="83fd11b5-40d1-4556-9d26-2a90febbb894" Label="discurso de Marcelo ecoa pelo ar" Number="14"></TagDefinition><TagDefinition CatId="0b0b44c9-aa4b-4c40-88b1-d94472ad7a26" Id="64ee68aa-0a66-4b80-97f0-6934eacecdbe" Label="música de fundo, um violão suave" Number="15"></TagDefinition><TagDefinition CatId="0b0b44c9-aa4b-4c40-88b1-d94472ad7a26" Id="e603e6df-da4f-4cac-a5ab-f0016e3f1b0d" Label="A música aumenta gradualmente" Number="16"></TagDefinition><TagDefinition CatId="09cb0d1c-ce01-4f22-bb64-b5f2e6c491c6" Id="3cf6cc35-b1f1-4d28-b2b8-8e8b415b28c1" Label="pomba branca" Number="17"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="4763b202-3fe7-45f5-92b3-1ce9aff389ef" Label="multidão" Number="18"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="cae84c9e-1f11-46e6-bf6b-bfbac8169faa" Label="vendedores ambulantes" Number="19"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="2f754b27-707b-4365-934b-870f0f1d3014" Label="multidão reage com risadas" Number="20"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="19e958b5-637f-4d96-bef7-d34cf7aa16e3" Label="multidão o ouve atentamente" Number="21"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="82d61004-e1c0-405f-99ad-f2bd36edcea2" Label="multidão reunida na praça" Number="22"></TagDefinition><TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071" Id="9b8e1ece-f151-4c5f-ab13-a44bf73c430a" Label="multidão reunida" Number="23"></TagDefinition><TagDefinition CatId="01fc9642-84ff-4366-b37c-a3068dee57e8" Id="5d8cfff2-0790-4571-a16b-07616ccec9ff" Label="Marcelo" Number="24"></TagDefinition><TagDefinition CatId="0debb71b-5743-4c53-80cc-e17e841ce645" Id="c8a0c393-c5ca-4799-adc8-6c5d7e973c9c" Label="palco improvisado" Number="25"></TagDefinition><TagDefinition CatId="04721a56-f54b-49c8-80ad-d53887d6b851" Id="2189224c-2f9a-4873-9e64-bb9ab5b5be53" Label="carro de polícia" Number="26"></TagDefinition></TagDefinitions><Tags><Tag Number="1"><DefId>87febd7b-f04e-41c8-b4d9-4dd6187752a5</DefId></Tag><Tag Number="2"><DefId>138e50af-84d4-4a0c-a30d-90ccd3df3933</DefId></Tag><Tag Number="3"><DefId>1c456877-ce0e-413b-8116-728562c64f74</DefId></Tag><Tag Number="4"><DefId>a5b9a865-42ad-4125-a8e7-c8726ae72435</DefId></Tag><Tag Number="5"><DefId>dc4ed919-00c9-4eb3-bd88-2b99183309b2</DefId></Tag><Tag Number="6"><DefId>3170d94f-6e97-417a-8c4d-ebd4195e8a96</DefId></Tag><Tag Number="7"><DefId>8c894e03-b06b-4b98-9a81-87200b213d32</DefId></Tag><Tag Number="8"><DefId>42242a11-f281-4692-945b-e80004f75401</DefId></Tag><Tag Number="9"><DefId>b9798f36-1f44-4531-9cbb-a3e6c080dccc</DefId></Tag><Tag Number="10"><DefId>3382020c-e44c-48e6-911e-104ea48e50d4</DefId></Tag><Tag Number="11"><DefId>9bdbddc6-3ba7-4247-ae8b-4fd1d990724f</DefId></Tag><Tag Number="12"><DefId>c134fcdd-9355-4752-932e-54d702dcc856</DefId></Tag><Tag Number="13"><DefId>7acae17f-dc15-4a97-bbf0-4ed4cc6beda9</DefId></Tag><Tag Number="14"><DefId>83fd11b5-40d1-4556-9d26-2a90febbb894</DefId></Tag><Tag Number="15"><DefId>64ee68aa-0a66-4b80-97f0-6934eacecdbe</DefId></Tag><Tag Number="16"><DefId>e603e6df-da4f-4cac-a5ab-f0016e3f1b0d</DefId></Tag><Tag Number="17"><DefId>3cf6cc35-b1f1-4d28-b2b8-8e8b415b28c1</DefId></Tag><Tag Number="18"><DefId>4763b202-3fe7-45f5-92b3-1ce9aff389ef</DefId></Tag><Tag Number="19"><DefId>cae84c9e-1f11-46e6-bf6b-bfbac8169faa</DefId></Tag><Tag Number="20"><DefId>2f754b27-707b-4365-934b-870f0f1d3014</DefId></Tag><Tag Number="21"><DefId>19e958b5-637f-4d96-bef7-d34cf7aa16e3</DefId></Tag><Tag Number="22"><DefId>82d61004-e1c0-405f-99ad-f2bd36edcea2</DefId></Tag><Tag Number="23"><DefId>9b8e1ece-f151-4c5f-ab13-a44bf73c430a</DefId></Tag><Tag Number="24"><DefId>5d8cfff2-0790-4571-a16b-07616ccec9ff</DefId></Tag><Tag Number="25"><DefId>c8a0c393-c5ca-4799-adc8-6c5d7e973c9c</DefId></Tag><Tag Number="26"><DefId>2189224c-2f9a-4873-9e64-bb9ab5b5be53</DefId></Tag></Tags></TagData>
 
   <UserDocumentData>
     <TaggerDocumentData xmlns="http://www.finaldraft.com/ns/Tagger" xmlns="http://www.finaldraft.com/ns/Tagger">

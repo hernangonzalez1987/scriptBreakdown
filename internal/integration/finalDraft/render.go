@@ -66,6 +66,14 @@ func (ref *Render) RenderScript(ctx context.Context, source io.Reader,
 				}
 				token = nil
 			}
+
+			if isTagDataElement(v) {
+				err = processTagData(&v, decoder, encoder, breakdown)
+				if err != nil {
+					return errors.WithStack(err)
+				}
+				token = nil
+			}
 		}
 
 	}
