@@ -40,8 +40,9 @@ func Test_renderScript(t *testing.T) {
 
 	expected := new(strings.Builder)
 
-	expected.Write([]byte(`<Paragraph Type="Scene Heading" Number="1"></Paragraph><Paragraph Type="Action">` +
-		`<Text TagNumber="1">Some</Text><Text> Text </Text></Paragraph><SomeOtherField></SomeOtherField>`))
+	expected.Write([]byte(`<Paragraph Type="Scene Heading" Number="1"></Paragraph>` +
+		`<Paragraph Type="Action"><Text TagNumber="1">Some</Text><Text> Text </Text>` +
+		`<UserParagraphData></UserParagraphData></Paragraph><SomeOtherField></SomeOtherField>`))
 
 	require.NoError(t, err)
 	assert.Equal(t, expected.String(), target.String())

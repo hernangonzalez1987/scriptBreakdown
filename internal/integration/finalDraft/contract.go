@@ -29,15 +29,19 @@ type Content struct {
 }
 
 type Paragraph struct {
-	Type              string `xml:"Type,attr,omitempty"`
-	Number            int    `xml:"Number,attr,omitempty"`
-	Text              []Text `xml:"Text,omitempty"`
-	UserParagraphData string `xml:"UserParagraphData,omitempty"`
+	Type              string            `xml:"Type,attr,omitempty"`
+	Number            int               `xml:"Number,attr,omitempty"`
+	Text              []Text            `xml:"Text,omitempty"`
+	UserParagraphData UserParagraphData `xml:"UserParagraphData,omitempty"`
 }
 
 type Text struct {
 	Value     string `xml:",innerxml"`
 	TagNumber string `xml:"TagNumber,attr,omitempty"`
+}
+
+type UserParagraphData struct {
+	Value string `xml:",innerxml"`
 }
 
 type TagData struct {
