@@ -28,9 +28,7 @@ func (ref *ScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Con
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
-	defer func() {
-		err = tempFile.Close()
-	}()
+	defer tempFile.Close()
 
 	scriptRawContent, err := io.ReadAll(io.TeeReader(req.TempScriptFile, tempFile))
 	if err != nil {

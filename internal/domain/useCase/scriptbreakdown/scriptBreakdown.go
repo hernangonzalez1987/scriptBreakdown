@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"io"
+	"os"
 	"sync"
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
@@ -75,6 +76,10 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		if current.Status == valueobjects.BreakdownStatusProcessing {
 			return nil, errAlreadyProcessing
 		}
+		if current.Status == valueobjects.BreakdownStatusSuccess {
+			log.Ctx(ctx).Info().Any("event", event).Msg("script already processed")
+			return nil, nil
+		}
 		version = current.Version + 1
 	}
 
@@ -123,15 +128,35 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		return nil, errors.WithStack(err)
 	}
 
-	breakdownBuffer := new(bytes.Buffer)
-	err = ref.targetStorage.Put(ctx, event.BreakdownID, io.TeeReader(breakdownContent, breakdownBuffer))
+	tempFile, err := os.CreateTemp("", "tempFile")
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+	defer tempFile.Close()
+
+	_, err = io.Copy(tempFile, breakdownContent)
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	err = tempFile.Sync()
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	_, err = tempFile.Seek(0, 0)
+	if err != nil {
+		return nil, errors.WithStack(err)
+	}
+
+	err = ref.targetStorage.Put(ctx, event.BreakdownID, tempFile)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
 	breakdownResult := entity.ScriptBreakdownResult{
 		BreakdownID:       event.BreakdownID,
-		Status:            valueobjects.BreakdownStatusProcessing,
+		Status:            valueobjects.BreakdownStatusSuccess,
 		Version:           version + 1,
 		StatusDescription: "Success",
 	}
