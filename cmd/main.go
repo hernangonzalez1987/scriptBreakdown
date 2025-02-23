@@ -19,7 +19,7 @@ import (
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/llm"
 	presentationbreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/breakdown"
 	eventhandler "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/eventHandler"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/repository"
+	breakdownresultrepository "github.com/hernangonzalez1987/scriptBreakdown/internal/repository/breakdownResult"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/cache"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/infrastructure/queue"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/infrastructure/storage"
@@ -55,9 +55,9 @@ func main() {
 	queueClient := getSQSClient(awsConfig)
 	storageClient := getS3Client(awsConfig)
 
-	repository := repository.New(dbClient)
+	breakdownResultRepository := breakdownresultrepository.New(dbClient)
 
-	err = repository.Init(ctx)
+	err = breakdownResultRepository.Init(ctx)
 	if err != nil {
 		log.Fatalf("error initializing repository %v", err)
 	}
@@ -66,11 +66,11 @@ func main() {
 	targetStorage := storage.NewS3Storage(storageClient, os.Getenv("BREAKDOWNS_BUCKET"))
 
 	router.POST("/script/breakdown", presentationbreakdown.New(
-		scriptbreakdownrequest.New(sourceStorage, repository),
+		scriptbreakdownrequest.New(sourceStorage, breakdownResultRepository),
 	).ProcessFile)
 
 	router.GET("/script/breakdown/:breakdownID", presentationbreakdown.New(
-		scriptbreakdownrequest.New(sourceStorage, repository),
+		scriptbreakdownrequest.New(sourceStorage, breakdownResultRepository),
 	).GetResult)
 
 	go func() {
@@ -81,7 +81,7 @@ func main() {
 				scenebreakdown.New(llm.New(gemini, cache.New[string](&ttl)), uuidgenerator.New()),
 				sourceStorage,
 				targetStorage,
-				repository,
+				breakdownResultRepository,
 			))).Listen(ctx)
 		if err != nil {
 			logger.Logger().Fatal().Msg(err.Error())

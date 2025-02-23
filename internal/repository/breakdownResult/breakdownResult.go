@@ -1,4 +1,4 @@
-package repository
+package breakdownresultrepository
 
 import (
 	"context"
