@@ -4,7 +4,7 @@ keeptree: False
 dir: internal/_mocks
 outpkg: _mocks
 packages:
-    github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces:
+    github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces:
         config:
             recursive: True
             all: True

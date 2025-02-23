@@ -22,6 +22,65 @@ func (_m *MockScriptBreakdownRequestUseCase) EXPECT() *MockScriptBreakdownReques
 	return &MockScriptBreakdownRequestUseCase_Expecter{mock: &_m.Mock}
 }
 
+// GetResult provides a mock function with given fields: ctx, breakdownID
+func (_m *MockScriptBreakdownRequestUseCase) GetResult(ctx context.Context, breakdownID string) (*entity.ScriptBreakdownResult, error) {
+	ret := _m.Called(ctx, breakdownID)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetResult")
+	}
+
+	var r0 *entity.ScriptBreakdownResult
+	var r1 error
+	if rf, ok := ret.Get(0).(func(context.Context, string) (*entity.ScriptBreakdownResult, error)); ok {
+		return rf(ctx, breakdownID)
+	}
+	if rf, ok := ret.Get(0).(func(context.Context, string) *entity.ScriptBreakdownResult); ok {
+		r0 = rf(ctx, breakdownID)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*entity.ScriptBreakdownResult)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(context.Context, string) error); ok {
+		r1 = rf(ctx, breakdownID)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// MockScriptBreakdownRequestUseCase_GetResult_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetResult'
+type MockScriptBreakdownRequestUseCase_GetResult_Call struct {
+	*mock.Call
+}
+
+// GetResult is a helper method to define mock.On call
+//   - ctx context.Context
+//   - breakdownID string
+func (_e *MockScriptBreakdownRequestUseCase_Expecter) GetResult(ctx interface{}, breakdownID interface{}) *MockScriptBreakdownRequestUseCase_GetResult_Call {
+	return &MockScriptBreakdownRequestUseCase_GetResult_Call{Call: _e.mock.On("GetResult", ctx, breakdownID)}
+}
+
+func (_c *MockScriptBreakdownRequestUseCase_GetResult_Call) Run(run func(ctx context.Context, breakdownID string)) *MockScriptBreakdownRequestUseCase_GetResult_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(context.Context), args[1].(string))
+	})
+	return _c
+}
+
+func (_c *MockScriptBreakdownRequestUseCase_GetResult_Call) Return(_a0 *entity.ScriptBreakdownResult, _a1 error) *MockScriptBreakdownRequestUseCase_GetResult_Call {
+	_c.Call.Return(_a0, _a1)
+	return _c
+}
+
+func (_c *MockScriptBreakdownRequestUseCase_GetResult_Call) RunAndReturn(run func(context.Context, string) (*entity.ScriptBreakdownResult, error)) *MockScriptBreakdownRequestUseCase_GetResult_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // RequestScriptBreakdown provides a mock function with given fields: ctx, req
 func (_m *MockScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Context, req entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error) {
 	ret := _m.Called(ctx, req)

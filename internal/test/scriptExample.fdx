@@ -2,7 +2,7 @@
 <FinalDraft DocumentType="Script" Template="No" Version="2">
   <Content>
     <Paragraph Type="Scene Heading" Alignment="Left">
-      <Text Style="AllCaps">EXT. PRAÇA DA SÉ - DIA</Text>
+      <Text Style="AllCaps">EXT. PRAÇA DA SÉ - NOITE</Text>
 
       <UserParagraphData>
 
@@ -10,7 +10,7 @@
     </Paragraph>
 
     <Paragraph Type="Action" Alignment="Left">
-      <Text Style="">Uma multidão se aglomera na grande Praça da Sé, em São Paulo. Alguns leem
+      <Text Style="">Uma multidão se aglomera na pequena Praça da Sé, em São Paulo. Alguns leem
         jornais,
         outros conversam animados, vendedores ambulantes oferecem seus produtos. O sol da manhã
         ilumina a cena, criando sombras longas e vibrantes.</Text>

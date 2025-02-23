@@ -20,6 +20,7 @@ import (
 	presentationbreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/breakdown"
 	eventhandler "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/eventHandler"
 	breakdownresultrepository "github.com/hernangonzalez1987/scriptBreakdown/internal/repository/breakdownResult"
+	sceneanalysisrepository "github.com/hernangonzalez1987/scriptBreakdown/internal/repository/sceneAnalysis"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/cache"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/infrastructure/queue"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/infrastructure/storage"
@@ -56,10 +57,16 @@ func main() {
 	storageClient := getS3Client(awsConfig)
 
 	breakdownResultRepository := breakdownresultrepository.New(dbClient)
+	sceneAnalysisRepository := sceneanalysisrepository.New(dbClient)
 
 	err = breakdownResultRepository.Init(ctx)
 	if err != nil {
-		log.Fatalf("error initializing repository %v", err)
+		log.Fatalf("error initializing result repository %v", err)
+	}
+
+	err = sceneAnalysisRepository.Init(ctx)
+	if err != nil {
+		log.Fatalf("error initializing scene analysis repository %v", err)
 	}
 
 	sourceStorage := storage.NewS3Storage(storageClient, os.Getenv("SCRIPTS_BUCKET"))
@@ -78,7 +85,8 @@ func main() {
 			scriptbreakdown.New(
 				finaldraft.NewParser(),
 				finaldraft.NewRender(),
-				scenebreakdown.New(llm.New(gemini, cache.New[string](&ttl)), uuidgenerator.New()),
+				scenebreakdown.New(llm.New(gemini, cache.New[string](&ttl)), uuidgenerator.New(),
+					sceneAnalysisRepository),
 				sourceStorage,
 				targetStorage,
 				breakdownResultRepository,
