@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	"github.com/pkg/errors"
 )

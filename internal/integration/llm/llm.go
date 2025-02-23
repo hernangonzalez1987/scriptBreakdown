@@ -6,7 +6,7 @@ import (
 	"regexp"
 
 	"github.com/google/uuid"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog/log"

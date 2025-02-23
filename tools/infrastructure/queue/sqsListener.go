@@ -6,18 +6,17 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/logger"
+	"github.com/hernangonzalez1987/scriptBreakdown/tools/logger"
 	log "github.com/rs/zerolog"
 )
 
 type SQSListener struct {
 	sqsClient    *sqs.Client
 	queueURL     string
-	eventHandler _interfaces.EventHandler
+	eventHandler EventHandler
 }
 
-func NewSQSListener(sqsClient *sqs.Client, queueURL string, eventHandler _interfaces.EventHandler) *SQSListener {
+func NewSQSListener(sqsClient *sqs.Client, queueURL string, eventHandler EventHandler) *SQSListener {
 	return &SQSListener{
 		sqsClient:    sqsClient,
 		queueURL:     queueURL,

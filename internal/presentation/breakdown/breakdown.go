@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 )
 

@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
 	"github.com/pkg/errors"
