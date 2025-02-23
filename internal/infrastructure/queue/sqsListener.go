@@ -6,8 +6,8 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
-	"github.com/google/uuid"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/_interfaces"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/logger"
 	log "github.com/rs/zerolog"
 )
 
@@ -45,26 +45,20 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 				continue
 			}
 
-			correlationID := uuid.New().String()
+			newCtx := logger.AddCorrelationID(ctx)
 
-			ctx := log.Ctx(ctx).WithContext(ctx)
-
-			log.Ctx(ctx).UpdateContext(func(c log.Context) log.Context {
-				return c.Str("correlation_id", correlationID)
-			})
-
-			err = l.eventHandler.HandleEvent(ctx, event)
+			err = l.eventHandler.HandleEvent(newCtx, event)
 			if err != nil {
-				log.Ctx(ctx).Error().Err(err).Msg("error on event handler")
+				log.Ctx(newCtx).Error().Err(err).Msg("error on event handler")
 				continue
 			}
 
-			_, err = l.sqsClient.DeleteMessage(ctx, &sqs.DeleteMessageInput{
+			_, err = l.sqsClient.DeleteMessage(newCtx, &sqs.DeleteMessageInput{
 				QueueUrl:      &l.queueURL,
 				ReceiptHandle: message.ReceiptHandle,
 			})
 			if err != nil {
-				log.Ctx(ctx).Error().Err(err).Msg("error on delete from queue")
+				log.Ctx(newCtx).Error().Err(err).Msg("error on delete from queue")
 			}
 		}
 	}

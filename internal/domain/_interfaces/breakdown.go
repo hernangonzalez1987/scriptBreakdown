@@ -21,4 +21,7 @@ type SceneBreakdownUseCase interface {
 
 type ScriptBreakdownRequestUseCase interface {
 	RequestScriptBreakdown(ctx context.Context, req entity.ScriptBreakdownRequest) (*entity.ScriptBreakdownResult, error)
+	GetResult(ctx context.Context, breakdownID string) (
+		*entity.ScriptBreakdownResult, error,
+	)
 }

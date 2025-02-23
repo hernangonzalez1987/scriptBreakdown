@@ -1,31 +1,43 @@
-package httplogger
+package logger
 
 import (
-	"net/http"
+	"context"
+	"os"
 
-	"github.com/pkg/errors"
+	"github.com/google/uuid"
 	"github.com/rs/zerolog"
 )
 
-type httpLogger struct {
-	logger    *zerolog.Logger
-	transport http.RoundTripper
+type Logger struct {
+	logger *zerolog.Logger
 }
 
-func New(logger *zerolog.Logger, transport http.RoundTripper) http.RoundTripper {
-	return &httpLogger{logger: logger, transport: transport}
+func New() *Logger {
+	logger := zerolog.New(os.Stdout).Level(zerolog.InfoLevel).
+		With().
+		Timestamp().
+		Caller().
+		Logger()
+
+	return &Logger{logger: &logger}
 }
 
-func (ref *httpLogger) RoundTrip(req *http.Request) (*http.Response, error) {
-	ref.logger.Info().Any("req", req).Msg("http request sent")
+func (ref *Logger) AssociateWithContext(ctx context.Context) context.Context {
+	return ref.logger.WithContext(ctx)
+}
 
-	res, err := ref.transport.RoundTrip(req)
+func (ref *Logger) Logger() *zerolog.Logger {
+	return ref.logger
+}
 
-	if err != nil {
-		ref.logger.Error().Any("res", res).Err(err).Msg("http error response received")
-	} else {
-		ref.logger.Info().Any("res", res).Msg("http success response received")
-	}
+func AddCorrelationID(ctx context.Context) context.Context {
+	correlationID := uuid.New().String()
 
-	return res, errors.WithStack(err)
+	newCtx := zerolog.Ctx(ctx).WithContext(ctx)
+
+	zerolog.Ctx(newCtx).UpdateContext(func(c zerolog.Context) zerolog.Context {
+		return c.Str("correlation_id", correlationID)
+	})
+
+	return newCtx
 }

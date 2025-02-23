@@ -9,7 +9,7 @@ import (
 
 type ScriptBreakdownResult struct {
 	BreakdownID       string                       `json:"breakdown_id" dynamodbav:"breakdown_id"`
-	Content           io.Reader                    `json:"content" dynamodbav:"-"`
+	Content           io.ReadCloser                `json:"content" dynamodbav:"-"`
 	Status            valueobjects.BreakdownStatus `json:"status" dynamodbav:"status"`
 	StatusDescription string                       `json:"status_description" dynamodbav:"status_description"`
 	Version           int                          `json:"version" dynamodbav:"version"`

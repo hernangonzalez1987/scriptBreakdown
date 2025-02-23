@@ -23,23 +23,19 @@ import (
 	eventhandler "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/eventHandler"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/repository"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/cache"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/tools/logger"
 	uuidgenerator "github.com/hernangonzalez1987/scriptBreakdown/internal/tools/uuidGenerator"
-	"github.com/rs/zerolog"
 	"github.com/tmc/langchaingo/llms/googleai"
 )
 
 func main() {
-	logger := zerolog.New(os.Stdout).Level(zerolog.InfoLevel).
-		With().
-		Timestamp().
-		Caller().
-		Logger()
+	logger := logger.New()
 
-	ctx := logger.WithContext(context.Background())
+	ctx := logger.AssociateWithContext(context.Background())
 
 	router := gin.Default()
 
-	router.Use(gin.LoggerWithWriter(logger))
+	router.Use(gin.LoggerWithWriter(logger.Logger()))
 
 	apiKey := os.Getenv("GEMINI_API_KEY")
 
@@ -70,8 +66,12 @@ func main() {
 	targetStorage := storage.NewS3Storage(storageClient, os.Getenv("BREAKDOWNS_BUCKET"))
 
 	router.POST("/script/breakdown", presentationbreakdown.New(
-		scriptbreakdownrequest.New(sourceStorage),
+		scriptbreakdownrequest.New(sourceStorage, repository),
 	).ProcessFile)
+
+	router.GET("/script/breakdown/:breakdownID", presentationbreakdown.New(
+		scriptbreakdownrequest.New(sourceStorage, repository),
+	).GetResult)
 
 	go func() {
 		err := queue.NewSQSListener(queueClient, os.Getenv("BREAKDOWN_EVENTS_QUEUE"), eventhandler.NewS3EventHandler(
@@ -84,13 +84,13 @@ func main() {
 				repository,
 			))).Listen(ctx)
 		if err != nil {
-			logger.Fatal().Msg(err.Error())
+			logger.Logger().Fatal().Msg(err.Error())
 		}
 	}()
 
 	err = router.Run(":9000")
 	if err != nil {
-		logger.Fatal().Msg(err.Error())
+		logger.Logger().Fatal().Msg(err.Error())
 	}
 }
 
