@@ -17,12 +17,16 @@ const namespace = "1486e36b-d00c-4f29-9098-10eb8eab9002"
 var errNotFound = valueobjects.NewCustomError("NOTFOUND", "breakdown not found")
 
 type UseCase struct {
-	storage    _interfaces.Storage
-	repository _interfaces.BreakdownRepository
+	scriptsStorage    _interfaces.Storage
+	breakdownsStorage _interfaces.Storage
+	repository        _interfaces.BreakdownRepository
 }
 
-func New(storage _interfaces.Storage, repository _interfaces.BreakdownRepository) *UseCase {
-	return &UseCase{storage: storage, repository: repository}
+func New(scriptsStorage _interfaces.Storage,
+	breakdownsStorage _interfaces.Storage,
+	repository _interfaces.BreakdownRepository,
+) *UseCase {
+	return &UseCase{scriptsStorage: scriptsStorage, breakdownsStorage: breakdownsStorage, repository: repository}
 }
 
 func (ref *UseCase) RequestScriptBreakdown(ctx context.Context,
@@ -51,7 +55,7 @@ func (ref *UseCase) RequestScriptBreakdown(ctx context.Context,
 		return nil, errors.WithStack(err)
 	}
 
-	err = ref.storage.Put(ctx, breakdownID.String(), tempFile)
+	err = ref.scriptsStorage.Put(ctx, breakdownID.String(), tempFile)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
@@ -75,7 +79,7 @@ func (ref *UseCase) GetResult(ctx context.Context, breakdownID string) (
 		return result, nil
 	}
 
-	result.Content, err = ref.storage.Get(ctx, breakdownID)
+	result.Content, err = ref.breakdownsStorage.Get(ctx, breakdownID)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}

@@ -31,6 +31,9 @@ func NewSQSListener(sqsClient *sqs.Client, queueURL string, eventHandler EventHa
 
 func (l *SQSListener) Listen(ctx context.Context) error {
 	for {
+
+		log.Ctx(ctx).Info().Msg("listening for events")
+
 		output, err := l.sqsClient.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
 			QueueUrl:            &l.queueURL,
 			MaxNumberOfMessages: maxNumberOfMessages,

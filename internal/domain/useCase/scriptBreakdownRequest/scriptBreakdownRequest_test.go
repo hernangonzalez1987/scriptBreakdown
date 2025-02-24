@@ -18,16 +18,16 @@ import (
 func TestRequestScriptBreakdown(t *testing.T) {
 	t.Parallel()
 
-	mockStorage := _mocks.NewMockStorage(t)
+	scriptsStorage := _mocks.NewMockStorage(t)
 	repository := _mocks.NewMockBreakdownRepository(t)
-	useCase := New(mockStorage, repository)
+	useCase := New(scriptsStorage, nil, repository)
 	ctx := context.Background()
 
 	tempFile := strings.NewReader("test script content")
 
 	req := entity.ScriptBreakdownRequest{TempScriptFile: tempFile}
 
-	mockStorage.EXPECT().Put(ctx, "a304328a-1455-35a5-a996-6ea6289a980a",
+	scriptsStorage.EXPECT().Put(ctx, "a304328a-1455-35a5-a996-6ea6289a980a",
 		mock.AnythingOfType("*os.File")).Return(nil)
 
 	result, err := useCase.RequestScriptBreakdown(ctx, req)
@@ -35,12 +35,10 @@ func TestRequestScriptBreakdown(t *testing.T) {
 	require.NoError(t, err)
 	assert.NotNil(t, result)
 	assert.Equal(t, &entity.ScriptBreakdownResult{BreakdownID: "a304328a-1455-35a5-a996-6ea6289a980a"}, result)
-
-	mockStorage.AssertExpectations(t)
 }
 
 func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
-	storage := _mocks.NewMockStorage(t)
+	breakdownsStorage := _mocks.NewMockStorage(t)
 	repository := _mocks.NewMockBreakdownRepository(t)
 	ctx := context.Background()
 
@@ -59,9 +57,9 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 	file, _ := os.CreateTemp(t.TempDir(), "someFile")
 	defer file.Close()
 
-	storage.EXPECT().Get(ctx, existingIDSuccess).Return(file, nil)
+	breakdownsStorage.EXPECT().Get(ctx, existingIDSuccess).Return(file, nil)
 
-	useCase := New(storage, repository)
+	useCase := New(nil, breakdownsStorage, repository)
 
 	type args struct {
 		breakdownID string
