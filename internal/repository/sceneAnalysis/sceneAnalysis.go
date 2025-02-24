@@ -15,7 +15,7 @@ import (
 
 const (
 	tableName               = "SceneAnalysis"
-	keyName                 = "scene_id"
+	keyName                 = "sceneId"
 	tableAlreadyExistsError = "Cannot create preexisting table"
 )
 
@@ -48,6 +48,7 @@ func (ref *Repository) Init(ctx context.Context) error {
 		if strings.Contains(err.Error(), tableAlreadyExistsError) {
 			return nil
 		}
+
 		return errors.WithStack(err)
 	}
 
@@ -89,6 +90,7 @@ func (ref *Repository) Get(ctx context.Context, id string) (*entity.SceneAnalysi
 	}
 
 	result := &entity.SceneAnalysis{}
+
 	err = attributevalue.UnmarshalMap(item.Item, result)
 	if err != nil {
 		return nil, errors.WithStack(err)

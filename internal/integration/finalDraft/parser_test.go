@@ -66,9 +66,11 @@ func Test_extractCategoryTagsFromScript(t *testing.T) {
 			},
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
+
 			if got := extractCategoryTagsFromScript(tt.args.script); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("extractCategoryTagsFromScript() = %v, want %v", got, tt.want)
 			}
@@ -76,7 +78,7 @@ func Test_extractCategoryTagsFromScript(t *testing.T) {
 	}
 }
 
-func Test_extractScenesFromScript_should_join_scene_text(t *testing.T) {
+func Test_extractScenesFromScript(t *testing.T) {
 	t.Parallel()
 
 	type args struct {
@@ -100,20 +102,14 @@ func Test_extractScenesFromScript_should_join_scene_text(t *testing.T) {
 							{
 								Type: actionHeading,
 								Text: []Text{
-									{
-										Value: "Some scene text.",
-									},
-									{
-										Value: "Some more scene text.",
-									},
+									{Value: "Some scene text."},
+									{Value: "Some more scene text."},
 								},
 							},
 							{
 								Type: actionHeading,
 								Text: []Text{
-									{
-										Value: "Some additional text.",
-									},
+									{Value: "Some additional text."},
 								},
 							},
 						},
@@ -133,15 +129,11 @@ func Test_extractScenesFromScript_should_join_scene_text(t *testing.T) {
 				script: FDXFile{
 					Content: Content{
 						Paragraph: []Paragraph{
-							{
-								Type: sceneHeading,
-							},
+							{Type: sceneHeading},
 							{
 								Type: actionHeading,
 								Text: []Text{
-									{
-										Value: "Some scene text.",
-									},
+									{Value: "Some scene text."},
 								},
 							},
 						},
@@ -149,13 +141,11 @@ func Test_extractScenesFromScript_should_join_scene_text(t *testing.T) {
 				},
 			},
 			want: []entity.Scene{
-				{
-					Number: 1,
-					Text:   " Some scene text.\n",
-				},
+				{Number: 1, Text: " Some scene text.\n"},
 			},
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
@@ -196,17 +186,20 @@ func Test_readFile(t *testing.T) {
 			wantErr:  false,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
 			t.Parallel()
 
-			gotFile, err := readScript(tt.args.reader)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("readFile() error = %v, wantErr %v", err, tt.wantErr)
+			gotFile, err := readScript(testCase.args.reader)
+			if (err != nil) != testCase.wantErr {
+				t.Errorf("readFile() error = %v, wantErr %v", err, testCase.wantErr)
+
 				return
 			}
-			if !reflect.DeepEqual(gotFile, tt.wantFile) {
-				t.Errorf("readFile() gotFile = %v, want %v", gotFile, tt.wantFile)
+
+			if !reflect.DeepEqual(gotFile, testCase.wantFile) {
+				t.Errorf("readFile() gotFile = %v, want %v", gotFile, testCase.wantFile)
 			}
 		})
 	}

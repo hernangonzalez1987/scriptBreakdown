@@ -74,15 +74,15 @@ type TagCategory struct {
 }
 
 type TagDefinition struct {
-	CatId  string `xml:"CatId,attr,omitempty"`
-	Id     string `xml:"Id,attr,omitempty"`
+	CatID  string `xml:"CatId,attr,omitempty"`
+	ID     string `xml:"Id,attr,omitempty"`
 	Label  string `xml:"Label,attr,omitempty"`
 	Number string `xml:"Number,attr,omitempty"`
 }
 
 type Tag struct {
 	Number string `xml:"Number,attr,omitempty"`
-	DefId  string `xml:"DefId"`
+	DefID  string `xml:"DefId"`
 }
 
 func isSceneHeading(token xml.StartElement) bool {

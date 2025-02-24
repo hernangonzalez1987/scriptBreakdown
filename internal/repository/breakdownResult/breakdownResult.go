@@ -2,7 +2,7 @@ package breakdownresultrepository
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -16,7 +16,7 @@ import (
 
 const (
 	tableName               = "ScriptBreakdownResults"
-	keyName                 = "breakdown_id"
+	keyName                 = "breakdownId"
 	tableAlreadyExistsError = "Cannot create preexisting table"
 )
 
@@ -49,6 +49,7 @@ func (ref *Repository) Init(ctx context.Context) error {
 		if strings.Contains(err.Error(), tableAlreadyExistsError) {
 			return nil
 		}
+
 		return errors.WithStack(err)
 	}
 
@@ -57,6 +58,7 @@ func (ref *Repository) Init(ctx context.Context) error {
 
 func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownResult) error {
 	condition := "attribute_not_exists(" + keyName + ")"
+
 	var expressionValues map[string]types.AttributeValue
 
 	result.UpdatedAt = time.Now()
@@ -64,7 +66,7 @@ func (ref *Repository) Save(ctx context.Context, result entity.ScriptBreakdownRe
 	if result.Version > 1 {
 		condition = "version = :version"
 		expressionValues = map[string]types.AttributeValue{
-			":version": &types.AttributeValueMemberN{Value: fmt.Sprint(result.Version - 1)},
+			":version": &types.AttributeValueMemberN{Value: strconv.Itoa(result.Version - 1)},
 		}
 	}
 
@@ -102,6 +104,7 @@ func (ref *Repository) Get(ctx context.Context, id string) (*entity.ScriptBreakd
 	}
 
 	result := &entity.ScriptBreakdownResult{}
+
 	err = attributevalue.UnmarshalMap(item.Item, result)
 	if err != nil {
 		return nil, errors.WithStack(err)

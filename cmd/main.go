@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/gin-gonic/gin"
+	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	scriptbreakdownrequest "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptBreakdownRequest"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown"
 	scenebreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown/sceneBreakdown"
@@ -26,6 +27,7 @@ import (
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/infrastructure/storage"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/logger"
 	uuidgenerator "github.com/hernangonzalez1987/scriptBreakdown/tools/uuidGenerator"
+	"github.com/pkg/errors"
 	"github.com/tmc/langchaingo/llms/googleai"
 )
 
@@ -52,25 +54,14 @@ func main() {
 		log.Fatalf("error creating aws config %v", err)
 	}
 
-	dbClient := getDynamoClient(awsConfig)
+	breakdownResultRepository, sceneAnalysisRepository, err := getRepositories(ctx, awsConfig)
+	if err != nil {
+		log.Fatalf("error creating repositories %v", err)
+	}
+
+	sourceStorage, targetStorage := getStorages(awsConfig)
+
 	queueClient := getSQSClient(awsConfig)
-	storageClient := getS3Client(awsConfig)
-
-	breakdownResultRepository := breakdownresultrepository.New(dbClient)
-	sceneAnalysisRepository := sceneanalysisrepository.New(dbClient)
-
-	err = breakdownResultRepository.Init(ctx)
-	if err != nil {
-		log.Fatalf("error initializing result repository %v", err)
-	}
-
-	err = sceneAnalysisRepository.Init(ctx)
-	if err != nil {
-		log.Fatalf("error initializing scene analysis repository %v", err)
-	}
-
-	sourceStorage := storage.NewS3Storage(storageClient, os.Getenv("SCRIPTS_BUCKET"))
-	targetStorage := storage.NewS3Storage(storageClient, os.Getenv("BREAKDOWNS_BUCKET"))
 
 	router.POST("/script/breakdown", presentationbreakdown.New(
 		scriptbreakdownrequest.New(sourceStorage, breakdownResultRepository),
@@ -116,4 +107,34 @@ func getS3Client(cfg aws.Config) *s3.Client {
 	return s3.NewFromConfig(cfg, func(o *s3.Options) {
 		o.UsePathStyle = true
 	})
+}
+
+func getRepositories(ctx context.Context, awsConfig aws.Config) (
+	_interfaces.BreakdownRepository,
+	_interfaces.SceneAnalysisRepository,
+	error,
+) {
+	dbClient := getDynamoClient(awsConfig)
+
+	breakdownResultRepository := breakdownresultrepository.New(dbClient)
+	sceneAnalysisRepository := sceneanalysisrepository.New(dbClient)
+
+	err := breakdownResultRepository.Init(ctx)
+	if err != nil {
+		return nil, nil, errors.WithStack(err)
+	}
+
+	err = sceneAnalysisRepository.Init(ctx)
+	if err != nil {
+		return nil, nil, errors.WithStack(err)
+	}
+
+	return breakdownResultRepository, sceneAnalysisRepository, nil
+}
+
+func getStorages(awsConfig aws.Config) (*storage.S3Storage, *storage.S3Storage) {
+	storageClient := getS3Client(awsConfig)
+
+	return storage.NewS3Storage(storageClient, os.Getenv("SCRIPTS_BUCKET")),
+		storage.NewS3Storage(storageClient, os.Getenv("BREAKDOWNS_BUCKET"))
 }

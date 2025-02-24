@@ -5,7 +5,7 @@ type CustomError struct {
 	Desc string
 }
 
-func New(code, desc string) error {
+func NewCustomError(code, desc string) error {
 	return CustomError{code, desc}
 }
 

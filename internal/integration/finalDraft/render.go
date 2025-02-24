@@ -3,8 +3,8 @@ package finaldraft
 import (
 	"context"
 	"encoding/xml"
-	"fmt"
 	"io"
+	"strconv"
 	"strings"
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
@@ -17,68 +17,84 @@ func NewRender() *Render {
 	return &Render{}
 }
 
-func (ref *Render) RenderScript(ctx context.Context, source io.Reader,
+func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 	target io.Writer, breakdown entity.ScriptBreakdown,
-) (err error) {
+) error {
 	decoder := xml.NewDecoder(source)
+
 	encoder := xml.NewEncoder(target)
-	defer func() {
-		err = encoder.Close()
-	}()
+	defer encoder.Close()
 
 	var token xml.Token
+
 	var sceneNumber int
+
 	var sceneCount int
 
 	for {
-
-		if token != nil {
-			err := encoder.EncodeToken(token)
-			if err != nil {
-				return errors.WithStack(err)
-			}
-		}
 		var err error
-		token, err = decoder.Token()
-		if errors.Is(err, io.EOF) {
-			break
-		}
+
+		err = encode(token, encoder)
 		if err != nil {
 			return errors.WithStack(err)
 		}
 
-		switch v := token.(type) {
-		case xml.StartElement:
-
-			if isSceneHeading(v) {
-				sceneCount++
-				sceneNumber = getSceneNumber(v)
-				if sceneNumber == 0 {
-					sceneNumber = sceneCount
-				}
-				continue
-			}
-
-			if isActionHeading(v) {
-				err = processActionParagraph(&v, sceneNumber, decoder, encoder, breakdown)
-				if err != nil {
-					return errors.WithStack(err)
-				}
-				token = nil
-			}
-
-			if isTagDataElement(v) {
-				err = processTagData(&v, decoder, encoder, breakdown)
-				if err != nil {
-					return errors.WithStack(err)
-				}
-				token = nil
-			}
+		token, err = decoder.Token()
+		if errors.Is(err, io.EOF) {
+			break
 		}
 
+		if err != nil {
+			return errors.WithStack(err)
+		}
+
+		elem, ok := token.(xml.StartElement)
+		if ok && isSceneHeading(elem) {
+			sceneCount++
+
+			sceneNumber = defineSceneNumber(elem, sceneCount)
+
+			continue
+		}
+
+		if ok && isActionHeading(elem) {
+			err = processActionParagraph(&elem, sceneNumber, decoder, encoder, breakdown)
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			token = nil
+		}
+
+		if ok && isTagDataElement(elem) {
+			err = processTagData(&elem, decoder, encoder, breakdown)
+			if err != nil {
+				return errors.WithStack(err)
+			}
+
+			token = nil
+		}
 	}
 
-	return err
+	return nil
+}
+
+func encode(token xml.Token, encoder *xml.Encoder) error {
+	if token != nil {
+		return encoder.EncodeToken(token)
+	}
+
+	return nil
+}
+
+func defineSceneNumber(v xml.StartElement, sceneCount int) int {
+	sceneNumber := getSceneNumber(v)
+
+	if sceneNumber == 0 {
+		sceneNumber = sceneCount
+	}
+
+	return sceneNumber
 }
 
 func processActionParagraph(token *xml.StartElement, sceneNumber int, decoder *xml.Decoder,
@@ -91,6 +107,7 @@ func processActionParagraph(token *xml.StartElement, sceneNumber int, decoder *x
 	}
 
 	paragraph := Paragraph{}
+
 	err := decoder.DecodeElement(&paragraph, token)
 	if err != nil {
 		return errors.WithStack(err)
@@ -126,10 +143,9 @@ func tagText(text Text, sceneBreakdown entity.SceneBreakdown) []Text {
 
 			nextTexts := tagText(Text{Value: text.Value[pos+len(tag.Label):]}, sceneBreakdown)
 
-			taggedText := Text{Value: tag.Label, TagNumber: fmt.Sprint(tag.Number)}
+			taggedText := Text{Value: tag.Label, TagNumber: strconv.Itoa(tag.Number)}
 
 			return append(append(prevTexts, taggedText), nextTexts...)
-
 		}
 	}
 
@@ -150,15 +166,15 @@ func processTagData(token *xml.StartElement, decoder *xml.Decoder, encoder *xml.
 		for _, tag := range sceneBreakdown.Tags {
 			tagData.TagDefinitions.TagDefinitions = append(tagData.TagDefinitions.TagDefinitions,
 				TagDefinition{
-					CatId:  tag.Category.ID,
-					Id:     tag.ID,
+					CatID:  tag.Category.ID,
+					ID:     tag.ID,
 					Label:  tag.Label,
-					Number: fmt.Sprint(tag.Number),
+					Number: strconv.Itoa(tag.Number),
 				})
 			tagData.Tags.Tags = append(tagData.Tags.Tags,
 				Tag{
-					Number: fmt.Sprint(tag.Number),
-					DefId:  tag.ID,
+					Number: strconv.Itoa(tag.Number),
+					DefID:  tag.ID,
 				})
 		}
 	}

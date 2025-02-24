@@ -38,17 +38,17 @@ func Test_renderScript(t *testing.T) {
 
 	err := (&Render{}).RenderScript(ctx, source, target, breakdown)
 
-	expected := new(strings.Builder)
-
-	expected.Write([]byte(`<Paragraph Type="Scene Heading" Number="1"></Paragraph>` +
+	expected := `<Paragraph Type="Scene Heading" Number="1"></Paragraph>` +
 		`<Paragraph Type="Action"><Text TagNumber="1">Some</Text><Text> Text </Text>` +
-		`<UserParagraphData></UserParagraphData></Paragraph><SomeOtherField></SomeOtherField>`))
+		`<UserParagraphData></UserParagraphData></Paragraph><SomeOtherField></SomeOtherField>`
 
 	require.NoError(t, err)
-	assert.Equal(t, expected.String(), target.String())
+	assert.Equal(t, expected, target.String())
 }
 
 func Test_processText(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		text           Text
 		sceneBreakdown entity.SceneBreakdown
@@ -99,8 +99,11 @@ func Test_processText(t *testing.T) {
 			want: []Text{{Value: "some", TagNumber: "4"}, {Value: " text with "}, {Value: "tags", TagNumber: "5"}},
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			if got := tagText(tt.args.text, tt.args.sceneBreakdown); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("processText() = %v, want %v", got, tt.want)
 			}
@@ -142,17 +145,13 @@ func Test_processTagData(t *testing.T) {
 
 	var err error
 
-	switch v := token.(type) {
-	case xml.StartElement:
-		err = processTagData(&v, decoder, encoder, breakdown)
-	}
+	v, _ := token.(xml.StartElement)
+	err = processTagData(&v, decoder, encoder, breakdown)
 
-	expected := new(strings.Builder)
-
-	expected.Write([]byte(`<TagData><TagCategories></TagCategories><TagDefinitions><TagDefinition CatId="someCatID"` +
+	expected := `<TagData><TagCategories></TagCategories><TagDefinitions><TagDefinition CatId="someCatID"` +
 		` Id="someTagID" Label="Some" Number="1">` +
-		`</TagDefinition></TagDefinitions><Tags><Tag Number="1"><DefId>someTagID</DefId></Tag></Tags></TagData>`))
+		`</TagDefinition></TagDefinitions><Tags><Tag Number="1"><DefId>someTagID</DefId></Tag></Tags></TagData>`
 
 	require.NoError(t, err)
-	assert.Equal(t, expected.String(), target.String())
+	assert.Equal(t, expected, target.String())
 }

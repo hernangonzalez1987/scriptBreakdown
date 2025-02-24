@@ -10,6 +10,11 @@ import (
 	log "github.com/rs/zerolog"
 )
 
+const (
+	maxNumberOfMessages = 10
+	waitTimeSeconds     = 20
+)
+
 type SQSListener struct {
 	sqsClient    *sqs.Client
 	queueURL     string
@@ -28,19 +33,22 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 	for {
 		output, err := l.sqsClient.ReceiveMessage(ctx, &sqs.ReceiveMessageInput{
 			QueueUrl:            &l.queueURL,
-			MaxNumberOfMessages: 10,
-			WaitTimeSeconds:     20,
+			MaxNumberOfMessages: maxNumberOfMessages,
+			WaitTimeSeconds:     waitTimeSeconds,
 		})
 		if err != nil {
 			log.Ctx(ctx).Error().Err(err).Msg("error receiving from queue")
+
 			continue
 		}
 
 		for _, message := range output.Messages {
 			var event events.S3Event
+
 			err := json.Unmarshal([]byte(*message.Body), &event)
 			if err != nil {
 				log.Ctx(ctx).Warn().Err(err).Msg("error unmarshaling event")
+
 				continue
 			}
 
@@ -49,6 +57,7 @@ func (l *SQSListener) Listen(ctx context.Context) error {
 			err = l.eventHandler.HandleEvent(newCtx, event)
 			if err != nil {
 				log.Ctx(newCtx).Error().Err(err).Msg("error on event handler")
+
 				continue
 			}
 

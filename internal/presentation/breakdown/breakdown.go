@@ -1,7 +1,6 @@
 package presentationbreakdown
 
 import (
-	"errors"
 	"io"
 	"net/http"
 	"os"
@@ -57,13 +56,6 @@ func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
 
 func (ref *PresentationBreakdown) GetResult(ctx *gin.Context) {
 	breakdownID := ctx.Param("breakdownID")
-	if breakdownID == "" {
-		ctx.JSON(http.StatusBadGateway, NewErrorResponse(
-			errors.New("breakdownID is mandatory"),
-		))
-
-		return
-	}
 
 	result, err := ref.service.GetResult(ctx, breakdownID)
 	if err != nil {

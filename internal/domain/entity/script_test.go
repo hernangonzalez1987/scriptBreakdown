@@ -8,6 +8,8 @@ import (
 )
 
 func TestTagCategories_GetByType(t *testing.T) {
+	t.Parallel()
+
 	type args struct {
 		ctgType valueobjects.TagCategoryType
 	}
@@ -36,8 +38,11 @@ func TestTagCategories_GetByType(t *testing.T) {
 			want: nil,
 		},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+
 			if got := tt.ref.GetByType(tt.args.ctgType); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("TagCategories.GetByType() = %v, want %v", got, tt.want)
 			}

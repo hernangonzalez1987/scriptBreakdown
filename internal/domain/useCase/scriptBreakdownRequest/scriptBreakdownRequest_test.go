@@ -1,11 +1,10 @@
 package scriptbreakdownrequest
 
 import (
-	"bytes"
 	"context"
-	"errors"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/_mocks"
@@ -17,12 +16,14 @@ import (
 )
 
 func TestRequestScriptBreakdown(t *testing.T) {
+	t.Parallel()
+
 	mockStorage := _mocks.NewMockStorage(t)
 	repository := _mocks.NewMockBreakdownRepository(t)
 	useCase := New(mockStorage, repository)
 	ctx := context.Background()
 
-	tempFile := bytes.NewBuffer([]byte("test script content"))
+	tempFile := strings.NewReader("test script content")
 
 	req := entity.ScriptBreakdownRequest{TempScriptFile: tempFile}
 
@@ -47,7 +48,7 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 	existingIDProcessing := "existingIDProcessing"
 	existingIDSuccess := "existingIDSuccess"
 
-	repository.EXPECT().Get(ctx, nonExistingID).Return(nil, errors.New("non existing on db"))
+	repository.EXPECT().Get(ctx, nonExistingID).Return(nil, errNotFound)
 	repository.EXPECT().Get(ctx, existingIDProcessing).Return(
 		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusProcessing}, nil,
 	)
@@ -55,7 +56,7 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusSuccess}, nil,
 	)
 
-	file, _ := os.CreateTemp("", "someFile")
+	file, _ := os.CreateTemp(t.TempDir(), "someFile")
 	defer file.Close()
 
 	storage.EXPECT().Get(ctx, existingIDSuccess).Return(file, nil)
@@ -65,6 +66,7 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 	type args struct {
 		breakdownID string
 	}
+
 	tests := []struct {
 		name    string
 		args    args
@@ -93,18 +95,21 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 			wantErr: false,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, err := useCase.GetResult(ctx, tt.args.breakdownID)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("ScriptBreakdownRequestUseCase.GetResult() error = %v, wantErr %v", err, tt.wantErr)
+
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			t.Parallel()
+
+			got, err := useCase.GetResult(ctx, testCase.args.breakdownID)
+			if (err != nil) != testCase.wantErr {
+				t.Errorf("ScriptBreakdownRequestUseCase.GetResult() error = %v, wantErr %v", err, testCase.wantErr)
+
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ScriptBreakdownRequestUseCase.GetResult() = %v, want %v", got, tt.want)
+
+			if !reflect.DeepEqual(got, testCase.want) {
+				t.Errorf("ScriptBreakdownRequestUseCase.GetResult() = %v, want %v", got, testCase.want)
 			}
 		})
 	}
-
-	mock.AssertExpectationsForObjects(t, storage, repository)
 }

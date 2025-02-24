@@ -54,6 +54,7 @@ func Test_isSceneHeading(t *testing.T) {
 	type args struct {
 		token xml.StartElement
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -122,6 +123,7 @@ func Test_isTagDataElement(t *testing.T) {
 	type args struct {
 		token xml.StartElement
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -235,18 +237,18 @@ func TestTagCategory_ToDomain(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
 			t.Parallel()
 
 			ref := TagCategory{
-				TagCategory: tt.fields.TagCategory,
-				Name:        tt.fields.Name,
-				Number:      tt.fields.Number,
-				ID:          tt.fields.ID,
+				TagCategory: testCase.fields.TagCategory,
+				Name:        testCase.fields.Name,
+				Number:      testCase.fields.Number,
+				ID:          testCase.fields.ID,
 			}
-			if got := ref.ToDomain(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("TagCategory.ToDomain() = %v, want %v", got, tt.want)
+			if got := ref.ToDomain(); !reflect.DeepEqual(got, testCase.want) {
+				t.Errorf("TagCategory.ToDomain() = %v, want %v", got, testCase.want)
 			}
 		})
 	}

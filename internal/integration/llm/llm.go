@@ -96,8 +96,10 @@ func generatePrompt(sceneText string) string {
 		if i > 0 {
 			categoryPrompt += ", "
 		}
+
 		categoryPrompt += name
 	}
+
 	categoryPrompt += "). "
 
 	return promptQuestionPart1 + categoryPrompt + promptQuestionPart2 + sceneText

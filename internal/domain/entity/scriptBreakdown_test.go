@@ -6,12 +6,16 @@ import (
 )
 
 func TestScriptBreakdown_GetSceneBreakdownByNumber(t *testing.T) {
+	t.Parallel()
+
 	type fields struct {
 		SceneBreakdowns []SceneBreakdown
 	}
+
 	type args struct {
 		number int
 	}
+
 	tests := []struct {
 		name   string
 		fields fields
@@ -31,13 +35,16 @@ func TestScriptBreakdown_GetSceneBreakdownByNumber(t *testing.T) {
 			want:   nil,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			t.Parallel()
+
 			ref := &ScriptBreakdown{
-				SceneBreakdowns: tt.fields.SceneBreakdowns,
+				SceneBreakdowns: testCase.fields.SceneBreakdowns,
 			}
-			if got := ref.GetSceneBreakdownByNumber(tt.args.number); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("ScriptBreakdown.GetSceneBreakdownByNumber() = %v, want %v", got, tt.want)
+			if got := ref.GetSceneBreakdownByNumber(testCase.args.number); !reflect.DeepEqual(got, testCase.want) {
+				t.Errorf("ScriptBreakdown.GetSceneBreakdownByNumber() = %v, want %v", got, testCase.want)
 			}
 		})
 	}

@@ -14,16 +14,18 @@ import (
 
 const namespace = "1486e36b-d00c-4f29-9098-10eb8eab9002"
 
-type ScriptBreakdownRequestUseCase struct {
+var errNotFound = valueobjects.NewCustomError("NOTFOUND", "breakdown not found")
+
+type UseCase struct {
 	storage    _interfaces.Storage
 	repository _interfaces.BreakdownRepository
 }
 
-func New(storage _interfaces.Storage, repository _interfaces.BreakdownRepository) *ScriptBreakdownRequestUseCase {
-	return &ScriptBreakdownRequestUseCase{storage: storage, repository: repository}
+func New(storage _interfaces.Storage, repository _interfaces.BreakdownRepository) *UseCase {
+	return &UseCase{storage: storage, repository: repository}
 }
 
-func (ref *ScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Context,
+func (ref *UseCase) RequestScriptBreakdown(ctx context.Context,
 	req entity.ScriptBreakdownRequest,
 ) (*entity.ScriptBreakdownResult, error) {
 	tempFile, err := os.CreateTemp("", "tempFile")
@@ -57,7 +59,7 @@ func (ref *ScriptBreakdownRequestUseCase) RequestScriptBreakdown(ctx context.Con
 	return &entity.ScriptBreakdownResult{BreakdownID: breakdownID.String()}, nil
 }
 
-func (ref *ScriptBreakdownRequestUseCase) GetResult(ctx context.Context, breakdownID string) (
+func (ref *UseCase) GetResult(ctx context.Context, breakdownID string) (
 	*entity.ScriptBreakdownResult, error,
 ) {
 	result, err := ref.repository.Get(ctx, breakdownID)
@@ -66,7 +68,7 @@ func (ref *ScriptBreakdownRequestUseCase) GetResult(ctx context.Context, breakdo
 	}
 
 	if result == nil {
-		return nil, errors.New("breakdown not found")
+		return nil, errNotFound
 	}
 
 	if result.Status != valueobjects.BreakdownStatusSuccess {

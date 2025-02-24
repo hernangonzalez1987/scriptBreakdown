@@ -10,11 +10,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-const (
-	namespace = "1486e36b-d00c-4f29-9098-10eb8eab9002"
-	sufix     = "_tagged"
-)
-
 type Parser struct{}
 
 func NewParser() *Parser {
@@ -33,13 +28,13 @@ func (ref *Parser) ParseScript(_ context.Context, reader io.Reader) (*entity.Scr
 	}, nil
 }
 
-func readScript(reader io.Reader) (fdxFile *FDXFile, err error) {
+func readScript(reader io.Reader) (*FDXFile, error) {
 	scriptRawContent, err := io.ReadAll(reader)
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
 
-	fdxFile = &FDXFile{}
+	fdxFile := &FDXFile{}
 
 	err = xml.Unmarshal(scriptRawContent, fdxFile)
 	if err != nil {
@@ -51,7 +46,9 @@ func readScript(reader io.Reader) (fdxFile *FDXFile, err error) {
 
 func extractScenesFromScript(script FDXFile) []entity.Scene {
 	var scenes []entity.Scene
+
 	var scene entity.Scene
+
 	var sceneCount int
 
 	for _, paragraph := range script.Content.Paragraph {
@@ -90,7 +87,6 @@ func extractCategoryTagsFromScript(script FDXFile) []entity.Category {
 	var tagCategories []entity.Category
 
 	for _, tagCategory := range script.TagData.TagCategories.TagCategories {
-
 		cat := tagCategory.ToDomain()
 
 		if cat != nil {

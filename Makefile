@@ -13,7 +13,9 @@ clean:
 
 test:
 	go test ./... -cover
-	golangci-lint run --enable-all --disable depguard --disable testpackage --exclude-files "mock.*" --sort-results
+
+lint:
+	golangci-lint run --enable-all --disable depguard --disable testpackage  --disable exhaustruct --disable nilnil --exclude-files "mock.*" --sort-results
 
 
 

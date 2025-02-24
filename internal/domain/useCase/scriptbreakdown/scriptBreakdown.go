@@ -51,9 +51,6 @@ func New(parser _interfaces.ScriptParser,
 func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 	event entity.ScriptBreakdownEvent,
 ) (*entity.ScriptBreakdownResult, error) {
-	// TODO: Update processing
-	// TODO: On error, update on error
-
 	log.Ctx(ctx).Info().Any("event", event).Msg("processing script breakdown")
 
 	var err error
@@ -76,10 +73,13 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 		if current.Status == valueobjects.BreakdownStatusProcessing {
 			return nil, errAlreadyProcessing
 		}
+
 		if current.Status == valueobjects.BreakdownStatusSuccess {
 			log.Ctx(ctx).Info().Any("event", event).Msg("script already processed")
+
 			return nil, nil
 		}
+
 		version = current.Version + 1
 	}
 
@@ -110,6 +110,7 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 	}()
 
 	scriptBuffer := new(bytes.Buffer)
+
 	script, err := ref.parser.ParseScript(ctx, io.TeeReader(scriptFile, scriptBuffer))
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -123,6 +124,7 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 	log.Ctx(ctx).Info().Any("event", event).Msg("script breakdown done. About to render")
 
 	breakdownContent := new(bytes.Buffer)
+
 	err = ref.render.RenderScript(ctx, scriptBuffer, breakdownContent, *scriptBreakdown)
 	if err != nil {
 		return nil, errors.WithStack(err)
@@ -174,7 +176,8 @@ func (ref *BreakdownUseCase) BreakdownScript(ctx context.Context,
 func (ref *BreakdownUseCase) scriptBreakdown(ctx context.Context,
 	script entity.Script,
 ) (*entity.ScriptBreakdown, error) {
-	mu := &sync.Mutex{}
+	mutex := &sync.Mutex{}
+
 	scriptBreakdown := entity.ScriptBreakdown{SceneBreakdowns: make([]entity.SceneBreakdown, 0)}
 	scenes := make(chan entity.Scene)
 
@@ -187,9 +190,10 @@ func (ref *BreakdownUseCase) scriptBreakdown(ctx context.Context,
 				if err != nil {
 					return errors.WithStack(err)
 				}
-				mu.Lock()
+
+				mutex.Lock()
 				scriptBreakdown.SceneBreakdowns = append(scriptBreakdown.SceneBreakdowns, *breakdown)
-				mu.Unlock()
+				mutex.Unlock()
 			}
 
 			return nil

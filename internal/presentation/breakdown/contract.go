@@ -34,7 +34,7 @@ func NewErrorResponse(err error) ErrorResponse {
 }
 
 type BreakdownRequestResponse struct {
-	BreakdownID string `json:"breakdown_id"`
+	BreakdownID string `json:"breakdownId"`
 }
 
 func NewBreakdownRequestResponse(result entity.ScriptBreakdownResult) BreakdownRequestResponse {
