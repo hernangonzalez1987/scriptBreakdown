@@ -6,7 +6,7 @@ services:
       - "8443:8080"
     container_name: mocks
     volumes:
-      - ./internal/test/mocks:/home/wiremock/mappings
+      - ./test/mocks:/home/wiremock/mappings
     entrypoint: [ "/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose" ]
 
   db:
@@ -14,7 +14,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./internal/test/db:/home/dynamodblocal/data
+      - ./test/db:/home/dynamodblocal/data
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
     container_name: dynamodb-local
 

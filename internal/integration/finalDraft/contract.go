@@ -30,6 +30,7 @@ type Content struct {
 
 type Paragraph struct {
 	Type              string            `xml:"Type,attr,omitempty"`
+	Alignment         string            `xml:"Alignment,attr,omitempty"`
 	Number            int               `xml:"Number,attr,omitempty"`
 	Text              []Text            `xml:"Text,omitempty"`
 	UserParagraphData UserParagraphData `xml:"UserParagraphData,omitempty"`
@@ -37,6 +38,7 @@ type Paragraph struct {
 
 type Text struct {
 	Value     string `xml:",innerxml"`
+	Style     string `xml:"Style,attr,omitempty"`
 	TagNumber string `xml:"TagNumber,attr,omitempty"`
 }
 

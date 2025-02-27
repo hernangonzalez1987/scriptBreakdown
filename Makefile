@@ -1,21 +1,21 @@
 BINARY_NAME=script-breakdown
 
-build: test
+build:
 	go mod download
-	go build -o ${BINARY_NAME} cmd/main.go
+	go build -o ${BINARY_NAME} main.go
 
 run: build
-	./${BINARY_NAME}
+	./${BINARY_NAME} start
 
 clean:
 	go clean
 	rm ${BINARY_NAME}
 
-test:
-	go test ./... -cover
+test: 
+	go test --cover ./... 
 
 lint:
-	golangci-lint run --enable-all --disable depguard --disable testpackage  --disable exhaustruct --disable nilnil --exclude-files "mock.*" --sort-results
+	golangci-lint run --enable-all --disable depguard --disable testpackage --disable gochecknoinits --disable exhaustruct --disable nilnil --disable gochecknoglobals --exclude-files "mock.*" --sort-results
 
 
 

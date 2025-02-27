@@ -23,13 +23,12 @@ import (
 	"github.com/tmc/langchaingo/llms/googleai"
 )
 
-// workerCmd represents the worker command
 var workerCmd = &cobra.Command{
 	Use:   "worker",
 	Short: "Start Script Breakdown Worker",
 	Long: `This worker process async the script breakdown requests
 	created on the API`,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		apiKey := os.Getenv("GEMINI_API_KEY")
 
 		logger := logger.New()
@@ -75,14 +74,4 @@ var workerCmd = &cobra.Command{
 
 func init() {
 	startCmd.AddCommand(workerCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// workerCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// workerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

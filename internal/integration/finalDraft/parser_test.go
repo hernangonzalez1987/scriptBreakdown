@@ -8,6 +8,7 @@ import (
 
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 	valueobjects "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/valueObjects"
+	"github.com/stretchr/testify/assert"
 )
 
 const sceneText = `
@@ -27,6 +28,7 @@ func Test_extractCategoryTagsFromScript(t *testing.T) {
 	type args struct {
 		script FDXFile
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -84,6 +86,7 @@ func Test_extractScenesFromScript(t *testing.T) {
 	type args struct {
 		script FDXFile
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -95,10 +98,7 @@ func Test_extractScenesFromScript(t *testing.T) {
 				script: FDXFile{
 					Content: Content{
 						Paragraph: []Paragraph{
-							{
-								Type:   sceneHeading,
-								Number: 2,
-							},
+							{Type: sceneHeading, Number: 2},
 							{
 								Type: actionHeading,
 								Text: []Text{
@@ -106,21 +106,13 @@ func Test_extractScenesFromScript(t *testing.T) {
 									{Value: "Some more scene text."},
 								},
 							},
-							{
-								Type: actionHeading,
-								Text: []Text{
-									{Value: "Some additional text."},
-								},
-							},
+							{Type: actionHeading, Text: []Text{{Value: "Some additional text."}}},
 						},
 					},
 				},
 			},
 			want: []entity.Scene{
-				{
-					Number: 2,
-					Text:   " Some scene text.\n Some more scene text.\n Some additional text.\n",
-				},
+				{Number: 2, Text: " Some scene text.\n Some more scene text.\n Some additional text.\n"},
 			},
 		},
 		{
@@ -130,12 +122,7 @@ func Test_extractScenesFromScript(t *testing.T) {
 					Content: Content{
 						Paragraph: []Paragraph{
 							{Type: sceneHeading},
-							{
-								Type: actionHeading,
-								Text: []Text{
-									{Value: "Some scene text."},
-								},
-							},
+							{Type: actionHeading, Text: []Text{{Value: "Some scene text."}}},
 						},
 					},
 				},
@@ -163,11 +150,11 @@ func Test_readFile(t *testing.T) {
 	type args struct {
 		reader io.Reader
 	}
+
 	tests := []struct {
 		name     string
 		args     args
 		wantFile *FDXFile
-		wantHash string
 		wantErr  bool
 	}{
 		{
@@ -175,15 +162,16 @@ func Test_readFile(t *testing.T) {
 			args: args{strings.NewReader(sceneText)},
 			wantFile: &FDXFile{Content: Content{Paragraph: []Paragraph{
 				{
-					Number: 0,
-					Type:   sceneHeading,
+					Alignment: "Left",
+					Number:    0,
+					Type:      sceneHeading,
 					Text: []Text{{
 						Value: "EXT. PRAÇA DA SÉ - DIA",
+						Style: "AllCaps",
 					}},
 				},
 			}}},
-			wantHash: "58d6af83-6160-3c89-8e37-5ebfb1872392",
-			wantErr:  false,
+			wantErr: false,
 		},
 	}
 
@@ -198,9 +186,7 @@ func Test_readFile(t *testing.T) {
 				return
 			}
 
-			if !reflect.DeepEqual(gotFile, testCase.wantFile) {
-				t.Errorf("readFile() gotFile = %v, want %v", gotFile, testCase.wantFile)
-			}
+			assert.Equal(t, testCase.wantFile, gotFile)
 		})
 	}
 }

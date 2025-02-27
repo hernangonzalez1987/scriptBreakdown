@@ -3,7 +3,6 @@ package scriptbreakdownrequest
 import (
 	"context"
 	"os"
-	"reflect"
 	"strings"
 	"testing"
 
@@ -48,11 +47,9 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 
 	repository.EXPECT().Get(ctx, nonExistingID).Return(nil, errNotFound)
 	repository.EXPECT().Get(ctx, existingIDProcessing).Return(
-		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusProcessing}, nil,
-	)
+		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusProcessing}, nil)
 	repository.EXPECT().Get(ctx, existingIDSuccess).Return(
-		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusSuccess}, nil,
-	)
+		&entity.ScriptBreakdownResult{Status: valueobjects.BreakdownStatusSuccess}, nil)
 
 	file, _ := os.CreateTemp(t.TempDir(), "someFile")
 	defer file.Close()
@@ -61,9 +58,7 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 
 	useCase := New(nil, breakdownsStorage, repository)
 
-	type args struct {
-		breakdownID string
-	}
+	type args struct{ breakdownID string }
 
 	tests := []struct {
 		name    string
@@ -105,9 +100,7 @@ func TestScriptBreakdownRequestUseCase_GetResult(t *testing.T) {
 				return
 			}
 
-			if !reflect.DeepEqual(got, testCase.want) {
-				t.Errorf("ScriptBreakdownRequestUseCase.GetResult() = %v, want %v", got, testCase.want)
-			}
+			assert.Equal(t, testCase.want, got)
 		})
 	}
 }

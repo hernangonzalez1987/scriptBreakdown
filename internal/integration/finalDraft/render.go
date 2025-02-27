@@ -48,8 +48,8 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 			return errors.WithStack(err)
 		}
 
-		elem, ok := token.(xml.StartElement)
-		if ok && isSceneHeading(elem) {
+		elem, isOk := token.(xml.StartElement)
+		if isOk && isSceneHeading(elem) {
 			sceneCount++
 
 			sceneNumber = defineSceneNumber(elem, sceneCount)
@@ -57,7 +57,7 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 			continue
 		}
 
-		if ok && isActionHeading(elem) {
+		if isOk && isActionHeading(elem) {
 			err = processActionParagraph(&elem, sceneNumber, decoder, encoder, breakdown)
 			if err != nil {
 				return errors.WithStack(err)
@@ -66,7 +66,7 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 			token = nil
 		}
 
-		if ok && isTagDataElement(elem) {
+		if isOk && isTagDataElement(elem) {
 			err = processTagData(&elem, decoder, encoder, breakdown)
 			if err != nil {
 				return errors.WithStack(err)
@@ -81,7 +81,7 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 
 func encode(token xml.Token, encoder *xml.Encoder) error {
 	if token != nil {
-		return encoder.EncodeToken(token)
+		return errors.WithStack(encoder.EncodeToken(token))
 	}
 
 	return nil

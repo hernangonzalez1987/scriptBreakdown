@@ -13,6 +13,7 @@ func TestTagCategories_GetByType(t *testing.T) {
 	type args struct {
 		ctgType valueobjects.TagCategoryType
 	}
+
 	tests := []struct {
 		name string
 		ref  TagCategories

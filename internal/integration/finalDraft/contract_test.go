@@ -89,6 +89,7 @@ func Test_isActionHeading(t *testing.T) {
 	type args struct {
 		token xml.StartElement
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -158,6 +159,7 @@ func Test_getSceneNumber(t *testing.T) {
 	type args struct {
 		token xml.StartElement
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -195,6 +197,7 @@ func TestTagCategory_ToDomain(t *testing.T) {
 		Number      string
 		ID          string
 	}
+
 	tests := []struct {
 		name   string
 		fields fields

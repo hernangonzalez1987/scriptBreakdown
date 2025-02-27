@@ -3,7 +3,6 @@ package finaldraft
 import (
 	"context"
 	"encoding/xml"
-	"reflect"
 	"strings"
 	"testing"
 
@@ -53,6 +52,7 @@ func Test_processText(t *testing.T) {
 		text           Text
 		sceneBreakdown entity.SceneBreakdown
 	}
+
 	tests := []struct {
 		name string
 		args args
@@ -103,10 +103,7 @@ func Test_processText(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-
-			if got := tagText(tt.args.text, tt.args.sceneBreakdown); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("processText() = %v, want %v", got, tt.want)
-			}
+			assert.Equal(t, tt.want, tagText(tt.args.text, tt.args.sceneBreakdown))
 		})
 	}
 }
