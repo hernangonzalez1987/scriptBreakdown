@@ -1,0 +1,111 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/script/breakdown": {
+            "post": {
+                "description": "Creates a breakdown script requests, the result should be async obtain later from GET method.",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "breakdwn"
+                ],
+                "summary": "Creates a breakdown script",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.BreakdownRequestResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/script/breakdown/{breakdown_id}": {
+            "get": {
+                "description": "Gets the result of a breakdown script",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "breakdwn"
+                ],
+                "summary": "Gets a breakdown script result",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "BreakdownID",
+                        "name": "breakdown_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.BreakdownRequestResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "presentationbreakdown.BreakdownRequestResponse": {
+            "type": "object",
+            "properties": {
+                "breakdownId": {
+                    "type": "string"
+                }
+            }
+        },
+        "presentationbreakdown.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

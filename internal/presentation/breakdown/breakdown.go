@@ -20,7 +20,17 @@ func New(service _interfaces.ScriptBreakdownRequestUseCase) *PresentationBreakdo
 	}
 }
 
-func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
+// BrakdownScript godoc
+// @Summary      Creates a breakdown script
+// @Description  Creates a breakdown script requests, the result should be async obtain later from GET method.
+// @Tags         breakdwn
+// @Accept       multipart/form-data
+// @Produce      json
+// @Success      201  {object}  BreakdownRequestResponse
+// @Failure      400  {object}  ErrorResponse
+// @Failure      500  {object}  ErrorResponse
+// @Router       /script/breakdown [post]
+func (ref *PresentationBreakdown) BreakdownScript(ctx *gin.Context) {
 	request := BreakdownRequest{}
 
 	err := ctx.ShouldBind(&request)
@@ -51,9 +61,20 @@ func (ref *PresentationBreakdown) ProcessFile(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, NewBreakdownRequestResponse(*result))
+	ctx.JSON(http.StatusCreated, NewBreakdownRequestResponse(*result))
 }
 
+// BrakdownScript godoc
+// @Summary      Gets a breakdown script result
+// @Description  Gets the result of a breakdown script
+// @Tags         breakdwn
+// @Produce      json
+// @Param 		 breakdown_id path string true "BreakdownID"
+// @Success      201  {object}  BreakdownRequestResponse
+// @Failure      400  {object}  ErrorResponse
+// @Failure      404  {object}  ErrorResponse
+// @Failure      500  {object}  ErrorResponse
+// @Router       /script/breakdown/{breakdown_id} [get]
 func (ref *PresentationBreakdown) GetResult(ctx *gin.Context) {
 	breakdownID := ctx.Param("breakdownID")
 

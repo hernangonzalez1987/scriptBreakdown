@@ -1,0 +1,72 @@
+definitions:
+  presentationbreakdown.BreakdownRequestResponse:
+    properties:
+      breakdownId:
+        type: string
+    type: object
+  presentationbreakdown.ErrorResponse:
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /script/breakdown:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Creates a breakdown script requests, the result should be async
+        obtain later from GET method.
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/presentationbreakdown.BreakdownRequestResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+      summary: Creates a breakdown script
+      tags:
+      - breakdwn
+  /script/breakdown/{breakdown_id}:
+    get:
+      description: Gets the result of a breakdown script
+      parameters:
+      - description: BreakdownID
+        in: path
+        name: breakdown_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/presentationbreakdown.BreakdownRequestResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+      summary: Gets a breakdown script result
+      tags:
+      - breakdwn
+swagger: "2.0"

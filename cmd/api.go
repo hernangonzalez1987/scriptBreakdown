@@ -13,6 +13,11 @@ import (
 	presentationbreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/breakdown"
 	"github.com/hernangonzalez1987/scriptBreakdown/tools/logger"
 	"github.com/spf13/cobra"
+
+	_ "github.com/hernangonzalez1987/scriptBreakdown/docs"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 var apiCmd = &cobra.Command{
@@ -44,11 +49,13 @@ var apiCmd = &cobra.Command{
 
 		router.POST("/script/breakdown", presentationbreakdown.New(
 			scriptbreakdownrequest.New(scriptsStorage, breakdownsStorage, breakdownResultRepository),
-		).ProcessFile)
+		).BreakdownScript)
 
 		router.GET("/script/breakdown/:breakdownID", presentationbreakdown.New(
 			scriptbreakdownrequest.New(scriptsStorage, breakdownsStorage, breakdownResultRepository),
 		).GetResult)
+
+		router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 		err = router.Run(":9000")
 		if err != nil {
@@ -57,6 +64,17 @@ var apiCmd = &cobra.Command{
 	},
 }
 
+// @title           Script Breakdown API
+// @version         1.0
+// @description     This API allows to create and obtain results from script breakdowns
+
+// @host      localhost:9000
+// @BasePath  /api/v1
+
+// @securityDefinitions.basic  BasicAuth
+
+// @externalDocs.description  OpenAPI
+// @externalDocs.url          https://swagger.io/resources/open-api/
 func init() {
 	startCmd.AddCommand(apiCmd)
 }
