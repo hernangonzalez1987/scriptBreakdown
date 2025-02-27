@@ -11,3 +11,7 @@ This aplication uses a LLM API in order to identify the scene elements. Initiall
 The input should be a script on fdx format, since it is the standard file format to export to production scheduling applications such as Movie Magic or Studio Binder.
 
 In order to run locally, Docker Compose is needed and a Google Gemini API Key that should be set as env var.
+
+## Architecture
+
+![Architecture](.github/assets/ScriptBreakdownArch.jpg)
