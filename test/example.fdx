@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<FinalDraft DocumentType="Script" Template="No" Version="2">
+	<Content>
+		<Paragraph Type="Scene Heading" Alignment="Left">
+			<Text Style="AllCaps">EXT. PRAÇA DA SÉ - NOITE</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>Uma </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text> se aglomera na grande Praça da Sé, em São Paulo. Alguns leem
+			</Text>
+			<Text TagNumber="5">jornais</Text>
+			<Text>,
+				outros conversam animados, </Text>
+			<Text TagNumber="19">vendedores ambulantes</Text>
+			<Text> oferecem seus </Text>
+			<Text TagNumber="6">produtos</Text>
+			<Text>. O sol da manhã
+				ilumina a cena, criando sombras longas e vibrantes.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>No centro da praça, um pequeno </Text>
+			<Text TagNumber="12">palco improvisado</Text>
+			<Text>. Um </Text>
+			<Text TagNumber="7">microfone</Text>
+			<Text> está posicionado
+				no centro, aguardando o orador.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text TagNumber="2">A câmera inicia em um plano geral da praça</Text>
+			<Text>, capturando a energia do local.
+			</Text>
+			<Text TagNumber="3">Lentamente, ela se move em direção ao palco</Text>
+			<Text>, onde um homem de </Text>
+			<Text TagNumber="8">terno e gravata</Text>
+			<Text>, </Text>
+			<Text TagNumber="24">Marcelo</Text>
+			<Text>,
+				ajusta o </Text>
+			<Text TagNumber="7">microfone</Text>
+			<Text>. Ele parece nervoso.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Character" Alignment="Left">
+			<Text Style="AllCaps">MARCELO</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Dialogue" Alignment="Left">
+			<Text Style="">(para si mesmo, sussurrando) Um, dois, testando... Um, dois...</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Dialogue" Alignment="Left">
+			<Text Style="">De repente, um pombo voa sobre o palco, assustando Marcelo. Ele se afasta
+				bruscamente, quase derrubando o microfone.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>A </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text> reage com </Text>
+			<Text TagNumber="13">risadas</Text>
+			<Text>. </Text>
+			<Text TagNumber="24">Marcelo</Text>
+			<Text> tenta disfarçar o nervosismo, ajeitando a
+			</Text>
+			<Text TagNumber="9">gravata</Text>
+			<Text>.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Character" Alignment="Left">
+			<Text Style="AllCaps">MARCELO</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Dialogue" Alignment="Left">
+			<Text Style="">(no microfone, com a voz tremendo) Bom dia a todos... É uma honra estar
+				aqui
+				hoje...</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Dialogue" Alignment="Left">
+			<Text Style="">Enquanto Marcelo tenta iniciar seu discurso, a câmera foca em suas mãos,
+				que
+				tremem levemente.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>No canto da praça, um </Text>
+			<Text TagNumber="11">carro de polícia</Text>
+			<Text> se aproxima lentamente, com as sirenes
+				desligadas. </Text>
+			<Text TagNumber="10">Dois policiais</Text>
+			<Text> saem do veículo e observam a </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text>, atentos a qualquer sinal
+				de problema.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>No palco, </Text>
+			<Text TagNumber="24">Marcelo</Text>
+			<Text> continua seu discurso, agora com mais confiança. A </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text> o
+				ouve atentamente.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Character" Alignment="Left">
+			<Text Style="AllCaps">MARCELO</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Dialogue" Alignment="Left">
+			<Text Style="">...e por isso, precisamos nos unir...</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text TagNumber="4">A câmera se afasta lentamente</Text>
+			<Text>, mostrando a </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text> reunida na praça, enquanto
+				o </Text>
+			<Text TagNumber="14">discurso de Marcelo ecoa pelo ar</Text>
+			<Text>. A </Text>
+			<Text TagNumber="15">música de fundo, um violão suave</Text>
+			<Text>, acompanha a cena.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>No céu, um efeito visual sutil: a imagem de uma </Text>
+			<Text TagNumber="1">pomba branca</Text>
+			<Text>, símbolo da paz,
+				se sobrepõe à imagem da praça.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+		<Paragraph Type="Action" Alignment="Left">
+			<Text>A cena termina com um plano geral da Praça da Sé, mostrando a </Text>
+			<Text TagNumber="18">multidão</Text>
+			<Text> reunida,
+				o </Text>
+			<Text TagNumber="12">palco improvisado</Text>
+			<Text> e o </Text>
+			<Text TagNumber="11">carro de polícia</Text>
+			<Text> ao fundo. A música aumenta gradualmente, enquanto a
+				imagem da </Text>
+			<Text TagNumber="1">pomba branca</Text>
+			<Text> desaparece lentamente.</Text>
+			<UserParagraphData></UserParagraphData>
+		</Paragraph>
+	</Content>
+	<HeaderAndFooter FooterFirstPage="No" FooterVisible="Yes" HeaderFirstPage="No"
+		HeaderVisible="Yes" StartingPage="1">
+		<Header>
+			<Paragraph Alignment="Full" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25"
+				RightIndent="1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+				<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+					Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+				<DynamicLabel Type="Last Revised"></DynamicLabel>
+				<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+					Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+				<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+					Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+				<DynamicLabel Type="Page #"></DynamicLabel>
+				<Tabstops>
+					<Tabstop Position="7.25" Type="Right"></Tabstop>
+				</Tabstops>
+				<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+					Font="Courier Final Draft" RevisionID="0" Size="12" Style="">.</Text>
+			</Paragraph>
+		</Header>
+		<Footer>
+			<Paragraph Alignment="Center" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25"
+				RightIndent="1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+				<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+					Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+			</Paragraph>
+		</Footer>
+	</HeaderAndFooter>
+	<PageLayout BackgroundColor="#FFFFFFFFFFFF" BottomMargin="72"
+		BreakDialogueAndActionAtSentences="Yes" DocumentLeading="Normal" FooterMargin="36"
+		ForegroundColor="#000000000000" HeaderMargin="36" InvisiblesColor="#A0A0A0A0A0A0"
+		TopMargin="72" UsesSmartQuotes="No">
+		<PageSize Height="11.00" Width="8.50"></PageSize>
+		<AutoCastList AddParentheses="Yes" AutomaticallyGenerate="No" CastListElement="Cast List"></AutoCastList>
+	</PageLayout>
+	<ElementSettings Type="Cast List">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Alignment="Left" FirstIndent="0.00" Leading="Regular" LeftIndent="1.60"
+			RightIndent="7.50" SpaceBefore="0" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Action" ReturnKey="Action" Shortcut="8"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Character">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="3.50" RightIndent="7.25" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="12" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Character" ReturnKey="Dialogue" Shortcut="3"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Dialogue">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="2.50" RightIndent="5.94" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="0" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Dialogue" ReturnKey="Action" Shortcut="5"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Parenthetical">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="3.00" RightIndent="5.50" FirstIndent="-0.10"
+			Alignment="Left" SpaceBefore="0" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Parenthetical" ReturnKey="Dialogue" Shortcut="4"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Action">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="12" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Action" ReturnKey="Action" Shortcut="2"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Scene Heading">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="24" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Scene Heading" ReturnKey="Action" Shortcut="1"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Shot">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="24" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Scene Heading" ReturnKey="Action" Shortcut="7"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Transition">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.00" FirstIndent="0.00"
+			Alignment="Right" SpaceBefore="12" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Transition" ReturnKey="Scene Heading" Shortcut="6"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="General">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="0" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="General" ReturnKey="General" Shortcut="8"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="New Act">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps+Underline"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.00" RightIndent="7.57" FirstIndent="0.00"
+			Alignment="Center" SpaceBefore="12" Spacing="1" StartsNewPage="Yes"></ParagraphSpec>
+		<Behavior PaginateAs="General" ReturnKey="Scene Heading" Shortcut="10"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="End of Act">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps+Underline"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Center" SpaceBefore="12" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="General" ReturnKey="New Act" Shortcut="11"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Lyrics">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style="AllCaps"></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="2.50" RightIndent="5.94" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="0" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Dialogue" ReturnKey="Lyrics" Shortcut="12"></Behavior>
+	</ElementSettings>
+	<ElementSettings Type="Image">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<ParagraphSpec Leading="Regular" LeftIndent="1.50" RightIndent="7.50" FirstIndent="0.00"
+			Alignment="Left" SpaceBefore="12" Spacing="1" StartsNewPage="No"></ParagraphSpec>
+		<Behavior PaginateAs="Action" ReturnKey="Action" Shortcut="1129"></Behavior>
+	</ElementSettings>
+	<TitlePage>
+		<HeaderAndFooter FooterFirstPage="Yes" FooterVisible="No" HeaderFirstPage="No"
+			HeaderVisible="Yes" StartingPage="1">
+			<Header>
+				<Paragraph Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25"
+					RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+					<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+						Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+				</Paragraph>
+			</Header>
+			<Footer>
+				<Paragraph Alignment="Right" FirstIndent="0.00" Leading="Regular" LeftIndent="1.25"
+					RightIndent="-1.25" SpaceBefore="0" Spacing="1" StartsNewPage="No">
+					<Text AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+						Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></Text>
+				</Paragraph>
+			</Footer>
+		</HeaderAndFooter>
+		<Content></Content>
+	</TitlePage>
+	<MoresAndContinueds>
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+		<DialogueBreaks AutomaticCharacterContinueds="Yes" BottomOfPage="Yes"
+			DialogueBottom="(MORE)" DialogueTop="(CONT&#39;D)" TopOfNext="Yes"></DialogueBreaks>
+		<SceneBreaks ContinuedNumber="No" SceneBottom="(CONTINUED)" SceneBottomOfPage="No"
+			SceneTop="CONTINUED:" SceneTopOfNext="No"></SceneBreaks>
+	</MoresAndContinueds>
+	<SpellCheckIgnoreLists>
+		<IgnoredRanges></IgnoredRanges>
+		<IgnoredWords></IgnoredWords>
+	</SpellCheckIgnoreLists>
+	<ScriptNoteDefinitions Active="1">
+		<ScriptNoteDefinition Color="#000000000000" ID="1" Marker="!" Name="Important"></ScriptNoteDefinition>
+		<ScriptNoteDefinition Color="#000000000000" ID="2" Marker="?" Name="Information"></ScriptNoteDefinition>
+		<ScriptNoteDefinition Color="#000000000000" ID="3" Marker="*" Name="Suggestion"></ScriptNoteDefinition>
+	</ScriptNoteDefinitions>
+	<SmartType>
+		<Characters></Characters>
+		<Extensions>
+			<Extension>(V.O.)</Extension>
+			<Extension>(O.S.)</Extension>
+			<Extension>(O.C.)</Extension>
+			<Extension>(CONT&#39;D)</Extension>
+			<Extension>(SUBTITLE)</Extension>
+		</Extensions>
+		<SceneIntros Separator=". ">
+			<SceneIntro>INT</SceneIntro>
+			<SceneIntro>EXT</SceneIntro>
+			<SceneIntro>I/E</SceneIntro>
+		</SceneIntros>
+		<Locations></Locations>
+		<TimesOfDay Separator=" - ">
+			<TimeOfDay>DAY</TimeOfDay>
+			<TimeOfDay>NIGHT</TimeOfDay>
+			<TimeOfDay>AFTERNOON</TimeOfDay>
+			<TimeOfDay>MORNING</TimeOfDay>
+			<TimeOfDay>EVENING</TimeOfDay>
+			<TimeOfDay>LATER</TimeOfDay>
+			<TimeOfDay>MOMENTS LATER</TimeOfDay>
+			<TimeOfDay>CONTINUOUS</TimeOfDay>
+			<TimeOfDay>THE NEXT DAY</TimeOfDay>
+		</TimesOfDay>
+		<Transitions>
+			<Transition>CUT TO:</Transition>
+			<Transition>FADE IN:</Transition>
+			<Transition>FADE OUT.</Transition>
+			<Transition>FADE TO:</Transition>
+			<Transition>DISSOLVE TO:</Transition>
+			<Transition>BACK TO:</Transition>
+			<Transition>MATCH CUT TO:</Transition>
+			<Transition>JUMP CUT TO:</Transition>
+			<Transition>FADE TO BLACK.</Transition>
+		</Transitions>
+	</SmartType>
+	<LockedPages></LockedPages>
+	<SceneNumberOptions LeftLocation="0.75" RightLocation="7.38" ShowNumbersOnLeft="Yes"
+		ShowNumbersOnRight="Yes">
+		<FontSpec AdornmentStyle="0" Background="#FFFFFFFFFFFF" Color="#000000000000"
+			Font="Courier Final Draft" RevisionID="0" Size="12" Style=""></FontSpec>
+	</SceneNumberOptions>
+	<Revisions ActiveSet="1" Location="7.75" RevisionMode="No" RevisionsShown="Active"
+		ShowAllMarks="No" ShowAllSets="No" ShowPageColor="No">
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="1" Mark="*" Name="Blue (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="2" Mark="*" Name="Pink (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="3" Mark="*" Name="Yellow (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="4" Mark="*" Name="Green (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="5" Mark="*"
+			Name="Goldenrod (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="6" Mark="*" Name="Buff (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="7" Mark="*" Name="Salmon (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="8" Mark="*" Name="Cherry (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="9" Mark="*" Name="Tan (mm/dd/yyyy)"
+			PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="10" Mark="*"
+			Name="2nd White (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="11" Mark="*"
+			Name="2nd Blue (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="12" Mark="*"
+			Name="2nd Pink (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="13" Mark="*"
+			Name="2nd Yellow (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="14" Mark="*"
+			Name="2nd Green (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="15" Mark="*"
+			Name="2nd Goldenrod (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="16" Mark="*"
+			Name="2nd Buff (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="17" Mark="*"
+			Name="2nd Salmon (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="18" Mark="*"
+			Name="2nd Cherry (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+		<Revision Color="#00000000FFFF" FullRevision="No" ID="19" Mark="*"
+			Name="2nd Tan (mm/dd/yyyy)" PageColor="#00000000FFFF" Style=""></Revision>
+	</Revisions>
+	<TagData>
+		<TagCategories>
+			<TagCategory Name="Cast Members" Number="2" Id="01fc9642-84ff-4366-b37c-a3068dee57e8"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Background Actors" Number="3"
+				Id="028a4e2b-b507-4d09-88ab-90e3edae9071" Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Stunts" Number="4" Id="0377dbe6-77a3-41af-bda8-86eb2468fdbf"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Vehicles" Number="5" Id="04721a56-f54b-49c8-80ad-d53887d6b851"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Props" Number="6" Id="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Special Effects" Number="8" Id="069e18b8-2109-4f3d-94e7-d802027a60a8"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Wardrobe" Number="9" Id="0726fa85-1e65-4ab8-87de-bf21d09b01f0"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Makeup/Hair" Number="10" Id="08ae1eef-32ce-415f-9a9b-0982d2453ec4"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Animals" Number="11" Id="09cb0d1c-ce01-4f22-bb64-b5f2e6c491c6"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Animal Wrangler" Number="12"
+				Id="0ae40617-cc7c-48e6-ae2b-5aaecc09986f" Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Music" Number="13" Id="0b0b44c9-aa4b-4c40-88b1-d94472ad7a26"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Sound" Number="14" Id="0ce7d308-096d-4603-8fe8-349f72cd89ff"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Set Dressing" Number="16" Id="0debb71b-5743-4c53-80cc-e17e841ce645"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Greenery" Number="17" Id="0e7a8fc5-5441-4bad-a9bf-5ddd3fe51c69"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Special Equipment" Number="19"
+				Id="0ff5cda4-4d43-4cfe-940f-91380c46fdad" Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Security" Number="18" Id="109d0eaa-0334-4823-ac0c-b44d3f209dc4"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Additional Labor" Number="20"
+				Id="1179a4b1-70ee-4011-b4a2-809a0af09e92" Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Visual Effects" Number="21" Id="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Mechanical Effects" Number="22"
+				Id="135cc9d1-c4d5-4d00-83d9-571f584ea9cd" Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Miscellaneous" Number="23" Id="148267ae-50ae-4746-8202-659fb7447b55"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Notes" Number="24" Id="15b6f4fd-4e74-4ad8-9971-b239d88c2997"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Comments" Number="29" Id="216f33fd-fc42-4269-be01-b05b18f815a0"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Camera" Number="7" Id="47b02ff1-5161-4137-b736-f36eebba7643"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Art Department" Number="15" Id="4a84b619-62f9-4c04-8e46-bf2cd0b7f582"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Script Day" Number="25" Id="63c140da-ef2b-491a-b416-b46f461abb89"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Sequence" Number="27" Id="70877d87-30ef-45b6-be46-c6fa94b83a71"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Unit" Number="26" Id="849f1ebf-5507-4f33-bff6-3a5b4d73be14"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Synopsis" Number="1" Id="8e5e75c2-713b-47df-a75f-f12648b98ded"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+			<TagCategory Name="Location" Number="28" Id="c5e89e4d-f83e-4c28-950c-92a63f1b5f26"
+				Style="Bold">
+				<TagCategory></TagCategory>
+			</TagCategory>
+		</TagCategories>
+		<TagDefinitions>
+			<TagDefinition CatId="09cb0d1c-ce01-4f22-bb64-b5f2e6c491c6"
+				Id="0c3fa4c5-0b25-4c55-bab1-6b648ee40514" Label="pomba branca" Number="1"></TagDefinition>
+			<TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643"
+				Id="8e8dca7e-0536-41aa-a0e7-c5204db9fa01"
+				Label="A câmera inicia em um plano geral da praça" Number="2"></TagDefinition>
+			<TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643"
+				Id="253fff90-2624-494c-b266-385a39213f05"
+				Label="Lentamente, ela se move em direção ao palco" Number="3"></TagDefinition>
+			<TagDefinition CatId="47b02ff1-5161-4137-b736-f36eebba7643"
+				Id="93522977-0cc7-4e17-972e-57413d46429c" Label="A câmera se afasta lentamente"
+				Number="4"></TagDefinition>
+			<TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Id="cf825263-acda-45fd-8afb-41af88f788f9" Label="jornais" Number="5"></TagDefinition>
+			<TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Id="4f062c74-2db4-4bde-aa57-7c11ccd93d9b" Label="produtos" Number="6"></TagDefinition>
+			<TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Id="318abcba-437d-4860-9895-719b905c4b1a" Label="microfone" Number="7"></TagDefinition>
+			<TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Id="d5075c14-c732-4f81-bbe8-e15670480cd5" Label="terno e gravata" Number="8"></TagDefinition>
+			<TagDefinition CatId="05c556eb-6bc1-4a3a-b09f-f8b5ba1b6afa"
+				Id="08733bb4-428c-4e84-b937-8b82fb8eef7d" Label="gravata" Number="9"></TagDefinition>
+			<TagDefinition CatId="109d0eaa-0334-4823-ac0c-b44d3f209dc4"
+				Id="049e7d1d-4652-4541-a1e2-3478634a8772" Label="Dois policiais" Number="10"></TagDefinition>
+			<TagDefinition CatId="109d0eaa-0334-4823-ac0c-b44d3f209dc4"
+				Id="8ab29a16-6f45-4786-aee4-c6f609278d06" Label="carro de polícia" Number="11"></TagDefinition>
+			<TagDefinition CatId="0debb71b-5743-4c53-80cc-e17e841ce645"
+				Id="192364a4-0bc8-4b7f-9e19-ee0db699c2ad" Label="palco improvisado" Number="12"></TagDefinition>
+			<TagDefinition CatId="0ce7d308-096d-4603-8fe8-349f72cd89ff"
+				Id="bf7b2c6f-8c1e-42ab-ad51-47bb5dfd57de" Label="risadas" Number="13"></TagDefinition>
+			<TagDefinition CatId="0ce7d308-096d-4603-8fe8-349f72cd89ff"
+				Id="b17ec12f-cbb5-4c32-8241-c0f33c2fc8f2" Label="discurso de Marcelo ecoa pelo ar"
+				Number="14"></TagDefinition>
+			<TagDefinition CatId="0ce7d308-096d-4603-8fe8-349f72cd89ff"
+				Id="6c5dd6ba-e843-4a80-822d-92426ed787b2" Label="música de fundo, um violão suave"
+				Number="15"></TagDefinition>
+			<TagDefinition CatId="04721a56-f54b-49c8-80ad-d53887d6b851"
+				Id="795fbf16-be00-4f33-b26e-c4c88c49daf0" Label="carro de polícia" Number="16"></TagDefinition>
+			<TagDefinition CatId="12ab0932-e3b9-4b4a-bcd0-3da1b4e61d5e"
+				Id="fc2941b6-5e55-471a-9851-a519870b81de" Label="imagem de uma pomba branca"
+				Number="17"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="61a41ddf-5836-4682-9119-a7b3d31aae1c" Label="multidão" Number="18"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="7f23d308-526c-4262-b44f-2b97044f883c" Label="vendedores ambulantes" Number="19"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="0143d46b-6372-4701-af0e-416f065deac7" Label="multidão reage com risadas"
+				Number="20"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="39ca0c57-5aa4-4725-b08e-21c8c8bc1e6c" Label="multidão o ouve atentamente"
+				Number="21"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="04af7ec9-eed3-4eee-9c7f-056b103ac37d" Label="multidão reunida na praça"
+				Number="22"></TagDefinition>
+			<TagDefinition CatId="028a4e2b-b507-4d09-88ab-90e3edae9071"
+				Id="d7e8ae07-7ffe-4eca-94fe-64667082c4f7" Label="multidão reunida" Number="23"></TagDefinition>
+			<TagDefinition CatId="01fc9642-84ff-4366-b37c-a3068dee57e8"
+				Id="c1a851c7-a3e7-4ad5-aedc-811be05354ad" Label="Marcelo" Number="24"></TagDefinition>
+			<TagDefinition CatId="069e18b8-2109-4f3d-94e7-d802027a60a8"
+				Id="06613f90-adc1-4d2f-a10a-1865142d0d04"
+				Label="efeito visual sutil: a imagem de uma pomba branca" Number="25"></TagDefinition>
+		</TagDefinitions>
+		<Tags>
+			<Tag Number="1">
+				<DefId>0c3fa4c5-0b25-4c55-bab1-6b648ee40514</DefId>
+			</Tag>
+			<Tag Number="2">
+				<DefId>8e8dca7e-0536-41aa-a0e7-c5204db9fa01</DefId>
+			</Tag>
+			<Tag Number="3">
+				<DefId>253fff90-2624-494c-b266-385a39213f05</DefId>
+			</Tag>
+			<Tag Number="4">
+				<DefId>93522977-0cc7-4e17-972e-57413d46429c</DefId>
+			</Tag>
+			<Tag Number="5">
+				<DefId>cf825263-acda-45fd-8afb-41af88f788f9</DefId>
+			</Tag>
+			<Tag Number="6">
+				<DefId>4f062c74-2db4-4bde-aa57-7c11ccd93d9b</DefId>
+			</Tag>
+			<Tag Number="7">
+				<DefId>318abcba-437d-4860-9895-719b905c4b1a</DefId>
+			</Tag>
+			<Tag Number="8">
+				<DefId>d5075c14-c732-4f81-bbe8-e15670480cd5</DefId>
+			</Tag>
+			<Tag Number="9">
+				<DefId>08733bb4-428c-4e84-b937-8b82fb8eef7d</DefId>
+			</Tag>
+			<Tag Number="10">
+				<DefId>049e7d1d-4652-4541-a1e2-3478634a8772</DefId>
+			</Tag>
+			<Tag Number="11">
+				<DefId>8ab29a16-6f45-4786-aee4-c6f609278d06</DefId>
+			</Tag>
+			<Tag Number="12">
+				<DefId>192364a4-0bc8-4b7f-9e19-ee0db699c2ad</DefId>
+			</Tag>
+			<Tag Number="13">
+				<DefId>bf7b2c6f-8c1e-42ab-ad51-47bb5dfd57de</DefId>
+			</Tag>
+			<Tag Number="14">
+				<DefId>b17ec12f-cbb5-4c32-8241-c0f33c2fc8f2</DefId>
+			</Tag>
+			<Tag Number="15">
+				<DefId>6c5dd6ba-e843-4a80-822d-92426ed787b2</DefId>
+			</Tag>
+			<Tag Number="16">
+				<DefId>795fbf16-be00-4f33-b26e-c4c88c49daf0</DefId>
+			</Tag>
+			<Tag Number="17">
+				<DefId>fc2941b6-5e55-471a-9851-a519870b81de</DefId>
+			</Tag>
+			<Tag Number="18">
+				<DefId>61a41ddf-5836-4682-9119-a7b3d31aae1c</DefId>
+			</Tag>
+			<Tag Number="19">
+				<DefId>7f23d308-526c-4262-b44f-2b97044f883c</DefId>
+			</Tag>
+			<Tag Number="20">
+				<DefId>0143d46b-6372-4701-af0e-416f065deac7</DefId>
+			</Tag>
+			<Tag Number="21">
+				<DefId>39ca0c57-5aa4-4725-b08e-21c8c8bc1e6c</DefId>
+			</Tag>
+			<Tag Number="22">
+				<DefId>04af7ec9-eed3-4eee-9c7f-056b103ac37d</DefId>
+			</Tag>
+			<Tag Number="23">
+				<DefId>d7e8ae07-7ffe-4eca-94fe-64667082c4f7</DefId>
+			</Tag>
+			<Tag Number="24">
+				<DefId>c1a851c7-a3e7-4ad5-aedc-811be05354ad</DefId>
+			</Tag>
+			<Tag Number="25">
+				<DefId>06613f90-adc1-4d2f-a10a-1865142d0d04</DefId>
+			</Tag>
+		</Tags>
+	</TagData>
+	<UserDocumentData>
+		<TaggerDocumentData
+			xmlns="http://www.finaldraft.com/ns/Tagger">
+			<CategoryList
+				count="0">
+			</CategoryList>
+			<ElementList
+				count="0">
+			</ElementList>
+		</TaggerDocumentData>
+	</UserDocumentData>
+</FinalDraft>
