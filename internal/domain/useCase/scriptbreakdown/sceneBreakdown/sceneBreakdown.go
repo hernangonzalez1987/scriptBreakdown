@@ -57,6 +57,7 @@ func (ref *SceneBreakdown) BreakdownScene(ctx context.Context,
 
 	return &entity.SceneBreakdown{
 		Number: scene.Number,
+		Header: scene.Header,
 		Tags:   ref.generateTags(ctx, sceneAnalysis.SceneElements, tagCategories),
 	}, nil
 }

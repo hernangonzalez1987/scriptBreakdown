@@ -19,6 +19,7 @@ func TestRender_RenderScript(t *testing.T) {
 		SceneBreakdowns: []entity.SceneBreakdown{
 			{
 				Number: 1,
+				Header: "INT. SOME LOCATION/DETAIL - DAY",
 				Tags: []entity.Tag{
 					{
 						Label:    "someProp",
@@ -32,6 +33,7 @@ func TestRender_RenderScript(t *testing.T) {
 			},
 			{
 				Number: 2,
+				Header: "EXT. SOME LOCATION/DETAIL - NIGTH",
 				Tags: []entity.Tag{
 					{
 						Label:    "someAnimal",
@@ -46,10 +48,10 @@ func TestRender_RenderScript(t *testing.T) {
 
 	require.NoError(t, err)
 
-	expected := "scene_number,scene_location,scene_day_night,tag_category,tag_label\n" +
-		"1,,,props,someProp\n" +
-		"1,,,props,someOtherProp\n" +
-		"2,,,animals,someAnimal\n"
+	expected := "scene_number,scene_int_ext,scene_location,scene_day_night,tag_category,tag_label\n" +
+		"1,INT,SOME LOCATION/DETAIL,DAY,props,someProp\n" +
+		"1,INT,SOME LOCATION/DETAIL,DAY,props,someOtherProp\n" +
+		"2,EXT,SOME LOCATION/DETAIL,NIGTH,animals,someAnimal\n"
 
 	assert.Equal(t, expected, buffer.String())
 }

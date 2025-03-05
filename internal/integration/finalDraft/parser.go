@@ -65,6 +65,9 @@ func extractScenesFromScript(script FDXFile) []entity.Scene {
 
 			scene.Number = paragraph.Number
 			scene.Text = ""
+			if len(paragraph.Text) > 0 {
+				scene.Header = paragraph.Text[0].Value
+			}
 
 			continue
 		}

@@ -11,6 +11,7 @@ type TagCategories []Category
 
 type Scene struct {
 	Number int
+	Header string
 	Text   string
 }
 

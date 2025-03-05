@@ -8,6 +8,7 @@ type ScriptBreakdown struct {
 
 type SceneBreakdown struct {
 	Number int
+	Header string
 	Tags   []Tag
 }
 
