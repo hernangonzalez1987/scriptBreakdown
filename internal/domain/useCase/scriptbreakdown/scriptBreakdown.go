@@ -18,7 +18,7 @@ import (
 var errAlreadyProcessing = errors.New("script is already being processed")
 
 const (
-	numGoRoutines = 2
+	numGoRoutines = 1
 	bufferSize    = 100
 )
 

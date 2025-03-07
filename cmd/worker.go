@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown"
 	scenebreakdown "github.com/hernangonzalez1987/scriptBreakdown/internal/domain/useCase/scriptbreakdown/sceneBreakdown"
-	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/csv"
 	finaldraft "github.com/hernangonzalez1987/scriptBreakdown/internal/integration/finalDraft"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/integration/llm"
 	eventhandler "github.com/hernangonzalez1987/scriptBreakdown/internal/presentation/eventHandler"
@@ -60,7 +59,7 @@ var workerCmd = &cobra.Command{
 		err = queue.NewSQSListener(queueClient, os.Getenv("BREAKDOWN_EVENTS_QUEUE"), eventhandler.NewS3EventHandler(
 			scriptbreakdown.New(
 				finaldraft.NewParser(),
-				csv.NewRender(),
+				finaldraft.NewRender(),
 				scenebreakdown.New(llm.New(gemini, cache.New[string](&ttl)), uuidgenerator.New(),
 					sceneAnalysisRepository),
 				scriptsStorage,

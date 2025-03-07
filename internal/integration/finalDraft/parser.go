@@ -66,7 +66,11 @@ func extractScenesFromScript(script FDXFile) []entity.Scene {
 			scene.Number = paragraph.Number
 			scene.Text = ""
 			if len(paragraph.Text) > 0 {
-				scene.Header = paragraph.Text[0].Value
+				header := ""
+				for _, text := range paragraph.Text {
+					header += text.Value
+				}
+				scene.Header = header
 			}
 
 			continue
@@ -88,6 +92,10 @@ func extractScenesFromScript(script FDXFile) []entity.Scene {
 
 func extractCategoryTagsFromScript(script FDXFile) []entity.Category {
 	var tagCategories []entity.Category
+
+	if script.TagData.TagCategories.TagCategories == nil {
+		return entity.GetDefaultCategories()
+	}
 
 	for _, tagCategory := range script.TagData.TagCategories.TagCategories {
 		cat := tagCategory.ToDomain()
