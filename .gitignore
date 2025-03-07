@@ -26,4 +26,4 @@ go.work.sum
 
 # VSCode settings
 .vscode/
-internal/test/db/shared-local-instance.db
+test/db/shared-local-instance.db
