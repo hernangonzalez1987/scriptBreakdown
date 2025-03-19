@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hernangonzalez1987/scriptBreakdown/api"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/_interfaces"
 	"github.com/hernangonzalez1987/scriptBreakdown/internal/domain/entity"
 )
@@ -26,42 +27,42 @@ func New(service _interfaces.ScriptBreakdownRequestUseCase) *PresentationBreakdo
 // @Tags         breakdwn
 // @Accept       multipart/form-data
 // @Produce      json
-// @Success      201  {object}  BreakdownRequestResponse
-// @Failure      400  {object}  ErrorResponse
-// @Failure      500  {object}  ErrorResponse
+// @Success      201  {object}  api.BreakdownRequestResponse
+// @Failure      400  {object}  api.ErrorResponse
+// @Failure      500  {object}  api.ErrorResponse
 // @Router       /script/breakdown [post]
 func (ref *PresentationBreakdown) BreakdownScript(ctx *gin.Context) {
-	request := BreakdownRequest{}
+	request := api.BreakdownRequest{}
 
 	err := ctx.ShouldBind(&request)
 	if err != nil {
-		ctx.JSON(http.StatusBadGateway, NewErrorResponse(err))
+		ctx.JSON(http.StatusBadGateway, api.NewErrorResponse(err))
 
 		return
 	}
 
 	fileHeader, err := ctx.FormFile("file")
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 		return
 	}
 
 	file, err := fileHeader.Open()
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 		return
 	}
 
 	result, err := ref.service.RequestScriptBreakdown(ctx, entity.ScriptBreakdownRequest{TempScriptFile: file})
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, NewBreakdownRequestResponse(*result))
+	ctx.JSON(http.StatusCreated, api.NewBreakdownRequestResponse(*result))
 }
 
 // BrakdownScript godoc
@@ -70,17 +71,17 @@ func (ref *PresentationBreakdown) BreakdownScript(ctx *gin.Context) {
 // @Tags         breakdwn
 // @Produce      json
 // @Param 		 breakdown_id path string true "BreakdownID"
-// @Success      201  {object}  BreakdownRequestResponse
-// @Failure      400  {object}  ErrorResponse
-// @Failure      404  {object}  ErrorResponse
-// @Failure      500  {object}  ErrorResponse
+// @Success      201  {object}  api.BreakdownRequestResponse
+// @Failure      400  {object}  api.ErrorResponse
+// @Failure      404  {object}  api.ErrorResponse
+// @Failure      500  {object}  api.ErrorResponse
 // @Router       /script/breakdown/{breakdown_id} [get]
 func (ref *PresentationBreakdown) GetResult(ctx *gin.Context) {
 	breakdownID := ctx.Param("breakdownID")
 
 	result, err := ref.service.GetResult(ctx, breakdownID)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+		ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 		return
 	}
@@ -88,14 +89,14 @@ func (ref *PresentationBreakdown) GetResult(ctx *gin.Context) {
 	if result.Content != nil {
 		tempFile, err := os.CreateTemp("", "")
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+			ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 			return
 		}
 
 		_, err = io.Copy(tempFile, result.Content)
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, NewErrorResponse(err))
+			ctx.JSON(http.StatusInternalServerError, api.NewErrorResponse(err))
 
 			return
 		}
@@ -108,5 +109,5 @@ func (ref *PresentationBreakdown) GetResult(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, NewBreakdownRequestResponse(*result))
+	ctx.JSON(http.StatusOK, api.NewBreakdownRequestResponse(*result))
 }

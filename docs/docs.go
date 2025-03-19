@@ -32,19 +32,19 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.BreakdownRequestResponse"
+                            "$ref": "#/definitions/contracts.BreakdownRequestResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                            "$ref": "#/definitions/contracts.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                            "$ref": "#/definitions/contracts.ErrorResponse"
                         }
                     }
                 }
@@ -73,25 +73,25 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.BreakdownRequestResponse"
+                            "$ref": "#/definitions/contracts.BreakdownRequestResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                            "$ref": "#/definitions/contracts.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                            "$ref": "#/definitions/contracts.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/presentationbreakdown.ErrorResponse"
+                            "$ref": "#/definitions/contracts.ErrorResponse"
                         }
                     }
                 }
@@ -99,7 +99,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "presentationbreakdown.BreakdownRequestResponse": {
+        "contracts.BreakdownRequestResponse": {
             "type": "object",
             "properties": {
                 "breakdownId": {
@@ -107,7 +107,7 @@ const docTemplate = `{
                 }
             }
         },
-        "presentationbreakdown.ErrorResponse": {
+        "contracts.ErrorResponse": {
             "type": "object",
             "properties": {
                 "code": {

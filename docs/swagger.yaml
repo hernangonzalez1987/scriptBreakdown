@@ -1,10 +1,10 @@
 definitions:
-  presentationbreakdown.BreakdownRequestResponse:
+  contracts.BreakdownRequestResponse:
     properties:
       breakdownId:
         type: string
     type: object
-  presentationbreakdown.ErrorResponse:
+  contracts.ErrorResponse:
     properties:
       code:
         type: string
@@ -26,15 +26,15 @@ paths:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/presentationbreakdown.BreakdownRequestResponse'
+            $ref: '#/definitions/contracts.BreakdownRequestResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+            $ref: '#/definitions/contracts.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+            $ref: '#/definitions/contracts.ErrorResponse'
       summary: Creates a breakdown script
       tags:
       - breakdwn
@@ -53,19 +53,19 @@ paths:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/presentationbreakdown.BreakdownRequestResponse'
+            $ref: '#/definitions/contracts.BreakdownRequestResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+            $ref: '#/definitions/contracts.ErrorResponse'
         "404":
           description: Not Found
           schema:
-            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+            $ref: '#/definitions/contracts.ErrorResponse'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/presentationbreakdown.ErrorResponse'
+            $ref: '#/definitions/contracts.ErrorResponse'
       summary: Gets a breakdown script result
       tags:
       - breakdwn

@@ -1,4 +1,4 @@
-package presentationbreakdown
+package api
 
 import (
 	"errors"
@@ -10,6 +10,10 @@ import (
 
 type BreakdownRequest struct {
 	File *multipart.FileHeader `binding:"required" form:"file"`
+}
+
+type BreakdownRequestResponse struct {
+	BreakdownID string `json:"breakdownId"`
 }
 
 type ErrorResponse struct {
@@ -31,10 +35,6 @@ func NewErrorResponse(err error) ErrorResponse {
 		Code:        "UNKNOWN",
 		Description: err.Error(),
 	}
-}
-
-type BreakdownRequestResponse struct {
-	BreakdownID string `json:"breakdownId"`
 }
 
 func NewBreakdownRequestResponse(result entity.ScriptBreakdownResult) BreakdownRequestResponse {

@@ -21,11 +21,14 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 	target io.Writer, breakdown entity.ScriptBreakdown,
 ) error {
 	var token xml.Token
+
 	var sceneNumber int
+
 	var sceneCount int
 
 	decoder := xml.NewDecoder(source)
 	encoder := xml.NewEncoder(target)
+
 	defer encoder.Close()
 
 	for {
@@ -61,7 +64,6 @@ func (ref *Render) RenderScript(_ context.Context, source io.Reader,
 			token = nil
 		}
 
-		// TODO: encode tag data if it is not present
 		if isOk && isTagDataElement(elem) {
 			err = processTagData(&elem, decoder, encoder, breakdown)
 			if err != nil {

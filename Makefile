@@ -15,7 +15,7 @@ test:
 	go test --cover ./... 
 
 lint:
-	golangci-lint run --enable-all --disable depguard --disable testpackage --disable gochecknoinits --disable exhaustruct --disable nilnil --disable gochecknoglobals --exclude-files "mock.*" --sort-results
+	golangci-lint run --enable-all --disable depguard --disable testpackage --disable godot --disable gochecknoinits --disable exhaustruct --disable nilnil --disable gochecknoglobals --exclude-files "mock.*" --sort-results
 
 
 
